@@ -1,10 +1,10 @@
 import './App.css'
-
-function Mycomponent({a,b='王曉明',c}) {
-	c()
+function SecondComponent(){
+	return <h1>Hello World</h1>
+}
+function Mycomponent({children}) {
 	return <>
-		<div>{a}</div>
-		<div>{b}</div>
+	{children}
 	</>
 }
 
@@ -12,9 +12,13 @@ function Mycomponent({a,b='王曉明',c}) {
 function App() {
 	return (
 		<>
-			<Mycomponent a="hello world" c={()=>console.log(123)} 
+			<Mycomponent>
+				<SecondComponent />
+			</Mycomponent>
+
+			<Mycomponent children={<SecondComponent />}>
 				
-				/>
+			</Mycomponent>
 		</>
 	)
 }
