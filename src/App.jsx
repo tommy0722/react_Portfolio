@@ -1,31 +1,16 @@
 import './App.css'
 
-function Mycomponent() {
-	return <h1>你好 </h1>
-}
 
 
 function App() {
-	const listItems = [
-		{ content: '張三', id: 'abc' },
-		{ content: '李四', id: 'qaz' },
-		{ content: '老五', id: 'wsx' },
-	]
-	const filterItems = listItems.filter((item) =>{
-		if (item.content !== '李四'){
-			return true
-		}
-	})
-	return (
-		<>
-			{listItems.map((item) => {
-				return <div key={item.id}>{item.content}</div>
-			})}
-			{filterItems.map((item) => {
-				return <div key={item.id}>{item.content}</div>
-			})}
-		</>
-	)
+	if (true) {
+		return <h1>Hello</h1>
+		
+	} else {
+		return <h1>world</h1>
+	}
+	// 三元運算式
+	return (false ? <h1>hello</h1>: <h1>world</h1>)
 }
 
 export default App
