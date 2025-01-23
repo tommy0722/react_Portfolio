@@ -1,10 +1,13 @@
 import './App.css'
-function SecondComponent(){
-	return <h1>Hello World</h1>
-}
-function Mycomponent({children}) {
+
+function Mycomponent() {
+	let click = 0;
+	const handleClick = () => {
+		click++;
+		console.log(click);
+	}
 	return <>
-	{children}
+		<button onClick={handleClick}>點擊次數：{click}</button>
 	</>
 }
 
@@ -12,13 +15,7 @@ function Mycomponent({children}) {
 function App() {
 	return (
 		<>
-			<Mycomponent>
-				<SecondComponent />
-			</Mycomponent>
-
-			<Mycomponent children={<SecondComponent />}>
-				
-			</Mycomponent>
+			<Mycomponent />
 		</>
 	)
 }
