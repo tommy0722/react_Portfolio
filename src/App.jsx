@@ -3,14 +3,17 @@ import './App.css'
 
 
 function App() {
-	if (true) {
-		return <h1>Hello</h1>
-		
-	} else {
-		return <h1>world</h1>
-	}
-	// 三元運算式
-	return (false ? <h1>hello</h1>: <h1>world</h1>)
+	return (
+		<div>
+			<div className={true ? 'a c' : 'b c'}>
+				{true ? <h1>hello</h1> : <h1>world</h1>}
+			</div>
+			<div className={`c ${false ? 'a' : 'b'}`}>
+				{true ? <h1>hello</h1> : <h1>world</h1>}
+			</div>
+		</div>
+	)
+
 }
 
 export default App
