@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import './App.css'
-
+function ChlidCompoent({clicks}){
+	return <div>{clicks}</div>
+}
 function Mycomponent() {
-	let click = 0;
+	const [clicks,setclicks] = useState(0);
 	const handleClick = () => {
-		click++;
-		console.log(click);
+		setclicks(clicks+1)
+		console.log(clicks);
 	}
+
 	return <>
-		<button onClick={handleClick}>點擊次數：{click}</button>
+		<button onClick={handleClick}>點擊次數：{clicks}</button>
+		<ChlidCompoent clicks={clicks} />
 	</>
 }
 
@@ -15,6 +20,8 @@ function Mycomponent() {
 function App() {
 	return (
 		<>
+			<Mycomponent />
+			<Mycomponent />
 			<Mycomponent />
 		</>
 	)
