@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  background: url(Frieren.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.container{
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+.container .box{
+  position: relative;
+  top: 0;
+  width: 3.33vw;
+  height: 3.33vw;
+  background: url(Frieren2.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.container .box.active{
+  background: #ff0;
+  z-index: 1;
+  pointer-events: none;
+  animation: animate 1s linear forwards;
+}
+
+
+/* 這段 CSS 程式碼是在定義一個名為 animate 的關鍵幀動畫。這個動畫從一開始到結束會改變元素的透明度和位置，並使其旋轉。具體來說：
+
+0% 表示動畫的起始狀態：
+
+opacity: 1; 元素完全不透明。
+transform: translate(0px,0px) rotate(0deg); 元素位置不變，沒有旋轉。
+100% 表示動畫的結束狀態：
+
+opacity: 0; 元素完全透明。
+transform: translate(var(--x),var(--y)) rotate(720deg); 元素將移動到 --x 和 --y 變數所指定的位置，並旋轉 720 度（即兩圈）。
+這個動畫會在這兩個狀態之間平滑過渡，使元素在動畫過程中逐漸變透明，移動並旋轉。這裡的 --x 和 --y 是 CSS 自定義屬性，通常會在其他地方定義和賦值。 */
+
+@keyframes animate
+{
+  0%
+  {
+    opacity: 1;
+    transform: translate(0px,0px) rotate(0deg);
+  }
+  100%
+  {
+    opacity: 0;
+    transform: translate(var(--x),var(--y)) rotate(720deg);
+  }
+}
