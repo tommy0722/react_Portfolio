@@ -1,16 +1,21 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Card, Button } from 'react-bootstrap';
 
 function MyCard({ data }) {
+    const navigate = useNavigate();
+
+    const handleButtonClick = () => {
+        navigate(data.link); // 跳轉到對應的內部路由
+    };
+
     return (
-        <Card style={{ width: '18rem', margin: '10px' }}>
+        <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src={data.image || "https://via.placeholder.com/150"} />
             <Card.Body>
                 <Card.Title>{data.title || "Default Title"}</Card.Title>
-                <Card.Text>
-                    {data.text || "Default text to build on the card title and make up the bulk of the card's content."}
-                </Card.Text>
-                <Button variant="primary" href={data.link || "#"}>
+                <Card.Text>{data.text || "Default Text"}</Card.Text>
+                <Button variant="primary" onClick={handleButtonClick}>
                     {data.buttonText || "Go somewhere"}
                 </Button>
             </Card.Body>
