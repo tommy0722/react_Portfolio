@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './AppA.css';
+import './JigsawArt.css';
 
 function AppA() {
     useEffect(() => {
