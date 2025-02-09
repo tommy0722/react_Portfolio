@@ -1,8 +1,19 @@
+# 作品集
+
+前端框架：React
+後端：Django
+
+
 # 目標
 
-這個專案要做todo
+[X] 透過資料庫+for迴圈將作品集顯示在前端，並做好路徑
+[O] 改使用後端連資料庫+for迴圈將作品集顯示在前端，並做好路徑
+
+
 
 # React + Vite
+
+### npm run dev
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
