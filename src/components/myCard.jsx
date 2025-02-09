@@ -10,8 +10,17 @@ function MyCard({ data }) {
     };
 
     return (
-        <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={data.image || "https://via.placeholder.com/150"} />
+        <Card style={{ width: '18rem', textAlign: 'center' }}> {/* 確保內容置中 */}
+            <Card.Img
+                style={{
+                    width: '285px',
+                    height: '290px',
+                    display: 'block', // 讓圖片成為區塊元素
+                    margin: '0 auto', // 水平置中
+                }}
+                variant="top"
+                src={data.image || "https://via.placeholder.com/150"}
+            />
             <Card.Body>
                 <Card.Title>{data.title || "Default Title"}</Card.Title>
                 <Card.Text>{data.text || "Default Text"}</Card.Text>
