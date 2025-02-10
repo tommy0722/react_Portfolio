@@ -6,6 +6,10 @@ import MyCard from './components/myCard';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import JigsawArt from './JigsawArt/JigsawArt'; // 導入 ProjectA
 import PwColor from './PwColor/PwColor'; // 導入 ProjectB
+import Login from './login/login';
+import LoginButton from './login/loginButton';
+import NavigationBar from './components/NavigationBar'; 
+import ContentTabs from './tab'; 
 import image1 from './assets/Frieren.jpg';
 import image2 from './assets/Pwclolr.jpg';
 import image3 from './assets/Roulette.jpg';
@@ -45,22 +49,16 @@ function App() {
 
     return (
         <Router>
+            <NavigationBar />
             <Routes>
-                {/* 主頁：卡片列表 */}
-                <Route
-                    path="/"
-                    element={
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', padding: '20px' }}>
-                            {cardsData.map((card, index) => (
-                                <MyCard key={index} data={card} />
-                            ))}
-                        </div>
-                    }
-                />
                 {/* ProjectA 路由 */}
                 <Route path="/JigsawArt" element={<JigsawArt />} />
                 {/* ProjectB 路由 */}
                 <Route path="/pwColor" element={<PwColor />} />
+                {/* login 路由 */}
+                <Route path="/login" element={<Login />} />
+                {/* tab 路由 */}
+                <Route path="/" element={<ContentTabs />} />
             </Routes>
         </Router>
     );
