@@ -25,37 +25,39 @@ function AppB() {
     };
 
     return (
-        <div className="box">
-            <h2>
-                Password Strength <span id="text">Check</span>
-            </h2>
-            <input
-                type="password"
-                id="password"
-                placeholder="請輸入密碼"
-                value={password}
-                onChange={handlePasswordChange}
-            />
-            <div
-                className="password-strength"
-                style={{
-                    background: `conic-gradient(${gradientColor} ${strength * 30}deg, #1115 ${strength * 30}deg)`,
-                }}
-            ></div>
-            <div
-                className="password-strength"
-                style={{
-                    background: `conic-gradient(${gradientColor} ${strength * 30}deg, #1115 ${strength * 30}deg)`,
-                    filter: 'blur(5px)',
-                }}
-            ></div>
-            <div
-                className="password-strength"
-                style={{
-                    background: `conic-gradient(${gradientColor} ${strength * 30}deg, #1115 ${strength * 30}deg)`,
-                    filter: 'blur(10px)',
-                }}
-            ></div>
+        <div className='body_box'>
+            <div className="box">
+                <h2>
+                    Password Strength <span id="text">Check</span>
+                </h2>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="請輸入密碼"
+                    value={password}
+                    onChange={handlePasswordChange}
+                />
+                <div
+                    className="password-strength"
+                    style={{
+                        background: `conic-gradient(${gradientColor} ${strength * 30}deg, #1115 ${strength * 30}deg)`,
+                    }}
+                ></div>
+                <div
+                    className="password-strength"
+                    style={{
+                        background: `conic-gradient(${gradientColor} ${strength * 30}deg, #1115 ${strength * 30}deg)`,
+                        filter: 'blur(5px)',
+                    }}
+                ></div>
+                <div
+                    className="password-strength"
+                    style={{
+                        background: `conic-gradient(${gradientColor} ${strength * 30}deg, #1115 ${strength * 30}deg)`,
+                        filter: 'blur(10px)',
+                    }}
+                ></div>
+            </div>
         </div>
     );
 }
