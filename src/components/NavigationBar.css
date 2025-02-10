@@ -1,0 +1,15 @@
+.custom-hover{
+    color: black;
+    text-decoration: none;
+    font-size: 24px;
+    font-family: fantasy;
+}
+.custom-hover:hover {
+    background-color: #007bff;
+    /* hover 時背景變藍色 */
+    color: white;
+    /* hover 時文字變白色 */
+    transition: all 0.3s ease;
+    /* 加入過渡效果 */
+    border-radius: 25%;
+}
