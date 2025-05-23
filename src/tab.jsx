@@ -14,6 +14,13 @@ function ContentTabs() {
             link: "/JigsawArt",
             buttonText: "連結",
         },
+        {
+            title: "色塊拼圖",
+            text: "這是一個放兩張圖片，透過滑動來解開第二張圖片的動畫",
+            image: image1,
+            link: "/JigsawArt",
+            buttonText: "連結",
+        },
     ];
     const jsData = [
         {
@@ -39,26 +46,33 @@ function ContentTabs() {
             <p>現在沒有確定的作品集，只是先亂放</p>
             <Tabs defaultActiveKey="css" className="mb-3">
                 <Tab eventKey="css" title="CSS">
-                    <div style={{ padding: '20px' }}>
+                    <div className="row g-3" style={{ padding: '20px' }}>
                         {cssData.map((card, index) => (
-                            <MyCard key={index} data={card} />
+                            <div className="col-md-4" key={index}>
+                                <MyCard data={card} />
+                            </div>
                         ))}
                     </div>
                 </Tab>
                 <Tab eventKey="js" title="JS">
-                    <div style={{ padding: '20px' }}>
+                    <div className="row g-3" style={{ padding: '20px' }}>
                         {jsData.map((card, index) => (
-                            <MyCard key={index} data={card} />
+                            <div className="col-md-4" key={index}>
+                                <MyCard data={card} />
+                            </div>
                         ))}
                     </div>
                 </Tab>
                 <Tab eventKey="backend" title="後端">
-                    <div style={{ padding: '20px' }}>
+                    <div className="row g-3" style={{ padding: '20px' }}>
                         {backendData.map((card, index) => (
-                            <MyCard key={index} data={card} />
+                            <div className="col-md-4" key={index}>
+                                <MyCard data={card} />
+                            </div>
                         ))}
                     </div>
                 </Tab>
+
             </Tabs>
         </div>
     );
