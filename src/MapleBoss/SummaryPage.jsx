@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Container } from 'react-bootstrap';
+import './MapleBoss.css';
 
 function KillSummaryPage() {
     const [summary, setSummary] = useState([]);
@@ -14,7 +15,7 @@ function KillSummaryPage() {
     return (
         <Container className="mt-4">
             <h1 className='text-center'>擊殺統計</h1>
-            <Table striped bordered hover>
+            <table>
                 <thead>
                     <tr>
                         <th>使用者</th>
@@ -33,7 +34,7 @@ function KillSummaryPage() {
                         </tr>
                     ))}
                 </tbody>
-            </Table>
+            </table>
         </Container>
     );
 }
