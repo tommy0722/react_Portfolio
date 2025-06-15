@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './MapleBoss.css';
 import Select from 'react-select';
+import KillSummaryPage from './SummaryPage'; // 引入統計頁面
 
 function MapleBoss() {
     const [now, setNow] = useState(new Date());
@@ -110,6 +111,7 @@ function MapleBoss() {
         });
     }
 
+
     return (
         <div className="maple-boss-container">
             <h1>楓之谷 BOSS 紀錄上傳</h1>
@@ -182,7 +184,8 @@ function MapleBoss() {
                         <th>重生時間（最大）</th>
                         <th>掉落物</th>
                         <th>重生倒數</th>
-                        <th>操作</th>
+                        <th>上傳者</th>
+                        {/* <th>操作</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -194,7 +197,8 @@ function MapleBoss() {
                             <td>{record.boss.respawn_max_minutes} 分</td>
                             <td>{(record.loots || []).join(', ')}</td>
                             <td>{getCountdownRange(record)}</td>
-                            <td>
+                            <td>{record.uploader.first_name}</td>
+                            {/* <td>
                                 <button
                                     className="btn btn-danger btn-sm me-2"
                                     onClick={() => handleDelete(record.id)}
@@ -203,11 +207,12 @@ function MapleBoss() {
                                     className="btn btn-warning btn-sm"
                                     onClick={() => handleRefresh(record.id)}
                                 >更新時間</button>
-                            </td>
+                            </td> */}
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <KillSummaryPage />
         </div>
     );
 }
