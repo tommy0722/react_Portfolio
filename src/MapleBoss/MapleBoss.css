@@ -1,0 +1,60 @@
+.maple-boss-container {
+  height: 100vh;                  /* 撐滿整個畫面高度 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;        /* 垂直置中 */
+  align-items: center;            /* 水平置中 */
+  background-color: #0d9cd4;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 2rem;                  /* 保留邊距，避免太貼邊 */
+}
+
+.boss-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.boss-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.boss-form input, .boss-form select {
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+button {
+  width: 120px;
+  padding: 0.6rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+.boss-form-inline {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap; /* 小螢幕時會自動換行 */
+}
+
+.boss-form-inline input,
+.boss-form-inline select,
+.boss-form-inline button {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
