@@ -10,42 +10,9 @@ import Login from './login/login';
 import LoginButton from './login/loginButton';
 import NavigationBar from './components/NavigationBar'; 
 import ContentTabs from './tab'; 
-import image1 from './assets/Frieren.jpg';
-import image2 from './assets/Pwclolr.jpg';
-import image3 from './assets/Roulette.jpg';
 
-function RedirectToExternal({ url }) {
-    useEffect(() => {
-        window.location.href = url;
-    }, [url]);
-    return null;
-}
 
 function App() {
-    const cardsData = [
-        {
-            title: "色塊拼圖",
-            text: "這是一個放兩張圖片，透過滑動來解開第二張圖片的動畫",
-            image: image1,
-            link: "/JigsawArt",
-            buttonText: "連結",
-        },
-        {
-            title: "密碼強度判斷",
-            text: "確認密碼強度的顏色牆",
-            image: image2,
-            link: "/pwColor",
-            buttonText: "連結",
-        },
-        {
-            title: "輪盤系統",
-            text: "今天吃甚麼的輪盤(外部連結)",
-            image: image3,
-            // 使用完整外部連結
-            link: "https://myweb-backend-571409330129.asia-east1.run.app",
-            buttonText: "連結",
-        },
-    ];
 
     return (
         <Router>
