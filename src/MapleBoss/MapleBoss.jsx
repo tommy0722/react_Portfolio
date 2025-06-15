@@ -43,7 +43,11 @@ const MapleBoss = () => {
         const seconds = String(totalSeconds % 60).padStart(2, '0');
         return `${hours}:${minutes}:${seconds}`;
     };
-
+    const fetchRecords = () => {
+        fetch('https://myweb-backend-571409330129.asia-east1.run.app/api/maple/kill-records/')
+            .then(res => res.json())
+            .then(data => setRecords(data));
+    };
 
 
 
