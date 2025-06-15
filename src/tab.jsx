@@ -4,6 +4,7 @@ import MyCard from './components/myCard';
 import image1 from './assets/Frieren.jpg';
 import image2 from './assets/Pwclolr.jpg';
 import image3 from './assets/Roulette.jpg';
+import MapleStory from './assets/MapleStory.jpg';
 
 function ContentTabs() {
     const cssData = [
@@ -37,6 +38,13 @@ function ContentTabs() {
             text: "今天吃甚麼的輪盤(外部連結)",
             image: image3,
             link: "https://myweb-backend-571409330129.asia-east1.run.app",
+            buttonText: "連結",
+        },
+        {
+            title: "楓之谷打王紀錄",
+            text: "楓之谷打王紀錄說明 ",
+            image: MapleStory,
+            link: "/mapleboss",
             buttonText: "連結",
         },
     ];
