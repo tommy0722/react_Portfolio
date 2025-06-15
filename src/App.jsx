@@ -8,29 +8,32 @@ import JigsawArt from './JigsawArt/JigsawArt'; // 導入 ProjectA
 import PwColor from './PwColor/PwColor'; // 導入 ProjectB
 import Login from './login/login';
 import LoginButton from './login/loginButton';
-import NavigationBar from './components/NavigationBar'; 
-import ContentTabs from './tab'; 
+import NavigationBar from './components/NavigationBar';
+import ContentTabs from './tab';
 import MapleBoss from './MapleBoss/MapleBoss'; // 導入楓之谷
+import { UserProvider } from './context/UserContext';
 
 
 function App() {
 
     return (
-        <Router>
-            <NavigationBar />
-            <Routes>
-                {/* ProjectA 路由 */}
-                <Route path="/JigsawArt" element={<JigsawArt />} />
-                {/* ProjectB 路由 */}
-                <Route path="/pwColor" element={<PwColor />} />
-                {/* login 路由 */}
-                <Route path="/login" element={<Login />} />
-                {/* tab 路由 */}
-                <Route path="/" element={<ContentTabs />} />
-                {/* 楓之谷 */}
-                <Route path="/mapleboss" element={<MapleBoss />} />
-            </Routes>
-        </Router>
+        <UserProvider>
+            <Router>
+                <NavigationBar />
+                <Routes>
+                    {/* ProjectA 路由 */}
+                    <Route path="/JigsawArt" element={<JigsawArt />} />
+                    {/* ProjectB 路由 */}
+                    <Route path="/pwColor" element={<PwColor />} />
+                    {/* login 路由 */}
+                    <Route path="/login" element={<Login />} />
+                    {/* tab 路由 */}
+                    <Route path="/" element={<ContentTabs />} />
+                    {/* 楓之谷 */}
+                    <Route path="/mapleboss" element={<MapleBoss />} />
+                </Routes>
+            </Router>
+        </UserProvider>
     );
 }
 export default App;

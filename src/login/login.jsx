@@ -1,29 +1,30 @@
 // src/pages/Login.js
 import React from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
-const clientId = '你的-client-id.apps.googleusercontent.com';
 
 function Login() {
     const handleSuccess = async (credentialResponse) => {
         const { credential } = credentialResponse;
 
         try {
-            const response = await axios.post('http://localhost:8000/api/google-login/', {
+            const response = await axios.post('https://myweb-backend-571409330129.asia-east1.run.app/api/google-login/', {
                 token: credential,
             });
 
-            const { access, refresh } = response.data;
-
+            const { access, refresh,email,name } = response.data;
+            
             // 儲存 JWT token
             localStorage.setItem('access', access);
             localStorage.setItem('refresh', refresh);
+            localStorage.setItem('user_email', email);
+            localStorage.setItem('user_name', name);
 
             alert('登入成功！');
             // 可選：導向主頁或 dashboard
-            // window.location.href = '/dashboard';
+            window.location.href = '/';
 
         } catch (error) {
             console.error('登入失敗', error);
