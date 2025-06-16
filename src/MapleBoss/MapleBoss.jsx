@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './MapleBoss.css';
 import Select from 'react-select';
 import KillSummaryPage from './SummaryPage'; // 引入統計頁面
+import axios from '../utils/axiosInstance';
 
 function MapleBoss() {
     const [now, setNow] = useState(new Date());
@@ -25,15 +26,11 @@ function MapleBoss() {
     }, []);
 
     function fetchBosses() {
-        fetch(`${urlapi}api/maple/bosses/`)
-            .then(res => res.json())
-            .then(data => setBosses(data));
+        axios.get('/maple/bosses/').then(res => setBosses(res.data));
     }
 
     function fetchRecords() {
-        fetch(`${urlapi}api/maple/kill-records/`)
-            .then(res => res.json())
-            .then(data => setRecords(data));
+        axios.get('/maple/kill-records/').then(res => setRecords(res.data));
     }
 
     function formatTime(ms) {
@@ -54,65 +51,33 @@ function MapleBoss() {
 
     function handleSubmit(e) {
         e.preventDefault();
-
         const payload = {
             server_id: parseInt(serverId),
             boss: parseInt(selectedBoss),
             loots: selectedDrops,
         };
-        console.log(payload);
-        
-        fetch(`${urlapi}api/maple/kill-records/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify(payload),
-        }).then(res => {
-            if (res.ok) {
-                alert('上傳成功');
-                setServerId('');
-                setSelectedBoss('');
-                setSelectedDrops([]);
-                fetchRecords();
-            } else {
-                alert('發生錯誤');
-            }
-        });
+        axios.post('/maple/kill-records/', payload).then(res => {
+            alert('上傳成功');
+            setServerId('');
+            setSelectedBoss('');
+            setSelectedDrops([]);
+            fetchRecords();
+        }).catch(() => alert('發生錯誤'));
     }
 
     function handleDelete(id) {
         if (!window.confirm('確定要刪除此筆紀錄嗎？')) return;
-        fetch(`${urlapi}api/maple/kill-records/${id}/`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        }).then(res => {
-            if (res.ok) {
-                alert('刪除成功');
-                fetchRecords();
-            } else {
-                alert('刪除失敗');
-            }
-        });
+        axios.delete(`/maple/kill-records/${id}/`).then(() => {
+            alert('刪除成功');
+            fetchRecords();
+        }).catch(() => alert('刪除失敗'));
     }
 
     function handleRefresh(id) {
-        fetch(`${urlapi}api/maple/kill-records/${id}/refresh/`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        }).then(res => {
-            if (res.ok) {
-                alert('時間已更新');
-                fetchRecords();
-            } else {
-                alert('更新失敗');
-            }
-        });
+        axios.post(`/maple/kill-records/${id}/refresh/`).then(() => {
+            alert('時間已更新');
+            fetchRecords();
+        }).catch(() => alert('更新失敗'));
     }
 
 
