@@ -1,5 +1,5 @@
 .maple-boss-container {
-  height: 100vh;                  /* 撐滿整個畫面高度 */
+  /* height: 100vh;                  撐滿整個畫面高度 */
   display: flex;
   flex-direction: column;
   justify-content: center;        /* 垂直置中 */
