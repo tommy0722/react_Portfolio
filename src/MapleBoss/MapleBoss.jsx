@@ -12,7 +12,8 @@ function MapleBoss() {
     const [records, setRecords] = useState([]);
 
     const token = localStorage.getItem('access');
-
+    const urlapi='https://myweb-backend-571409330129.asia-east1.run.app/'
+    // const urlapi='http://127.0.0.1:8000/'
     useEffect(() => {
         fetchBosses();
         fetchRecords();
@@ -24,13 +25,13 @@ function MapleBoss() {
     }, []);
 
     function fetchBosses() {
-        fetch('https://myweb-backend-571409330129.asia-east1.run.app/api/maple/bosses/')
+        fetch(`${urlapi}api/maple/bosses/`)
             .then(res => res.json())
             .then(data => setBosses(data));
     }
 
     function fetchRecords() {
-        fetch('https://myweb-backend-571409330129.asia-east1.run.app/api/maple/kill-records/')
+        fetch(`${urlapi}api/maple/kill-records/`)
             .then(res => res.json())
             .then(data => setRecords(data));
     }
@@ -53,12 +54,15 @@ function MapleBoss() {
 
     function handleSubmit(e) {
         e.preventDefault();
+
         const payload = {
             server_id: parseInt(serverId),
             boss: parseInt(selectedBoss),
             loots: selectedDrops,
         };
-        fetch('https://myweb-backend-571409330129.asia-east1.run.app/api/maple/kill-records/', {
+        console.log(payload);
+        
+        fetch(`${urlapi}api/maple/kill-records/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +84,7 @@ function MapleBoss() {
 
     function handleDelete(id) {
         if (!window.confirm('確定要刪除此筆紀錄嗎？')) return;
-        fetch(`https://myweb-backend-571409330129.asia-east1.run.app/api/maple/kill-records/${id}/`, {
+        fetch(`${urlapi}api/maple/kill-records/${id}/`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -96,7 +100,7 @@ function MapleBoss() {
     }
 
     function handleRefresh(id) {
-        fetch(`https://myweb-backend-571409330129.asia-east1.run.app/api/maple/kill-records/${id}/refresh/`, {
+        fetch(`${urlapi}api/maple/kill-records/${id}/refresh/`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
