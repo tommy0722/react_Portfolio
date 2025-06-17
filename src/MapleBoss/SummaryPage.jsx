@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Container } from 'react-bootstrap';
 import './SummaryPage.css';
+import axios from '../utils/axiosInstance';
 
 function KillSummaryPage() {
     const [summary, setSummary] = useState([]);
 
     useEffect(() => {
-        fetch('https://myweb-backend-571409330129.asia-east1.run.app/api/maple/kill-summary/')
-            .then(res => res.json())
-            .then(data => setSummary(data))
-            .catch(err => console.error('讀取統計資料失敗', err));
+    fetchKillSummary();
     }, []);
+    function fetchKillSummary() {
+        axios.get('maple/kill-summary/').then(res => setSummary(res.data));
+    }
 
     return (
         <Container className="mt-4 Container">
