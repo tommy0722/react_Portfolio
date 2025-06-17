@@ -49,8 +49,8 @@ function KillSummaryPage() {
                 <tbody>
                     {summary.map((item, idx) => (
                         <tr key={idx}>
-                            <td>{item.uploader__first_name}</td>
-                            <td>{item.boss__name}</td>
+                            <td>{item.uploader_name}</td>
+                            <td>{item.boss_name}</td>
                             <td>{item.kill_count}</td>
                             <td>{(item.loots || []).join(', ')}</td>
                         </tr>
