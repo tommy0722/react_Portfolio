@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './MapleBoss.css';
 import Select from 'react-select';
-import KillSummaryPage from './SummaryPage'; // 引入統計頁面
 import axios from '../utils/axiosInstance';
 
 function MapleBoss() {
@@ -12,9 +11,6 @@ function MapleBoss() {
     const [selectedDrops, setSelectedDrops] = useState([]);
     const [records, setRecords] = useState([]);
 
-    const token = localStorage.getItem('access');
-    const urlapi='https://myweb-backend-571409330129.asia-east1.run.app/'
-    // const urlapi='http://127.0.0.1:8000/'
     useEffect(() => {
         fetchBosses();
         fetchRecords();
