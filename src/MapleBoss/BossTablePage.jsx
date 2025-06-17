@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './MapleBoss.css';
-import Select from 'react-select';
-import KillSummaryPage from './SummaryPage'; // 引入統計頁面
 import axios from '../utils/axiosInstance';
 
 function MapleBoss() {
     const [now, setNow] = useState(new Date());
-    const [serverId, setServerId] = useState('');
-    const [bosses, setBosses] = useState([]);
-    const [selectedBoss, setSelectedBoss] = useState('');
-    const [selectedDrops, setSelectedDrops] = useState([]);
     const [records, setRecords] = useState([]);
 
-    const token = localStorage.getItem('access');
-    const urlapi='https://myweb-backend-571409330129.asia-east1.run.app/'
-    // const urlapi='http://127.0.0.1:8000/'
     useEffect(() => {
-        fetchBosses();
         fetchRecords();
     }, []);
 
@@ -25,9 +15,6 @@ function MapleBoss() {
         return () => clearInterval(timer);
     }, []);
 
-    function fetchBosses() {
-        axios.get('/maple/bosses/').then(res => setBosses(res.data));
-    }
 
     function fetchRecords() {
         axios.get('/maple/kill-records/').then(res => setRecords(res.data));
@@ -49,101 +36,10 @@ function MapleBoss() {
         return `${formatTime(min - now)} ~ ${formatTime(max - now)}`;
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        const payload = {
-            server_id: parseInt(serverId),
-            boss: parseInt(selectedBoss),
-            loots: selectedDrops,
-        };
-        axios.post('/maple/kill-records/', payload).then(res => {
-            alert('上傳成功');
-            setServerId('');
-            setSelectedBoss('');
-            setSelectedDrops([]);
-            fetchRecords();
-        }).catch(() => alert('發生錯誤'));
-    }
-
-    function handleDelete(id) {
-        if (!window.confirm('確定要刪除此筆紀錄嗎？')) return;
-        axios.delete(`/maple/kill-records/${id}/`).then(() => {
-            alert('刪除成功');
-            fetchRecords();
-        }).catch(() => alert('刪除失敗'));
-    }
-
-    function handleRefresh(id) {
-        axios.post(`/maple/kill-records/${id}/refresh/`).then(() => {
-            alert('時間已更新');
-            fetchRecords();
-        }).catch(() => alert('更新失敗'));
-    }
-
 
     return (
         <div className="maple-boss-container">
-            <h1>楓之谷 BOSS 紀錄上傳</h1>
-
-            <form onSubmit={handleSubmit} className="boss-form-inline">
-                <input
-                    type="number"
-                    value={serverId}
-                    onChange={e => setServerId(e.target.value)}
-                    placeholder="伺服器 ID"
-                    required
-                    className="form-control form-control-sm"
-                    style={{ width: '120px' }}
-                />
-
-                <select
-                    value={selectedBoss}
-                    onChange={e => setSelectedBoss(e.target.value)}
-                    required
-                    className="form-select form-select-sm"
-                    style={{ width: '160px' }}
-                >
-                    <option value="">選擇 BOSS</option>
-                    {bosses.map(boss => (
-                        <option key={boss.id} value={boss.id}>{boss.name}</option>
-                    ))}
-                </select>
-
-                <div style={{ minWidth: '250px', flexGrow: 1 }}>
-                    <Select
-                        isMulti
-                        options={(bosses.find(b => b.id === parseInt(selectedBoss))?.drop_items || []).map(item => ({
-                            value: item.name,
-                            label: item.name,
-                        }))}
-                        value={selectedDrops.map(name => ({ value: name, label: name }))}
-                        onChange={selected => setSelectedDrops(selected.map(opt => opt.value))}
-                        placeholder="搜尋或選擇掉落物"
-                        theme={theme => ({
-                            ...theme,
-                            borderRadius: 4,
-                            colors: {
-                                ...theme.colors,
-                                primary25: '#b2e4f7',
-                                primary: '#0d6efd',
-                                neutral0: '#ffffff',
-                                neutral80: '#000000',
-                            },
-                        })}
-                        styles={{
-                            control: base => ({ ...base, backgroundColor: 'white', color: 'black' }),
-                            input: base => ({ ...base, color: 'black' }),
-                            multiValueLabel: base => ({ ...base, color: 'black' }),
-                            singleValue: base => ({ ...base, color: 'black' }),
-                            option: base => ({ ...base, color: 'black' }),
-                        }}
-                    />
-                </div>
-
-                <button type="submit" className="btn btn-primary btn-sm">送出</button>
-            </form>
-
-            <h2>擊殺紀錄</h2>
+            <h1>擊殺紀錄</h1>
             <table>
                 <thead>
                     <tr>
@@ -167,16 +63,7 @@ function MapleBoss() {
                             <td>{(record.loots || []).join(', ')}</td>
                             <td>{getCountdownRange(record)}</td>
                             <td>{record.uploader.first_name}</td>
-                            {/* <td>
-                                <button
-                                    className="btn btn-danger btn-sm me-2"
-                                    onClick={() => handleDelete(record.id)}
-                                >刪除</button>
-                                <button
-                                    className="btn btn-warning btn-sm"
-                                    onClick={() => handleRefresh(record.id)}
-                                >更新時間</button>
-                            </td> */}
+
                         </tr>
                     ))}
                 </tbody>
