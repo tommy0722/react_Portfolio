@@ -17,7 +17,7 @@ function MapleBoss() {
                     onClick={() => setActivePage('boss')}
                     style={{ minWidth: '200px' }}
                 >
-                    🗡️ 打王記錄(48H)
+                    🗡️ 打王記錄(36H)
                 </button>
                 <button
                     className={`btn ${activePage === 'summary' ? 'btn-success' : 'btn-outline-success'}`}
