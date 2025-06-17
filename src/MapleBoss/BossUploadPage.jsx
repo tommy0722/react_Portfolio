@@ -87,6 +87,15 @@ function MapleBoss() {
             fetchRecords();
         }).catch(() => alert('更新失敗'));
     }
+    function handleHidden(id) {
+        axios.post(`/maple/kill-records/${id}/hidden/`).then(() => {
+            fetchRecords();
+        })
+            .catch(err => {
+                const msg = err.response?.data?.detail || '更新失敗';
+                alert(msg);
+            });
+    }
 
 
     return (
@@ -162,7 +171,7 @@ function MapleBoss() {
                         <th>掉落物</th>
                         <th>重生倒數</th>
                         <th>上傳者</th>
-                        {/* <th>操作</th> */}
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -185,16 +194,21 @@ function MapleBoss() {
                                     {countdown}
                                 </td>
                                 <td>{record.uploader.first_name}</td>
-                                {/* <td>
-                                <button
+                                <td>
+                                    <button
+                                        className="btn btn-info btn-sm me-2"
+                                        onClick={() => handleHidden(record.id)}
+                                    >
+                                        隱藏</button>
+                                    {/* <button
                                     className="btn btn-danger btn-sm me-2"
                                     onClick={() => handleDelete(record.id)}
                                 >刪除</button>
                                 <button
                                     className="btn btn-warning btn-sm"
                                     onClick={() => handleRefresh(record.id)}
-                                >更新時間</button>
-                            </td> */}
+                                >更新時間</button> */}
+                                </td>
                             </tr>
                         );
                     })}
