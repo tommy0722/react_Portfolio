@@ -1,22 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Container } from 'react-bootstrap';
+import { Table, Container, ButtonGroup, Button } from 'react-bootstrap';
 import './SummaryPage.css';
 import axios from '../utils/axiosInstance';
 
 function KillSummaryPage() {
     const [summary, setSummary] = useState([]);
+    const [filter, setFilter] = useState('all'); // 'all' 或 'today'
 
     useEffect(() => {
-    fetchKillSummary();
-    }, []);
+        fetchKillSummary();
+    }, [filter]);
+
     function fetchKillSummary() {
-        axios.get('maple/kill-summary/').then(res => setSummary(res.data));
+        const url = filter === 'today' ? 'maple/kill-summary/?today=true' : 'maple/kill-summary/';
+        axios.get(url).then(res => setSummary(res.data));
     }
 
     return (
         <Container className="mt-4 Container">
             <h1 className='text-center'>擊殺統計</h1>
-            <table className="table-primary table-bordered table-sm text-center" style={{ color: 'white' }}>
+
+            <div className="text-center mb-3">
+                <ButtonGroup>
+                    <Button
+                        variant={filter === 'all' ? 'primary' : 'outline-primary'}
+                        onClick={() => setFilter('all')}
+                    >
+                        所有
+                    </Button>
+                    <Button
+                        variant={filter === 'today' ? 'success' : 'outline-success'}
+                        onClick={() => setFilter('today')}
+                    >
+                        今天
+                    </Button>
+                </ButtonGroup>
+            </div>
+
+            <table className="table table-primary table-bordered table-sm text-center" style={{ color: 'white' }}>
                 <thead>
                     <tr>
                         <th>使用者</th>
@@ -28,10 +49,10 @@ function KillSummaryPage() {
                 <tbody>
                     {summary.map((item, idx) => (
                         <tr key={idx}>
-                            <td>{item.uploader_name}</td>
-                            <td>{item.boss_name}</td>
+                            <td>{item.uploader__first_name}</td>
+                            <td>{item.boss__name}</td>
                             <td>{item.kill_count}</td>
-                            <td>{item.loots.join(', ')}</td>
+                            <td>{(item.loots || []).join(', ')}</td>
                         </tr>
                     ))}
                 </tbody>
