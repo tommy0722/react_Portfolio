@@ -44,14 +44,18 @@ function MapleBoss() {
         const max = new Date(killTime.getTime() + record.boss.respawn_max_minutes * 60000);
         return `${formatTime(min - now)} ~ ${formatTime(max - now)}`;
     }
-    function isRespawnReady(record) {
-        if (!record?.kill_time) return false;
+    function getRespawnStatus(record) {
+        if (!record?.kill_time) return 'unknown';
+
         const nowMs = now.getTime();
         const killTime = new Date(record.kill_time);
-        const minRespawnTime = killTime.getTime() + record.boss.respawn_min_minutes * 60000;
-        return nowMs >= minRespawnTime;
-    }
+        const min = killTime.getTime() + record.boss.respawn_min_minutes * 60000;
+        const max = killTime.getTime() + record.boss.respawn_max_minutes * 60000;
 
+        if (nowMs < min) return 'waiting';         // 尚未進入重生期
+        if (nowMs <= max) return 'respawning';     // 正在重生期範圍
+        return 'overdue';                          // 已經超過最大時間
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -164,9 +168,12 @@ function MapleBoss() {
                 <tbody>
                     {records.map(record => {
                         const countdown = getCountdownRange(record);
-                        const countdownClass = isRespawnReady(record)
-                            ? 'text-danger bg-warning-subtle fw-bold'
-                            : '';
+                        const respawnStatus = getRespawnStatus(record);
+                        const countdownClass = {
+                            waiting: '', // 尚未重生，不強調
+                            respawning: 'text-danger bg-warning-subtle fw-bold', // 進入可打期
+                            overdue: 'text-white bg-danger fw-bold', // 已超過最大重生時間
+                        }[respawnStatus];
                         return (
                             <tr key={record.id}>
                                 <td>{record.server_id}</td>
