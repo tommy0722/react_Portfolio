@@ -26,7 +26,7 @@ function MapleBoss() {
     }
 
     function fetchRecords() {
-        axios.get('/maple/kill-records/').then(res => setRecords(res.data));
+        axios.get('/maple/kill-records/recent/').then(res => setRecords(res.data));
     }
 
     function formatTime(ms) {
@@ -44,6 +44,14 @@ function MapleBoss() {
         const max = new Date(killTime.getTime() + record.boss.respawn_max_minutes * 60000);
         return `${formatTime(min - now)} ~ ${formatTime(max - now)}`;
     }
+    function isRespawnReady(record) {
+        if (!record?.kill_time) return false;
+        const nowMs = now.getTime();
+        const killTime = new Date(record.kill_time);
+        const minRespawnTime = killTime.getTime() + record.boss.respawn_min_minutes * 60000;
+        return nowMs >= minRespawnTime;
+    }
+
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -153,15 +161,17 @@ function MapleBoss() {
                         {/* <th>操作</th> */}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     {records.map(record => (
-                        <tr key={record.id}>
+                        <tr key={record.id} className={isRespawnReady(record) ? 'text-danger bg-secondary' : ''}>
                             <td>{record.server_id}</td>
                             <td>{record.boss.name}</td>
                             <td>{record.boss.respawn_min_minutes} 分</td>
                             <td>{record.boss.respawn_max_minutes} 分</td>
                             <td>{(record.loots || []).join(', ')}</td>
-                            <td>{getCountdownRange(record)}</td>
+                            <td>
+                                {getCountdownRange(record)}
+                            </td>
                             <td>{record.uploader.first_name}</td>
                             {/* <td>
                                 <button
