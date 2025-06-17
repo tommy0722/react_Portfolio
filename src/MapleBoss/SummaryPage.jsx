@@ -16,7 +16,7 @@ function KillSummaryPage() {
     return (
         <Container className="mt-4 Container">
             <h1 className='text-center'>擊殺統計</h1>
-            <table>
+            <table className="table-primary table-bordered table-sm text-center" style={{ color: 'white' }}>
                 <thead>
                     <tr>
                         <th>使用者</th>

@@ -148,7 +148,7 @@ function MapleBoss() {
             </form>
 
             <h2>擊殺紀錄</h2>
-            <table>
+            <table className="table-primary table-bordered table-sm text-center" style={{ color: 'white' }}>
                 <thead>
                     <tr>
                         <th>伺服器</th>
@@ -161,19 +161,24 @@ function MapleBoss() {
                         {/* <th>操作</th> */}
                     </tr>
                 </thead>
-                <tbody >
-                    {records.map(record => (
-                        <tr key={record.id} className={isRespawnReady(record) ? 'text-danger bg-secondary' : ''}>
-                            <td>{record.server_id}</td>
-                            <td>{record.boss.name}</td>
-                            <td>{record.boss.respawn_min_minutes} 分</td>
-                            <td>{record.boss.respawn_max_minutes} 分</td>
-                            <td>{(record.loots || []).join(', ')}</td>
-                            <td>
-                                {getCountdownRange(record)}
-                            </td>
-                            <td>{record.uploader.first_name}</td>
-                            {/* <td>
+                <tbody>
+                    {records.map(record => {
+                        const countdown = getCountdownRange(record);
+                        const countdownClass = isRespawnReady(record)
+                            ? 'text-danger bg-warning-subtle fw-bold'
+                            : '';
+                        return (
+                            <tr key={record.id}>
+                                <td>{record.server_id}</td>
+                                <td>{record.boss.name}</td>
+                                <td>{record.boss.respawn_min_minutes} 分</td>
+                                <td>{record.boss.respawn_max_minutes} 分</td>
+                                <td>{(record.loots || []).join(', ')}</td>
+                                <td className={countdownClass}>
+                                    {countdown}
+                                </td>
+                                <td>{record.uploader.first_name}</td>
+                                {/* <td>
                                 <button
                                     className="btn btn-danger btn-sm me-2"
                                     onClick={() => handleDelete(record.id)}
@@ -183,9 +188,11 @@ function MapleBoss() {
                                     onClick={() => handleRefresh(record.id)}
                                 >更新時間</button>
                             </td> */}
-                        </tr>
-                    ))}
+                            </tr>
+                        );
+                    })}
                 </tbody>
+
             </table>
         </div>
     );

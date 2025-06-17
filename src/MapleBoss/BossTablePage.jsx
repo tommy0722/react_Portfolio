@@ -40,7 +40,7 @@ function MapleBoss() {
     return (
         <div className="maple-boss-container">
             <h1>擊殺紀錄</h1>
-            <table>
+            <table className="table-primary table-bordered table-sm text-center" style={{ color: 'white' }}>
                 <thead>
                     <tr>
                         <th>伺服器</th>
