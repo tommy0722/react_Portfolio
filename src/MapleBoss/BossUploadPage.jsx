@@ -166,8 +166,8 @@ function MapleBoss() {
                     <tr>
                         <th>伺服器</th>
                         <th>BOSS</th>
-                        <th>重生時間（最小）</th>
-                        <th>重生時間（最大）</th>
+                        {/* <th>重生時間（最小）</th> */}
+                        {/* <th>重生時間（最大）</th> */}
                         <th>掉落物</th>
                         <th>重生倒數</th>
                         <th>上傳者</th>
@@ -187,8 +187,8 @@ function MapleBoss() {
                             <tr key={record.id}>
                                 <td>{record.server_id}</td>
                                 <td>{record.boss.name}</td>
-                                <td>{record.boss.respawn_min_minutes} 分</td>
-                                <td>{record.boss.respawn_max_minutes} 分</td>
+                                {/* <td>{record.boss.respawn_min_minutes} 分</td> */}
+                                {/* <td>{record.boss.respawn_max_minutes} 分</td> */}
                                 <td>{(record.loots || []).join(', ')}</td>
                                 <td className={countdownClass}>
                                     {countdown}
