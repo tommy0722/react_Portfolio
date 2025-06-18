@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import BossUploadPage from './BossUploadPage';
 import SummaryPage from './SummaryPage';
-import BossTablePage from './BossTablePage'; // ⬅️ 假設你這是打王總表頁
+import BossTablePage from './BossTablePage'; 
+import UnitConversion from './unitConversion'; 
 
 function MapleBoss() {
     const [activePage, setActivePage] = useState('boss'); // 'boss', 'summary', or 'table'
@@ -33,6 +34,13 @@ function MapleBoss() {
                 >
                     📋 打王總表
                 </button>
+                <button
+                    className={`btn ${activePage === 'unitConversion' ? 'btn btn-info' : 'btn-outline-info'}`}
+                    onClick={() => setActivePage('unitConversion')}
+                    style={{ minWidth: '200px' }}
+                >
+                    💱 單位換算
+                </button>
             </div>
 
 
@@ -40,6 +48,7 @@ function MapleBoss() {
                 {activePage === 'boss' && <BossUploadPage />}
                 {activePage === 'summary' && <SummaryPage />}
                 {activePage === 'table' && <BossTablePage />}
+                {activePage === 'unitConversion' && <UnitConversion />}
             </div>
         </div>
     );
