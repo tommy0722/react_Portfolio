@@ -48,7 +48,7 @@ function UnitConversion() {
                             <td>
                                 <Form.Control
                                     type="number"
-                                    min="0"
+                                    // min="0"
                                     step="1"
                                     value={snowflakes}
                                     onChange={handleNumberChange(setSnowflakes)}
@@ -71,7 +71,7 @@ function UnitConversion() {
                             <td>
                                 <Form.Control
                                     type="number"
-                                    min="0"
+                                    // min="0"
                                     step="1"
                                     value={WCToMaple}
                                     onChange={handleNumberChange(setWCToMaple)}
