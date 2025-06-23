@@ -10,6 +10,8 @@ function MapleBoss() {
     const [selectedBoss, setSelectedBoss] = useState('');
     const [selectedDrops, setSelectedDrops] = useState([]);
     const [records, setRecords] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
 
     useEffect(() => {
         fetchBosses();
@@ -59,20 +61,28 @@ function MapleBoss() {
 
     function handleSubmit(e) {
         e.preventDefault();
+        if (isSubmitting) return; // 防止重複送出
+
+        setIsSubmitting(true);
+
         const payload = {
             server_id: parseInt(serverId),
             boss: parseInt(selectedBoss),
             loots: selectedDrops,
         };
+
         axios.post('/maple/kill-records/', payload).then(res => {
             alert('上傳成功');
             setServerId('');
             setSelectedBoss('');
             setSelectedDrops([]);
             fetchRecords();
-        }).catch(() => alert('發生錯誤'));
+        }).catch(() => {
+            alert('發生錯誤');
+        }).finally(() => {
+            setIsSubmitting(false);
+        });
     }
-
     function handleDelete(id) {
         if (!window.confirm('確定要刪除此筆紀錄嗎？')) return;
         axios.delete(`/maple/kill-records/${id}/`).then(() => {
@@ -157,7 +167,14 @@ function MapleBoss() {
                     />
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-sm">送出</button>
+                <button
+                    type="submit"
+                    className="btn btn-primary btn-sm"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? '送出中...' : '送出'}
+                </button>
+
             </form>
 
             <h2>擊殺紀錄</h2>
