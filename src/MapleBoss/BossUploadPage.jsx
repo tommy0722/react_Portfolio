@@ -133,14 +133,12 @@ function MapleBoss() {
     const customStyles = {
         table: {
             style: {
-                backgroundColor: '#1e1e2f',  // 整張表格背景
-                color: 'white',
+                backgroundColor: '#1e1e2f',
             },
         },
         headRow: {
             style: {
-                backgroundColor: '#1e1e2f',  // 標題列背景統一
-                color: 'white',
+                backgroundColor: '#1e1e2f',
             },
         },
         headCells: {
@@ -150,7 +148,7 @@ function MapleBoss() {
         },
         rows: {
             style: {
-                backgroundColor: '#1e1e2f',  // 每一列背景固定
+                backgroundColor: '#1e1e2f',  // ✅ 每一列都相同背景
                 color: 'white',
             },
         },
@@ -161,7 +159,6 @@ function MapleBoss() {
             },
         },
     };
-
 
     return (
         <div className="maple-boss-container">
@@ -238,13 +235,13 @@ function MapleBoss() {
                     noRowsPerPage: false,
                     selectAllRowsItem: false,
                 }}
-                striped
                 highlightOnHover
                 responsive
                 dense
                 progressPending={loading}
                 noDataComponent="目前尚無資料"
                 customStyles={customStyles}
+                striped={false}  // ✅ 關閉斑馬紋
             />
         </div>
     );
