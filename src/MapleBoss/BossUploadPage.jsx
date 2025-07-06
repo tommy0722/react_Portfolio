@@ -144,12 +144,14 @@ function MapleBoss() {
         headCells: {
             style: {
                 color: 'white',
+                fontSize: '20px', 
             },
         },
         rows: {
             style: {
                 backgroundColor: '#1e1e2f',  // ✅ 每一列都相同背景
                 color: 'white',
+                fontSize: '15px', 
             },
         },
         pagination: {
