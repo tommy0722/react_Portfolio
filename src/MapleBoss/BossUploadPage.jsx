@@ -109,12 +109,12 @@ function MapleBoss() {
         { name: 'BOSS', selector: row => row.boss.name, sortable: true },
         { name: '掉落物', selector: row => (row.loots || []).join(', ') },
         {
-            name: '重生倒數',
+            name: '重生倒數', sortable: true,
             cell: row => (
                 <span className={getCountdownClass(row)}>{getCountdownRange(row)}</span>
             ),
         },
-        { name: '上傳者', selector: row => row.uploader.first_name },
+        { name: '上傳者', selector: row => row.uploader.first_name, sortable: true },
         {
             name: '操作',
             cell: row => (
@@ -235,9 +235,9 @@ function MapleBoss() {
                     noRowsPerPage: false,
                     selectAllRowsItem: false,
                 }}
-                highlightOnHover
+                highlightOnHover 
                 responsive
-                dense
+                // dense 
                 progressPending={loading}
                 noDataComponent="目前尚無資料"
                 customStyles={customStyles}
