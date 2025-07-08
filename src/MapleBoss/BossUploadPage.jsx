@@ -48,8 +48,9 @@ function MapleBoss() {
         const status = getRespawnStatus(record);
 
         if (status === 'respawning') {
-            const mins = Math.ceil(msUntilMax / 60000); // 向上取整
-            return `即將重生（約 ${mins} 分鐘內）`;
+            const mins = Math.ceil((max - now) / 60000); // ✅ 計算剩餘分鐘
+
+            return `約 ${mins} 分鐘內倒數完畢`;
         }
         if (status === 'overdue') {
             return `已重生`;
@@ -234,7 +235,7 @@ function MapleBoss() {
 
                                     <div className="boss-timer">
                                         <span className={isRespawning ? 'respawning-text' : 'timer-text'}>
-                                            ⏱ {isRespawning ? `即將重生 (${countdown})` : countdown}
+                                            ⏱ {isRespawning ? `(${countdown})` : countdown}
                                         </span>
                                     </div>
                                 </div>
