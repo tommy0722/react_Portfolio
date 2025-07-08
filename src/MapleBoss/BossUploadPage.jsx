@@ -40,35 +40,42 @@ function MapleBoss() {
         return `${hours}:${minutes}:${seconds}`;
     }
 
-    function getCountdownRange(record) {
-        if (!record?.kill_time) return '-';
+    function getRespawnDisplay(record, now) {
+        if (!record?.kill_time) {
+            return {
+                className: 'status-unknown',
+                text: '-',
+                status: 'unknown',
+            };
+        }
+
         const killTime = new Date(record.kill_time);
         const min = new Date(killTime.getTime() + record.boss.respawn_min_minutes * 60000);
         const max = new Date(killTime.getTime() + record.boss.respawn_max_minutes * 60000);
-        const status = getRespawnStatus(record);
-
-        if (status === 'respawning') {
-            const mins = Math.ceil((max - now) / 60000); // ✅ 計算剩餘分鐘
-
-            return `約 ${mins} 分鐘內倒數完畢`;
-        }
-        if (status === 'overdue') {
-            return `已重生`;
-        }
-
-        return `${formatTime(min - now)} ~ ${formatTime(max - now)}`;
-    }
-    function getRespawnStatus(record) {
-        if (!record?.kill_time) return 'unknown';
-
         const nowMs = now.getTime();
-        const killTime = new Date(record.kill_time);
-        const min = killTime.getTime() + record.boss.respawn_min_minutes * 60000;
-        const max = killTime.getTime() + record.boss.respawn_max_minutes * 60000;
 
-        if (nowMs < min) return 'waiting';         // 尚未進入重生期
-        if (nowMs <= max) return 'respawning';     // 正在重生期範圍
-        return 'overdue';                          // 已經超過最大時間
+        if (nowMs < min) {
+            return {
+                className: 'status-waiting',
+                text: `${formatTime(min - now)} ~ ${formatTime(max - now)}`,
+                status: 'waiting',
+            };
+        }
+
+        if (nowMs <= max) {
+            const mins = Math.ceil((max - now) / 60000);
+            return {
+                className: 'status-respawning',
+                text: `約 ${mins} 分鐘內倒數完畢`,
+                status: 'respawning',
+            };
+        }
+
+        return {
+            className: 'status-overdue',
+            text: '已重生',
+            status: 'overdue',
+        };
     }
 
     function handleSubmit(e) {
@@ -211,9 +218,7 @@ function MapleBoss() {
                             selectedBossFilter === '' || record.boss.name === selectedBossFilter
                         )
                         .map(record => {
-                            const countdown = getCountdownRange(record);
-                            const respawnStatus = getRespawnStatus(record);
-                            const isRespawning = respawnStatus === 'respawning';
+                            const display = getRespawnDisplay(record, now);
 
                             return (
                                 <div className="boss-card" key={record.id}>
@@ -234,8 +239,8 @@ function MapleBoss() {
                                     </div>
 
                                     <div className="boss-timer">
-                                        <span className={isRespawning ? 'respawning-text' : 'timer-text'}>
-                                            ⏱ {isRespawning ? `(${countdown})` : countdown}
+                                        <span className={display.className}>
+                                            ⏱ {display.text}
                                         </span>
                                     </div>
                                 </div>
