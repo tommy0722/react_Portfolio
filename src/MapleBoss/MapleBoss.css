@@ -2,11 +2,14 @@
   /* height: 100vh;                  撐滿整個畫面高度 */
   display: flex;
   flex-direction: column;
-  justify-content: center;        /* 垂直置中 */
-  align-items: center;            /* 水平置中 */
+  justify-content: center;
+  /* 垂直置中 */
+  align-items: center;
+  /* 水平置中 */
   background-color: #0d9cd4;
   font-family: 'Segoe UI', sans-serif;
-  padding: 2rem;                  /* 保留邊距，避免太貼邊 */
+  padding: 2rem;
+  /* 保留邊距，避免太貼邊 */
 }
 
 .boss-form {
@@ -22,7 +25,8 @@
   font-weight: bold;
 }
 
-.boss-form input, .boss-form select {
+.boss-form input,
+.boss-form select {
   padding: 0.5rem;
   margin-top: 0.3rem;
 }
@@ -39,17 +43,20 @@ table {
   border-collapse: collapse;
 }
 
-table th, table td {
+table th,
+table td {
   padding: 0.8rem;
   border: 1px solid #ccc;
   text-align: center;
 }
+
 .boss-form-inline {
   display: flex;
   gap: 1rem;
   margin-bottom: 1.5rem;
   align-items: center;
-  flex-wrap: wrap; /* 小螢幕時會自動換行 */
+  flex-wrap: wrap;
+  /* 小螢幕時會自動換行 */
 }
 
 .boss-form-inline input,
@@ -57,4 +64,73 @@ table th, table td {
 .boss-form-inline button {
   padding: 0.5rem;
   font-size: 1rem;
+}
+
+
+.boss-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 10px;
+}
+
+.boss-card {
+  background-color: #1e1e2f;
+  border: 1px solid #444;
+  border-radius: 12px;
+  padding: 12px;
+  width: 240px;
+  color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.boss-card-header {
+  display: flex;
+  align-items: center;
+}
+
+.boss-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.boss-info {
+  flex-grow: 1;
+}
+
+.boss-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.boss-server {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 16px;
+  cursor: pointer;
+  width: 24px;
+}
+
+.boss-timer {
+  margin-top: 8px;
+}
+
+.timer-text {
+  color: #bbb;
+}
+
+.respawning-text {
+  color: orange;
+  font-weight: bold;
 }
