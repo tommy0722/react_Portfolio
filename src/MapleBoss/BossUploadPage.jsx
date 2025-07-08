@@ -11,6 +11,7 @@ function MapleBoss() {
     const [selectedDrops, setSelectedDrops] = useState([]);
     const [records, setRecords] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [selectedBossFilter, setSelectedBossFilter] = useState('');
 
 
     useEffect(() => {
@@ -188,39 +189,57 @@ function MapleBoss() {
             </form>
 
             <h2>擊殺紀錄</h2>
+            <div className="mb-3">
+                <label className="form-label text-white">篩選 BOSS</label>
+                <select
+                    className="form-select"
+                    value={selectedBossFilter}
+                    onChange={e => setSelectedBossFilter(e.target.value)}
+                    style={{ maxWidth: '300px' }}
+                >
+                    <option value="">全部 BOSS</option>
+                    {bosses.map(boss => (
+                        <option key={boss.id} value={boss.name}>{boss.name}</option>
+                    ))}
+                </select>
+            </div>
             <div className="boss-card-container">
-                {records.map(record => {
-                    
-                    const countdown = getCountdownRange(record);
-                    const respawnStatus = getRespawnStatus(record);
-                    const isRespawning = respawnStatus === 'respawning';
+                {
+                    records
+                        .filter(record =>
+                            selectedBossFilter === '' || record.boss.name === selectedBossFilter
+                        )
+                        .map(record => {
+                            const countdown = getCountdownRange(record);
+                            const respawnStatus = getRespawnStatus(record);
+                            const isRespawning = respawnStatus === 'respawning';
 
-                    return (
-                        <div className="boss-card" key={record.id}>
-                            <div className="boss-card-header">
-                                <img
-                                    src={`/assets/BOSS/${record.boss.id}.jpg`}
-                        
-                                    alt="boss"
-                                    className="boss-avatar"
-                                />
-                                <div className="boss-info">
-                                    <div className="boss-name">{record.boss.name}</div>
-                                    <div className="boss-server">頻道 {record.server_id}</div>
+                            return (
+                                <div className="boss-card" key={record.id}>
+                                    <div className="boss-card-header">
+                                        <img
+                                            src={`/assets/BOSS/${record.boss.id}.jpg`}
+
+                                            alt="boss"
+                                            className="boss-avatar"
+                                        />
+                                        <div className="boss-info">
+                                            <div className="boss-name">{record.boss.name}</div>
+                                            <div className="boss-server">頻道 {record.server_id}</div>
+                                        </div>
+                                        <button className="delete-btn" onClick={() => handleHidden(record.id)}>
+                                            🗑
+                                        </button>
+                                    </div>
+
+                                    <div className="boss-timer">
+                                        <span className={isRespawning ? 'respawning-text' : 'timer-text'}>
+                                            ⏱ {isRespawning ? `即將重生 (${countdown})` : countdown}
+                                        </span>
+                                    </div>
                                 </div>
-                                <button className="delete-btn" onClick={() => handleHidden(record.id)}>
-                                    🗑
-                                </button>
-                            </div>
-
-                            <div className="boss-timer">
-                                <span className={isRespawning ? 'respawning-text' : 'timer-text'}>
-                                    ⏱ {isRespawning ? `即將重生 (${countdown})` : countdown}
-                                </span>
-                            </div>
-                        </div>
-                    );
-                })}
+                            );
+                        })}
             </div>
 
         </div>
