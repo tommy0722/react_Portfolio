@@ -12,12 +12,6 @@
   /* 保留邊距，避免太貼邊 */
 }
 
-.boss-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
 
 .boss-form label {
   display: flex;
@@ -25,11 +19,6 @@
   font-weight: bold;
 }
 
-.boss-form input,
-.boss-form select {
-  padding: 0.5rem;
-  margin-top: 0.3rem;
-}
 
 button {
   width: 120px;
@@ -64,14 +53,16 @@ table td {
 .boss-form-inline button {
   padding: 0.5rem;
   font-size: 1rem;
+  border-radius: 20px;
 }
 
 
 .boss-card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 20px;
   padding: 10px;
+
 }
 
 .boss-card {

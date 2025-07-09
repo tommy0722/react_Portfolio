@@ -9,7 +9,7 @@ function MapleBoss() {
     const [activePage, setActivePage] = useState('boss'); // 'boss', 'summary', or 'table'
 
     return (
-        <div className="container py-4">
+        <div style={{ width: '80%', margin: '0 auto', padding: '20px' }}>
             <h1 className="h4 fw-bold mb-4 text-center">楓之谷 Boss 工具</h1>
 
             <div className="mb-4 d-flex justify-content-around">
