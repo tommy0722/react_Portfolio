@@ -17,7 +17,7 @@ function KillSummaryPage() {
     }
 
     return (
-        <Container className="mt-4 Container">
+        <div className="Container">
             <h1 className='text-center'>擊殺統計</h1>
 
             <div className="text-center mb-3">
@@ -37,7 +37,12 @@ function KillSummaryPage() {
                 </ButtonGroup>
             </div>
 
-            <table className="table table-primary table-bordered table-sm text-center" style={{ color: 'white' }}>
+            <table
+                className="table table-primary table-bordered table-sm text-center my-3"
+                style={{
+                    verticalAlign: 'middle', 
+                }}
+            >
                 <thead>
                     <tr>
                         <th>使用者</th>
@@ -57,7 +62,7 @@ function KillSummaryPage() {
                     ))}
                 </tbody>
             </table>
-        </Container>
+        </div>
     );
 }
 
