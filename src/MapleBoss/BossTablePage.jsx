@@ -30,12 +30,16 @@ function MapleBoss() {
 
     function getCountdownRange(record) {
         if (!record?.kill_time) return '-';
+        const now = new Date();
         const killTime = new Date(record.kill_time);
         const min = new Date(killTime.getTime() + record.boss.respawn_min_minutes * 60000);
         const max = new Date(killTime.getTime() + record.boss.respawn_max_minutes * 60000);
-        return `${formatTime(min - now)} ~ ${formatTime(max - now)}`;
-    }
 
+        const diffMin = Math.max(0, Math.round((min - now) / 60000));
+        const diffMax = Math.max(0, Math.round((max - now) / 60000));
+
+        return `${diffMin} 分 ~ ${diffMax} 分`;
+    }
     function formatTime(isoString) {
         if (!isoString) return '';
         const date = new Date(isoString);
