@@ -62,7 +62,7 @@ function MapleBoss() {
                         {/* <th>重生時間（最小）</th>
                         <th>重生時間（最大）</th> */}
                         <th>掉落物</th>
-                        <th>重生倒數</th>
+                        {/* <th>重生倒數</th> */}
                         <th>上傳者</th>
                         <th>上傳時間</th>
                         {/* <th>操作</th> */}
@@ -76,7 +76,7 @@ function MapleBoss() {
                             {/* <td>{record.boss.respawn_min_minutes} 分</td>
                             <td>{record.boss.respawn_max_minutes} 分</td> */}
                             <td>{(record.loots || []).join(', ')}</td>
-                            <td>{getCountdownRange(record)}</td>
+                            {/* <td>{getCountdownRange(record)}</td> */}
                             <td>{record.uploader.first_name}</td>
                             <td>{formatTime(record.kill_time)}</td>
 
