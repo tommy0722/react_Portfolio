@@ -36,6 +36,16 @@ function MapleBoss() {
         return `${formatTime(min - now)} ~ ${formatTime(max - now)}`;
     }
 
+    function formatTime(isoString) {
+        if (!isoString) return '';
+        const date = new Date(isoString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hour = String(date.getHours()).padStart(2, '0');
+        const minute = String(date.getMinutes()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hour}:${minute}`;
+    }
 
     return (
         <div className="maple-boss-container">
@@ -45,11 +55,12 @@ function MapleBoss() {
                     <tr>
                         <th>伺服器</th>
                         <th>BOSS</th>
-                        <th>重生時間（最小）</th>
-                        <th>重生時間（最大）</th>
+                        {/* <th>重生時間（最小）</th>
+                        <th>重生時間（最大）</th> */}
                         <th>掉落物</th>
                         <th>重生倒數</th>
                         <th>上傳者</th>
+                        <th>上傳時間</th>
                         {/* <th>操作</th> */}
                     </tr>
                 </thead>
@@ -58,11 +69,12 @@ function MapleBoss() {
                         <tr key={record.id}>
                             <td>{record.server_id}</td>
                             <td>{record.boss.name}</td>
-                            <td>{record.boss.respawn_min_minutes} 分</td>
-                            <td>{record.boss.respawn_max_minutes} 分</td>
+                            {/* <td>{record.boss.respawn_min_minutes} 分</td>
+                            <td>{record.boss.respawn_max_minutes} 分</td> */}
                             <td>{(record.loots || []).join(', ')}</td>
                             <td>{getCountdownRange(record)}</td>
                             <td>{record.uploader.first_name}</td>
+                            <td>{formatTime(record.kill_time)}</td>
 
                         </tr>
                     ))}
