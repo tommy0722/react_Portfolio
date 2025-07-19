@@ -243,6 +243,9 @@ function MapleBoss() {
                                             ⏱ {display.text}
                                         </span>
                                     </div>
+                                    <div className="boss-info">
+                                            發現者 ：{record.uploader.first_name} 
+                                    </div>
                                 </div>
                             );
                         })}
