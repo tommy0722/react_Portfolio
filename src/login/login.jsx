@@ -24,7 +24,7 @@ function Login() {
 
             alert('登入成功！');
             // 可選：導向主頁或 dashboard
-            window.location.href = '/';
+            window.location.href = '/mapleboss';
 
         } catch (error) {
             console.error('登入失敗', error);
