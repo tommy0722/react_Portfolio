@@ -29,7 +29,7 @@ function MapleBoss() {
     }
 
     function fetchRecords() {
-        axios.get('/maple/kill-records/recent/').then(res => setRecords(res.data));
+        axios.get('/maple/kill-records/recent_time/').then(res => setRecords(res.data));
     }
 
     function formatTime(ms) {
@@ -198,18 +198,20 @@ function MapleBoss() {
 
             <h2>擊殺紀錄</h2>
             <div className="mb-3">
-                <label className="form-label text-white">篩選 BOSS</label>
-                <select
-                    className="form-select"
-                    value={selectedBossFilter}
-                    onChange={e => setSelectedBossFilter(e.target.value)}
-                    style={{ maxWidth: '300px' }}
-                >
-                    <option value="">全部 BOSS</option>
-                    {bosses.map(boss => (
-                        <option key={boss.id} value={boss.name}>{boss.name}</option>
-                    ))}
-                </select>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1rem' }}>
+                    <label style={{ whiteSpace: 'nowrap', marginBottom: 0 }}>篩選BOSS：</label>
+                    <select
+                        className="form-select"
+                        value={selectedBossFilter}
+                        onChange={e => setSelectedBossFilter(e.target.value)}
+                        style={{ maxWidth: '300px' }}
+                    >
+                        <option value="">全部 BOSS</option>
+                        {bosses.map(boss => (
+                            <option key={boss.id} value={boss.name}>{boss.name}</option>
+                        ))}
+                    </select>
+                </div>
             </div>
             <div className="boss-card-container">
                 {
@@ -244,7 +246,7 @@ function MapleBoss() {
                                         </span>
                                     </div>
                                     <div className="boss-info">
-                                            發現者 ：{record.uploader.first_name} 
+                                        發現者 ：{record.uploader.first_name}
                                     </div>
                                 </div>
                             );
