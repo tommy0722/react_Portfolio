@@ -50,34 +50,43 @@ function ContentTabs() {
     ];
 
     return (
-        <div className='container'>
-            <p>現在沒有確定的作品集，只是先亂放</p>
-            <Tabs defaultActiveKey="css" className="mb-3">
-                <Tab eventKey="css" title="CSS">
-                    <div className="row g-3" style={{ padding: '20px' }}>
-                        {cssData.map((card, index) => (
-                            <div className="col-md-4" key={index}>
-                                <MyCard data={card} />
-                            </div>
-                        ))}
+        <div className='container main-content'>
+            <div className="hero-section">
+                <h1 className="hero-title">我的作品集</h1>
+                <p className="hero-subtitle">探索我的程式作品和專案展示</p>
+            </div>
+            <Tabs defaultActiveKey="css" className="custom-tabs">
+                <Tab eventKey="css" title="🎨 CSS動畫">
+                    <div className="tab-content-wrapper">
+                        <div className="row g-4">
+                            {cssData.map((card, index) => (
+                                <div className="col-lg-4 col-md-6" key={index}>
+                                    <MyCard data={card} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </Tab>
-                <Tab eventKey="js" title="JS">
-                    <div className="row g-3" style={{ padding: '20px' }}>
-                        {jsData.map((card, index) => (
-                            <div className="col-md-4" key={index}>
-                                <MyCard data={card} />
-                            </div>
-                        ))}
+                <Tab eventKey="js" title="⚡ JavaScript">
+                    <div className="tab-content-wrapper">
+                        <div className="row g-4">
+                            {jsData.map((card, index) => (
+                                <div className="col-lg-4 col-md-6" key={index}>
+                                    <MyCard data={card} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </Tab>
-                <Tab eventKey="backend" title="後端">
-                    <div className="row g-3" style={{ padding: '20px' }}>
-                        {backendData.map((card, index) => (
-                            <div className="col-md-4" key={index}>
-                                <MyCard data={card} />
-                            </div>
-                        ))}
+                <Tab eventKey="backend" title="🚀 後端專案">
+                    <div className="tab-content-wrapper">
+                        <div className="row g-4">
+                            {backendData.map((card, index) => (
+                                <div className="col-lg-4 col-md-6" key={index}>
+                                    <MyCard data={card} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </Tab>
 

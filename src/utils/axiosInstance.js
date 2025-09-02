@@ -1,8 +1,8 @@
 // src/utils/axiosInstance.js
 import axios from 'axios';
 
-const baseURL = 'https://myweb-backend-571409330129.asia-east1.run.app/api';
-// const baseURL = 'http://127.0.0.1:8000/api';
+// const baseURL = 'https://myweb-backend-571409330129.asia-east1.run.app/api';
+const baseURL = 'http://127.0.0.1:8000/api';
 
 const instance = axios.create({ baseURL });
 

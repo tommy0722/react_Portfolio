@@ -1,15 +1,88 @@
-.custom-hover{
-    color: black;
-    text-decoration: none;
-    font-size: 24px;
-    font-family: fantasy;
+/* 導航欄主容器 */
+.modern-navbar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 15px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
-.custom-hover:hover {
-    background-color: #007bff;
-    /* hover 時背景變藍色 */
-    color: white;
-    /* hover 時文字變白色 */
+
+/* 品牌標誌 */
+.brand-logo {
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff !important;
+    font-family: 'Arial Black', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
-    /* 加入過渡效果 */
-    border-radius: 25%;
+    position: relative;
+}
+
+.brand-logo:hover {
+    color: #ffd700 !important;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    transform: scale(1.05);
+}
+
+/* 用戶區域 */
+.user-section {
+    text-align: right;
+    padding-right: 50px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.welcome-text {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 登出按鈕 */
+.logout-btn {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    background: transparent;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #ffffff;
+    color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* 登入連結 */
+.login-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 2px solid #ffffff;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    background: transparent;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.login-link:hover {
+    background: #ffffff;
+    color: #667eea;
+    text-shadow: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }

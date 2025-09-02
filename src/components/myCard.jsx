@@ -12,32 +12,37 @@ function MyCard({ data }) {
     };
 
     return (
-        <Card style={{ width: '18rem', textAlign: 'center' }}>
-            <Card.Img
-                style={{
-                    width: '285px',
-                    height: '290px',
-                    display: 'block',
-                    margin: '0 auto',
-                }}
-                variant="top"
-                src={data.image || "https://via.placeholder.com/150"}
-            />
-            <Card.Body>
-                <Card.Title>{data.title || "Default Title"}</Card.Title>
-                <Card.Text>{data.text || "Default Text"}</Card.Text>
+        <Card className="modern-card">
+            <div className="card-image-wrapper">
+                <Card.Img
+                    className="modern-card-img"
+                    variant="top"
+                    src={data.image || "https://via.placeholder.com/150"}
+                />
+                <div className="card-overlay">
+                    <div className="overlay-content">
+                        <i className="fas fa-eye view-icon"></i>
+                        <p>查看詳情</p>
+                    </div>
+                </div>
+            </div>
+            <Card.Body className="modern-card-body">
+                <Card.Title className="modern-card-title">{data.title || "Default Title"}</Card.Title>
+                <Card.Text className="modern-card-text">{data.text || "Default Text"}</Card.Text>
                 {isExternal ? (
                     <a
                         href={data.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-primary"
+                        className="modern-btn modern-btn-primary"
                     >
                         {data.buttonText || "Go somewhere"}
+                        <i className="fas fa-external-link-alt btn-icon"></i>
                     </a>
                 ) : (
-                    <Button variant="primary" onClick={handleInternalNavigation}>
+                    <Button className="modern-btn modern-btn-primary" onClick={handleInternalNavigation}>
                         {data.buttonText || "Go somewhere"}
+                        <i className="fas fa-arrow-right btn-icon"></i>
                     </Button>
                 )}
             </Card.Body>
