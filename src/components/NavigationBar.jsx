@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import './NavigationBar.css';
-import { UserContext } from '../context/UserContext';
+import { useUser } from '../hooks/useUser';
 
 function NavigationBar() {
-    const { userName, logout } = useContext(UserContext);
+    const { userName, logout, loading } = useUser();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -27,7 +27,11 @@ function NavigationBar() {
 
                 {/* 右側：登入 or 使用者名稱 + 登出 */}
                 <Col xs={4} className="user-section">
-                    {userName ? (
+                    {loading ? (
+                        <div className="spinner-border spinner-border-sm text-light" role="status">
+                            <span className="visually-hidden">載入中...</span>
+                        </div>
+                    ) : userName ? (
                         <div className="user-info">
                             <span className="welcome-text">歡迎 {userName}</span>
                             <Button variant="outline-light" size="sm" className="logout-btn" onClick={handleLogout}>
