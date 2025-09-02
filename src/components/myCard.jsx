@@ -1,6 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
+import LazyImage from './LazyImage';
 
 const MyCard = memo(({ data }) => {
     const navigate = useNavigate();
@@ -14,10 +15,10 @@ const MyCard = memo(({ data }) => {
     return (
         <Card className="modern-card">
             <div className="card-image-wrapper">
-                <Card.Img
-                    className="modern-card-img"
-                    variant="top"
+                <LazyImage
                     src={data.image || "https://via.placeholder.com/150"}
+                    alt={data.title}
+                    className="modern-card-img"
                 />
                 <div className="card-overlay">
                     <div className="overlay-content">
