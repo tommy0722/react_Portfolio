@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 
-function MyCard({ data }) {
+const MyCard = memo(({ data }) => {
     const navigate = useNavigate();
     const isExternal = data.link.startsWith('http');
     
 
-    const handleInternalNavigation = () => {
-        navigate(data.link); // 跳轉到對應的內部路由
-    };
+    const handleInternalNavigation = useCallback(() => {
+        navigate(data.link);
+    }, [navigate, data.link]);
 
     return (
         <Card className="modern-card">
@@ -48,6 +48,8 @@ function MyCard({ data }) {
             </Card.Body>
         </Card>
     );
-}
+});
+
+MyCard.displayName = 'MyCard';
 
 export default MyCard;
