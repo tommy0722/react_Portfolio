@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './MapleBoss.css';
 import Select from 'react-select';
-import axios from '../utils/axiosInstance';
+import axios from '../../services/axiosInstance';
 
 function MapleBoss() {
     const [now, setNow] = useState(new Date());

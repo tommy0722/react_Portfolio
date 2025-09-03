@@ -8,11 +8,11 @@ import ErrorBoundary from './components/ErrorBoundary';
 import { UserProvider } from './context/UserContext';
 
 // 懶載入組件
-const JigsawArt = lazy(() => import('./JigsawArt/JigsawArt'));
-const PwColor = lazy(() => import('./PwColor/PwColor'));
-const Login = lazy(() => import('./login/login'));
+const JigsawArt = lazy(() => import('./pages/JigsawArt/JigsawArt'));
+const PwColor = lazy(() => import('./pages/PwColor/PwColor'));
+const Login = lazy(() => import('./pages/login/login'));
 const ContentTabs = lazy(() => import('./tab'));
-const MapleBoss = lazy(() => import('./MapleBoss/MapleBoss'));
+const MapleBoss = lazy(() => import('./pages/MapleBoss/MapleBoss'));
 
 // 載入中組件
 const PageLoading = () => (

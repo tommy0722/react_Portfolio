@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Container, ButtonGroup, Button } from 'react-bootstrap';
 import './SummaryPage.css';
-import axios from '../utils/axiosInstance';
+import axios from '../../services/axiosInstance';
 
 function KillSummaryPage() {
     const [summary, setSummary] = useState([]);

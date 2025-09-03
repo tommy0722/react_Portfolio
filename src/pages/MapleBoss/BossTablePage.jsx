@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './MapleBoss.css';
-import axios from '../utils/axiosInstance';
+import axios from '../../services/axiosInstance';
 import Select from 'react-select/base';
 
 function MapleBoss() {
