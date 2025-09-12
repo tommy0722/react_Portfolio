@@ -12,6 +12,7 @@ const API_CONFIG = {
 const baseURL = process.env.NODE_ENV === 'production' 
     ? API_CONFIG.PRODUCTION_URL 
     : API_CONFIG.DEVELOPMENT_URL;
+console.log(baseURL);
 
 // 創建 axios 實例
 const instance = axios.create({ 
