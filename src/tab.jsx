@@ -37,7 +37,7 @@ function ContentTabs() {
             title: "輪盤系統",
             text: "今天吃甚麼的輪盤(外部連結)",
             image: image3,
-            link: "https://myweb-backend-571409330129.asia-east1.run.app",
+            link: "/roulette",
             buttonText: "連結",
         },
         {
