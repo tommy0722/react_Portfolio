@@ -6,28 +6,31 @@ import performRequest from './api';
 function HomePage() {
   const [eatGroupData, setEatGroupData] = useState([]);
   const [reload, setReload] = useState(false);
+  const navigate = useNavigate();
+
   const goToRoulette = (id) => {
-    navigate(`/roulette/${id}`);
+    navigate(`/roulette/roulette/${id}`);
   };
+
   useEffect(() => {
     fetch("https://myweb-backend-571409330129.asia-east1.run.app/api/roulette/eatgroups/")
       .then((response) => response.json())
       .then((data) => setEatGroupData(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, [reload]);
+
   const handleUpdate = (id) => {
-    navigate(`/update/${id}`);
+    navigate(`/roulette/update/${id}`);
   };
   const handleChartBar = (id) => {
-    navigate(`/chartbar/${id}`);
+    navigate(`/roulette/chartbar/${id}`);
   };
   const handleMap = () => {
-    navigate(`/map`);
+    navigate(`/roulette/map`);
   };
   const handleRandom = () => {
-    navigate(`/random`);
+    navigate(`/roulette/random`);
   };
-  const navigate = useNavigate();
 
   const addGroupItem = async () => {
     const groupName = prompt("請輸入新的群組:");
