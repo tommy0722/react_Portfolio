@@ -190,6 +190,32 @@
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
 }
 
+/* ChartBar 專屬樣式 */
+.chart-page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  border: 1px solid #ecf0f1;
+}
+
+.chart-wrapper {
+  height: 500px;
+  position: relative;
+}
+
+.chart-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .update-actions {
   text-align: center;
   margin-bottom: 2rem;
@@ -305,6 +331,14 @@
   .update-footer {
     flex-direction: column;
   }
+
+  .chart-card {
+    padding: 20px;
+  }
+
+  .chart-wrapper {
+    height: 350px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -327,5 +361,9 @@
 
   .update-table .food-name {
     font-size: 0.9rem;
+  }
+
+  .chart-wrapper {
+    height: 300px;
   }
 }

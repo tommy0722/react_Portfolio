@@ -31,7 +31,7 @@ function ChartBar() {
     // 使用 useCallback 包装 loadChartData，依赖于 id
     const loadChartData = useCallback(async () => {
         try {
-            const [data, error] = await performRequest(`https://myweb-backend-571409330129.asia-east1.run.app/api/roulette/eatlogs/customer-food-count/${id}`);
+            const [data, error] = await performRequest(`https://myweb-backend-571409330129.asia-east1.run.app/api/roulette/eatlogs/customer-food-count/${id}/`);
             if (error) {
                 console.error("Failed to fetch food data:", error);
             } else {
@@ -65,11 +65,86 @@ function ChartBar() {
         loadChartData();
     }, [loadChartData]);
 
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    },
+                    color: '#2c3e50',
+                    padding: 20
+                }
+            },
+            title: {
+                display: false
+            },
+            tooltip: {
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                padding: 15,
+                cornerRadius: 10,
+                titleFont: {
+                    size: 16,
+                    weight: 'bold'
+                },
+                bodyFont: {
+                    size: 14
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(0, 0, 0, 0.05)'
+                },
+                ticks: {
+                    color: '#2c3e50',
+                    font: {
+                        size: 12,
+                        weight: 'bold'
+                    }
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    color: '#2c3e50',
+                    font: {
+                        size: 12,
+                        weight: 'bold'
+                    }
+                }
+            }
+        }
+    };
+
     return (
-        <div>
-            <h2>統計圖表</h2>
-            <div className="chart-container">
-                <Chart type='bar' data={chartData} options={{}} />
+        <div className="main-container">
+            <div className="chart-page-header">
+                <h1 className="main-title">📊 統計報表</h1>
+                <h2 className="group-name">
+                    {chartData.datasets[0]?.label || '載入中...'}
+                </h2>
+            </div>
+            <div className="chart-card">
+                <div className="chart-wrapper">
+                    <Chart type='bar' data={chartData} options={chartOptions} />
+                </div>
+            </div>
+            <div className="chart-footer">
+                <button className="btn-back" onClick={() => window.history.back()}>
+                    ← 返回列表
+                </button>
             </div>
         </div>
     );
