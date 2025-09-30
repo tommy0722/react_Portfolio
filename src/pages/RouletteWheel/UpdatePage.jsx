@@ -56,37 +56,52 @@ function UpdatePage() {
   };
 
   return (
-    <div>
-        <h1>{foodData.length > 0 ? foodData[0].Eatgroup_name : '網頁加載中...'}</h1>
-    
-      <table className="table  table-hover" style={{width:'80%'}}>
+    <div className="main-container">
+      <div className="update-page-header">
+        <h1 className="main-title">
+          ✏️ 編輯群組
+        </h1>
+        <h2 className="group-name">
+          {foodData.length > 0 ? foodData[0].Eatgroup_name : '載入中...'}
+        </h2>
+      </div>
+
+      <div className="update-actions">
+        <button className="btn-warning-custom" onClick={addFoodItem}>
+          ➕ 新增選項
+        </button>
+      </div>
+
+      <table className="table-custom update-table">
         <thead>
           <tr>
-            <th>食物</th>
-            <th style={{ width: '120px' }}>開關</th>
+            <th>🍽️ 項目名稱</th>
+            <th style={{ width: '150px' }}>🎯 顯示狀態</th>
           </tr>
         </thead>
         <tbody>
           {foodData.map((item, index) => (
             <tr key={item.id}>
-              <td>{item.Food}</td>
+              <td className="food-name">{item.Food}</td>
               <td>
-              <Switch
-          key={item.id}
-          isActive={item.Sh === 1}
-          toggle={() => toggleSh(index)}
-        />
+                <Switch
+                  key={item.id}
+                  isActive={item.Sh === 1}
+                  toggle={() => toggleSh(index)}
+                />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div className="row">
-        <div className="col-2"></div>
-      <button className="col-4 btn btn-outline-success" type="button" onClick={handleSave}>保存</button>
-        <div className="col-2"></div>
-      <button className="col-4 btn btn-outline-primary" onClick={addFoodItem}>新增新食物</button>
-        <div className="col-2"></div>
+
+      <div className="update-footer">
+        <button className="btn-save" onClick={handleSave}>
+          💾 保存更改
+        </button>
+        <button className="btn-back" onClick={() => navigate('/roulette')}>
+          ← 返回列表
+        </button>
       </div>
     </div>
   );
