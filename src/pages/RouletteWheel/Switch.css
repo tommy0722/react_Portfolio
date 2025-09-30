@@ -1,0 +1,26 @@
+  .container1 {
+    box-sizing: border-box;
+    width: 70px;
+    height: 40px;
+    padding: 2px;
+    border-radius: 20px;
+    background-color: #eee;
+    border: 2px solid #ccc;
+  }
+  .circle {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    background-color: #aaa;
+    border-radius: 50%;
+    margin-left: 0;
+    cursor: pointer;
+  }
+  .is-active.container1 {
+    background-color: Honeydew;
+    border-color: SeaGreen;
+  }
+  .is-active .circle {
+    background-color: DarkGreen;
+    margin-left: calc(100% - 32px);
+  }

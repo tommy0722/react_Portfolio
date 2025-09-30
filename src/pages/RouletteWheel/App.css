@@ -1,0 +1,208 @@
+/* 全局容器樣式 */
+.App {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px 0;
+}
+
+/* 主要內容區域 */
+.main-container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  padding: 40px;
+  max-width: 1000px;
+  min-height: calc(100vh - 40px);
+}
+
+/* 標題樣式 */
+.main-title {
+  background: linear-gradient(45deg, #ff6b6b, #ffa726);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 2rem 0 1.5rem 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 30px;
+  background: linear-gradient(45deg, #ff6b6b, #ffa726);
+  border-radius: 2px;
+}
+
+/* 按鈕樣式 */
+.btn-custom {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 12px 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  text-transform: none;
+  margin: 5px;
+}
+
+.btn-custom:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(45deg, #5a67d8, #6b46c1);
+  color: white;
+}
+
+.btn-custom:active {
+  transform: translateY(-1px);
+}
+
+.btn-warning-custom {
+  background: linear-gradient(45deg, #ffa726, #ff7043);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 15px 40px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 167, 38, 0.3);
+  margin-bottom: 2rem;
+}
+
+.btn-warning-custom:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 167, 38, 0.4);
+  background: linear-gradient(45deg, #ff9800, #ff5722);
+  color: white;
+}
+
+/* 表格樣式 */
+.table-custom {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  border: none;
+}
+
+.table-custom thead {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+}
+
+.table-custom th {
+  border: none;
+  padding: 20px 15px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.table-custom td {
+  border: none;
+  padding: 20px 15px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+.table-custom tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.table-custom tbody tr:hover {
+  background: linear-gradient(45deg, #f8f9ff, #f1f3ff);
+  transform: scale(1.02);
+}
+
+.table-custom tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* 卡片樣式 */
+.card-custom {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  border: 1px solid #ecf0f1;
+}
+
+.card-custom:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .main-container {
+    margin: 10px;
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .main-title {
+    font-size: 2.2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .btn-custom {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    margin: 3px;
+  }
+
+  .btn-warning-custom {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+
+  .table-custom th,
+  .table-custom td {
+    padding: 15px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 1.8rem;
+  }
+
+  .btn-custom {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .table-custom {
+    font-size: 0.8rem;
+  }
+}

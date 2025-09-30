@@ -13,6 +13,7 @@ const PwColor = lazy(() => import('./pages/PwColor/PwColor'));
 const Login = lazy(() => import('./pages/login/login'));
 const ContentTabs = lazy(() => import('./tab'));
 const MapleBoss = lazy(() => import('./pages/MapleBoss/MapleBoss'));
+const RouletteWheel = lazy(() => import('./pages/RouletteWheel'));
 
 // 載入中組件
 const PageLoading = () => (
@@ -40,6 +41,7 @@ function App() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/" element={<ContentTabs />} />
                             <Route path="/mapleboss" element={<MapleBoss />} />
+                            <Route path="/roulette/*" element={<RouletteWheel />} />
                         </Routes>
                     </Suspense>
                 </Router>

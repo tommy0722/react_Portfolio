@@ -1,0 +1,8 @@
+.chart-container {
+    display: grid;
+    place-items: center;
+    width: 600px; /* 可以调整宽度 */
+    height: 400px; /* 可以调整高度 */
+    margin: auto; /* 如果需要在外层容器中居中 */
+  }
+  
