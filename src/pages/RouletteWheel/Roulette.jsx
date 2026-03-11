@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import performRequest from './api';
 import './Roulette.css'
 
+// API 基礎網址
+const API_BASE_URL = 'https://myweb-backend-571409330129.asia-east1.run.app/api/roulette';
+
 const Roulette = () => {
   const [wheel, setWheel] = useState(null);
   const [groupData, setGroupData] = useState(null); 
@@ -10,13 +13,16 @@ const Roulette = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const [data, error] = await performRequest(`https://tommy0722.pythonanywhere.com/api/foods/?eatgroup_id=${id}&Sh=1`);
-      if (!error && data) {
+      const [data, error] = await performRequest(`${API_BASE_URL}/foods/?eatgroup_id=${id}&Sh=1`);
+      console.log('Foods API Response:', data, 'Error:', error);
+
+      if (!error && data && Array.isArray(data) && data.length > 0) {
         const segments = data.map((item, index) => ({
           'fillStyle': ['#6695d4', '#3274c9', '#6ebcd4'][index % 3],
           'text': item.Food,
         }));
         const newWheel = new window.Winwheel({
+          'canvasId': 'canvas',
           'numSegments': data.length,
           'outerRadius': 150,
           'textFontSize': 12,
@@ -32,8 +38,8 @@ const Roulette = () => {
               const foodName = indicatedSegment.text;
 
               const [, error] = await performRequest(
-                'https://tommy0722.pythonanywhere.com/api/eatlogs/', 
-                'POST', 
+                `${API_BASE_URL}/eatlogs/`,
+                'POST',
                 { body: { Customer: customerName, Food: foodName } }
               );
 
@@ -55,7 +61,8 @@ const Roulette = () => {
   }, [id]); // 依赖项包括id，确保id变化时重新获取数据
   useEffect(() => {
     const fetchGroupData = async () => {
-      const [data, error] = await performRequest(`https://tommy0722.pythonanywhere.com/api/foods/?eatgroup_id=${id}`);
+      const [data, error] = await performRequest(`${API_BASE_URL}/foods/?eatgroup_id=${id}`);
+      console.log('Group Foods Response:', data, 'Error:', error);
       if (!error) {
         setGroupData(data); // 更新状态
       } else {
@@ -72,7 +79,7 @@ const Roulette = () => {
   };
 
   // const Group = async () => {
-  //   const [data, error] = await performRequest(`https://tommy0722.pythonanywhere.com/api/eatgroups/?id=${id}`);
+  //   const [data, error] = await performRequest(`https://myweb-backend-571409330129.asia-east1.run.app/api/eatgroups/?id=${id}`);
   //   return data
   // }
 
@@ -80,7 +87,7 @@ const Roulette = () => {
     <div className="roulette-container">
       <h1 className="roulette-title">
         🎯{" "}
-        {groupData ? (
+        {groupData && Array.isArray(groupData) && groupData.length > 0 ? (
           <span>{groupData[0].Eatgroup_name} 美食輪盤</span>
         ) : (
           <span>載入中...</span>
@@ -105,7 +112,7 @@ const Roulette = () => {
         <p className="text-muted">點擊輪盤或按鈕開始轉動！</p>
       </div>
 
-      {groupData && (
+      {groupData && Array.isArray(groupData) && groupData.length > 0 && (
         <div className="food-list">
           <h3>🍽️ 美食選項</h3>
           <div className="food-items">
