@@ -1,0 +1,170 @@
+/* 24 點遊戲樣式 - 整合到作品集風格 */
+
+.game24-app {
+  min-height: 100vh;
+  padding: clamp(1rem, 4vw, 2rem);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.game24-banner {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.game24-banner h1 {
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  margin: 0 0 0.35rem;
+}
+
+.game24-tagline {
+  margin: 0;
+  color: #a0a0a0;
+  font-size: 0.95rem;
+}
+
+.game24-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.game24-play {
+  flex: 1 1 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.game24-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.game24-card {
+  width: 4.5rem;
+  height: 6.25rem;
+  border-radius: 10px;
+  background: linear-gradient(160deg, #fffef8 0%, #f0ebe0 100%);
+  border: 2px solid #d4cfc0;
+  box-shadow:
+    0 4px 0 rgba(200, 190, 170, 0.5),
+    0 12px 24px rgba(30, 40, 50, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.game24-card:hover {
+  transform: translateY(-2px);
+}
+
+.game24-card-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #d63447;
+  font-variant-numeric: tabular-nums;
+}
+
+.game24-card-face .game24-card-value {
+  font-size: 2.25rem;
+  letter-spacing: 0.02em;
+}
+
+.game24-sidebar {
+  flex: 0 1 240px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.25rem 1.35rem;
+  box-shadow: 0 8px 28px rgba(30, 40, 50, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+.game24-sidebar h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.game24-btn {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  padding: 0.65rem 1.2rem;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.game24-btn:active {
+  transform: translateY(1px);
+}
+
+.game24-btn.game24-primary {
+  background: #d63447;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 3px 0 #a82838;
+}
+
+.game24-btn.game24-primary:hover {
+  filter: brightness(1.05);
+}
+
+.game24-btn.game24-reveal {
+  width: 100%;
+  background: #2c2c2c;
+  color: #fff;
+  font-weight: 600;
+}
+
+.game24-btn.game24-reveal:hover {
+  filter: brightness(1.2);
+  background: #3c3c3c;
+}
+
+.game24-solution-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.game24-solution {
+  display: block;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  word-break: break-all;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px dashed #d4cfc0;
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  color: #2c2c2c;
+}
+
+.game24-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #a0a0a0;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .game24-sidebar {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+}

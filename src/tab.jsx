@@ -8,16 +8,17 @@ import MapleStory from './assets/MapleStory.jpg';
 import Invoice from './assets/invoice.jpg';
 import Scheduler from './assets/scheduler.jpg';
 import NTHU from './assets/NTHU.jpg';
+import Game24 from './assets/Game24.png';
 
 function ContentTabs() {
     const cssData = [
-        {
-            title: "色塊拼圖",
-            text: "這是一個放兩張圖片，透過滑動來解開第二張圖片的動畫",
-            image: image1,
-            link: "/JigsawArt",
-            buttonText: "連結",
-        },
+        // {
+        //     title: "色塊拼圖",
+        //     text: "這是一個放兩張圖片，透過滑動來解開第二張圖片的動畫",
+        //     image: image1,
+        //     link: "/JigsawArt",
+        //     buttonText: "連結",
+        // },
         {
             title: "色塊拼圖",
             text: "這是一個放兩張圖片，透過滑動來解開第二張圖片的動畫",
@@ -32,6 +33,13 @@ function ContentTabs() {
             text: "確認密碼強度的顏色牆",
             image: image2,
             link: "/pwColor",
+            buttonText: "連結",
+        },
+        {
+            title: "24 點遊戲",
+            text: "用四張牌的數字透過加減乘除得到 24 - 數學益智遊戲",
+            image: Game24,
+            link: "/game24",
             buttonText: "連結",
         },
     ];
