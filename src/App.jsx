@@ -15,6 +15,7 @@ const ContentTabs = lazy(() => import('./tab'));
 const MapleBoss = lazy(() => import('./pages/MapleBoss/MapleBoss'));
 const RouletteWheel = lazy(() => import('./pages/RouletteWheel'));
 const Game24 = lazy(() => import('./pages/Game24/Game24'));
+const AccountingPage = lazy(() => import('./pages/Accounting/AccountingPage'));
 
 // 載入中組件
 const PageLoading = () => (
@@ -44,6 +45,7 @@ function App() {
                             <Route path="/mapleboss" element={<MapleBoss />} />
                             <Route path="/roulette/*" element={<RouletteWheel />} />
                             <Route path="/game24" element={<Game24 />} />
+                            <Route path="/accounting" element={<AccountingPage />} />
                         </Routes>
                     </Suspense>
                 </Router>
