@@ -57,7 +57,7 @@ function CategoryManager({ categories, onRefresh }) {
             <div className="row g-4 mb-4">
                 {/* 新增大分類 */}
                 <div className="col-md-6">
-                    <div className="card h-100">
+                    <div className="card h-100 text-dark">
                         <div className="card-header fw-semibold">新增大分類</div>
                         <div className="card-body">
                             <Form onSubmit={handleAddMain} className="d-flex flex-column gap-2">
@@ -82,7 +82,7 @@ function CategoryManager({ categories, onRefresh }) {
 
                 {/* 新增小分類 */}
                 <div className="col-md-6">
-                    <div className="card h-100">
+                    <div className="card h-100 text-dark">
                         <div className="card-header fw-semibold">新增小分類</div>
                         <div className="card-body">
                             <Form onSubmit={handleAddSub} className="d-flex flex-column gap-2">
@@ -124,14 +124,14 @@ function CategoryManager({ categories, onRefresh }) {
                         </div>
                         {topLevel.map(parent => (
                             <div key={parent.id} className="mb-1">
-                                <div className="d-flex justify-content-between align-items-center px-3 py-2 bg-white border rounded">
+                                <div className="d-flex justify-content-between align-items-center px-3 py-2 bg-white border rounded text-dark">
                                     <span className="fw-semibold">{parent.name}</span>
                                     {parent.user && (
                                         <Button variant="outline-danger" size="sm" onClick={() => handleDelete(parent.id)}>刪除</Button>
                                     )}
                                 </div>
                                 {childrenOf(parent.id).map(child => (
-                                    <div key={child.id} className="d-flex justify-content-between align-items-center px-3 py-2 ms-4 border rounded mt-1 bg-light">
+                                    <div key={child.id} className="d-flex justify-content-between align-items-center px-3 py-2 ms-4 border rounded mt-1 bg-light text-dark">
                                         <span className="text-muted">└ {child.name}</span>
                                         {child.user && (
                                             <Button variant="outline-danger" size="sm" onClick={() => handleDelete(child.id)}>刪除</Button>

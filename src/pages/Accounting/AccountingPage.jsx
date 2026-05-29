@@ -117,21 +117,21 @@ function AccountingPage() {
             <h1 className="h4 fw-bold mb-4 text-center">記帳系統</h1>
 
             <div className="mb-4 d-flex justify-content-around">
-                <button className={`btn ${activePage === 'transactions' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => setActivePage('transactions')} style={{ minWidth: 140 }}>
+                <button className={`btn ${activePage === 'transactions' ? 'btn-primary' : 'btn-outline-primary text-dark'}`} onClick={() => setActivePage('transactions')} style={{ minWidth: 140 }}>
                     收支紀錄
                 </button>
-                <button className={`btn ${activePage === 'accounts' ? 'btn-info' : 'btn-outline-info'}`} onClick={() => setActivePage('accounts')} style={{ minWidth: 140 }}>
+                <button className={`btn ${activePage === 'accounts' ? 'btn-info' : 'btn-outline-info text-dark'}`} onClick={() => setActivePage('accounts')} style={{ minWidth: 140 }}>
                     帳戶管理
                 </button>
-                <button className={`btn ${activePage === 'categories' ? 'btn-success' : 'btn-outline-success'}`} onClick={() => setActivePage('categories')} style={{ minWidth: 140 }}>
+                <button className={`btn ${activePage === 'categories' ? 'btn-success' : 'btn-outline-success text-dark'}`} onClick={() => setActivePage('categories')} style={{ minWidth: 140 }}>
                     分類管理
                 </button>
-                <button className={`btn ${activePage === 'stats' ? 'btn-secondary' : 'btn-outline-secondary'}`} onClick={() => setActivePage('stats')} style={{ minWidth: 140 }}>
+                <button className={`btn ${activePage === 'stats' ? 'btn-secondary' : 'btn-outline-secondary text-dark'}`} onClick={() => setActivePage('stats')} style={{ minWidth: 140 }}>
                     統計圖表
                 </button>
             </div>
 
-            <div className="border rounded p-4 shadow-sm bg-light">
+            <div className="border rounded p-4 shadow-sm bg-light text-dark">
                 {activePage === 'transactions' && (
                     <>
                         <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
@@ -162,7 +162,7 @@ function AccountingPage() {
                         ) : transactions.length === 0 ? (
                             <div className="text-center text-muted py-4">本月尚無紀錄</div>
                         ) : (
-                            <Table striped bordered hover responsive size="sm">
+                            <Table striped bordered hover responsive size="sm" className="text-dark">
                                 <thead>
                                     <tr>
                                         <th>日期</th>

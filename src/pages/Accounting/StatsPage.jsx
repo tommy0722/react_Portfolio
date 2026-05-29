@@ -70,7 +70,7 @@ function StatsPage({ summary, month }) {
     };
 
     return (
-        <div>
+        <div className="text-dark">
             {/* 圓餅圖 */}
             <div className="mb-5">
                 <div className="d-flex align-items-center gap-3 mb-3">

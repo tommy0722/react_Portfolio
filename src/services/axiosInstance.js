@@ -5,7 +5,7 @@ import axios from 'axios';
 const API_CONFIG = {
     PRODUCTION_URL: 'https://myweb-backend-571409330129.asia-east1.run.app/api',
     DEVELOPMENT_URL: 'http://127.0.0.1:8000/api',
-    TIMEOUT: 10000, // 10秒超時
+
 };
 
 // 根據環境選擇 baseURL
@@ -15,9 +15,8 @@ const baseURL = process.env.NODE_ENV === 'production'
 console.log(baseURL);
 
 // 創建 axios 實例
-const instance = axios.create({ 
+const instance = axios.create({
     baseURL,
-    timeout: API_CONFIG.TIMEOUT,
     headers: {
         'Content-Type': 'application/json',
     }

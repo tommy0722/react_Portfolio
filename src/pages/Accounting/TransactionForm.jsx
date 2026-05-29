@@ -44,7 +44,7 @@ function TransactionForm({ show, onHide, onSubmit, accounts, categories, initial
     const childrenOf = (id) => filtered.filter(c => c.parent === id);
 
     return (
-        <Modal show={show} onHide={onHide} centered>
+        <Modal show={show} onHide={onHide} centered className="text-dark">
             <Modal.Header closeButton>
                 <Modal.Title>{initial ? '編輯紀錄' : '新增紀錄'}</Modal.Title>
             </Modal.Header>

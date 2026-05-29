@@ -55,10 +55,10 @@ function AccountManager({ accounts, onRefresh }) {
 
             <ListGroup>
                 {accounts.length === 0 && (
-                    <ListGroup.Item className="text-muted">尚無帳戶</ListGroup.Item>
+                    <ListGroup.Item className="text-muted text-dark">尚無帳戶</ListGroup.Item>
                 )}
                 {accounts.map(acc => (
-                    <ListGroup.Item key={acc.id} className="d-flex justify-content-between align-items-center">
+                    <ListGroup.Item key={acc.id} className="d-flex justify-content-between align-items-center text-dark">
                         <div>
                             <span className="fw-semibold">{acc.name}</span>
                             <span className="text-muted ms-3 small">初始餘額 $ {Number(acc.initial_balance).toLocaleString()}</span>
