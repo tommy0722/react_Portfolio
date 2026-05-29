@@ -42,13 +42,14 @@ function AccountManager({ accounts, onRefresh }) {
                     value={name}
                     onChange={e => setName(e.target.value)}
                     maxLength={50}
-                    style={{ maxWidth: 260 }}
+                    className="flex-grow-1"
+                    style={{ minWidth: 160 }}
                 />
                 <Form.Control
                     type="number" step="1" placeholder="初始餘額"
                     value={initialBalance}
                     onChange={e => setInitialBalance(e.target.value)}
-                    style={{ maxWidth: 140 }}
+                    style={{ minWidth: 100, maxWidth: 140 }}
                 />
                 <Button type="submit" variant="primary" disabled={saving}>新增</Button>
             </Form>

@@ -87,7 +87,7 @@ function StatsPage({ summary, month }) {
                     </div>
                 </div>
                 {pieData ? (
-                    <div style={{ maxWidth: 360, margin: '0 auto' }}>
+                    <div style={{ maxWidth: 'min(360px, 100%)', margin: '0 auto' }}>
                         <Pie data={pieData} />
                     </div>
                 ) : (

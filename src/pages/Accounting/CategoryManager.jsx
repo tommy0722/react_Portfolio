@@ -124,15 +124,15 @@ function CategoryManager({ categories, onRefresh }) {
                         </div>
                         {topLevel.map(parent => (
                             <div key={parent.id} className="mb-1">
-                                <div className="d-flex justify-content-between align-items-center px-3 py-2 bg-white border rounded text-dark">
-                                    <span className="fw-semibold">{parent.name}</span>
+                                <div className="d-flex justify-content-between align-items-center flex-wrap gap-1 px-3 py-2 bg-white border rounded text-dark">
+                                    <span className="fw-semibold text-truncate" style={{ maxWidth: '70%' }}>{parent.name}</span>
                                     {parent.user && (
                                         <Button variant="outline-danger" size="sm" onClick={() => handleDelete(parent.id)}>刪除</Button>
                                     )}
                                 </div>
                                 {childrenOf(parent.id).map(child => (
-                                    <div key={child.id} className="d-flex justify-content-between align-items-center px-3 py-2 ms-4 border rounded mt-1 bg-light text-dark">
-                                        <span className="text-muted">└ {child.name}</span>
+                                    <div key={child.id} className="d-flex justify-content-between align-items-center flex-wrap gap-1 px-3 py-2 ms-3 ms-sm-4 border rounded mt-1 bg-light text-dark">
+                                        <span className="text-muted text-truncate" style={{ maxWidth: '70%' }}>└ {child.name}</span>
                                         {child.user && (
                                             <Button variant="outline-danger" size="sm" onClick={() => handleDelete(child.id)}>刪除</Button>
                                         )}

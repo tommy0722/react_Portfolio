@@ -113,38 +113,38 @@ function AccountingPage() {
     };
 
     return (
-        <div style={{ width: '90%', maxWidth: 960, margin: '0 auto', padding: '20px' }}>
+        <div style={{ width: '95%', maxWidth: 960, margin: '0 auto', padding: '12px 8px' }}>
             <h1 className="h4 fw-bold mb-4 text-center">記帳系統</h1>
 
-            <div className="mb-4 d-flex justify-content-around">
-                <button className={`btn ${activePage === 'transactions' ? 'btn-primary' : 'btn-outline-primary text-dark'}`} onClick={() => setActivePage('transactions')} style={{ minWidth: 140 }}>
+            <div className="mb-4 d-flex flex-wrap gap-2 justify-content-center">
+                <button className={`btn flex-fill ${activePage === 'transactions' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => setActivePage('transactions')} style={{ minWidth: 120 }}>
                     收支紀錄
                 </button>
-                <button className={`btn ${activePage === 'accounts' ? 'btn-info' : 'btn-outline-info text-dark'}`} onClick={() => setActivePage('accounts')} style={{ minWidth: 140 }}>
+                <button className={`btn flex-fill ${activePage === 'accounts' ? 'btn-info' : 'btn-outline-info'}`} onClick={() => setActivePage('accounts')} style={{ minWidth: 120 }}>
                     帳戶管理
                 </button>
-                <button className={`btn ${activePage === 'categories' ? 'btn-success' : 'btn-outline-success text-dark'}`} onClick={() => setActivePage('categories')} style={{ minWidth: 140 }}>
+                <button className={`btn flex-fill ${activePage === 'categories' ? 'btn-success' : 'btn-outline-success'}`} onClick={() => setActivePage('categories')} style={{ minWidth: 120 }}>
                     分類管理
                 </button>
-                <button className={`btn ${activePage === 'stats' ? 'btn-secondary' : 'btn-outline-secondary text-dark'}`} onClick={() => setActivePage('stats')} style={{ minWidth: 140 }}>
+                <button className={`btn flex-fill ${activePage === 'stats' ? 'btn-secondary' : 'btn-outline-secondary'}`} onClick={() => setActivePage('stats')} style={{ minWidth: 120 }}>
                     統計圖表
                 </button>
             </div>
 
-            <div className="border rounded p-4 shadow-sm bg-light text-dark">
+            <div className="border rounded p-3 p-md-4 shadow-sm bg-light text-dark">
                 {activePage === 'transactions' && (
                     <>
                         <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                            <div className="d-flex align-items-center gap-2">
+                            <div className="d-flex align-items-center gap-2 flex-wrap">
                                 <label className="fw-bold mb-0">月份：</label>
                                 <input
-                                    type="month" className="form-control" style={{ width: 160 }}
+                                    type="month" className="form-control" style={{ width: 150 }}
                                     value={month} onChange={e => setMonth(e.target.value)}
                                 />
                                 <Form.Select
                                     value={filterAccount}
                                     onChange={e => setFilterAccount(e.target.value)}
-                                    style={{ width: 150 }}
+                                    style={{ minWidth: 120, maxWidth: 180 }}
                                 >
                                     <option value="">全部帳戶</option>
                                     {accounts.map(a => (
