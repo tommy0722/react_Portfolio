@@ -56,15 +56,15 @@ function AccountManager({ accounts, onRefresh }) {
 
             <ListGroup>
                 {accounts.length === 0 && (
-                    <ListGroup.Item className="text-muted text-dark">尚無帳戶</ListGroup.Item>
+                    <ListGroup.Item style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.5)' }}>尚無帳戶</ListGroup.Item>
                 )}
                 {accounts.map(acc => (
-                    <ListGroup.Item key={acc.id} className="d-flex justify-content-between align-items-center text-dark">
+                    <ListGroup.Item key={acc.id} className="d-flex justify-content-between align-items-center" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff' }}>
                         <div>
                             <span className="fw-semibold">{acc.name}</span>
-                            <span className="text-muted ms-3 small">初始餘額 $ {Number(acc.initial_balance).toLocaleString()}</span>
+                            <span className="ms-3 small" style={{ color: 'rgba(255,255,255,0.6)' }}>初始餘額 $ {Number(acc.initial_balance).toLocaleString()}</span>
                         </div>
-                        <Button variant="outline-danger" size="sm" onClick={() => handleDelete(acc.id)}>刪除</Button>
+                        <Button variant="outline-light" size="sm" onClick={() => handleDelete(acc.id)}>刪除</Button>
                     </ListGroup.Item>
                 ))}
             </ListGroup>

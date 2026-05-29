@@ -131,7 +131,7 @@ function AccountingPage() {
                 </button>
             </div>
 
-            <div className="border rounded p-3 p-md-4 shadow-sm bg-light text-dark">
+            <div className="border rounded p-3 p-md-4" style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', borderColor: 'rgba(255,255,255,0.15)' }}>
                 {activePage === 'transactions' && (
                     <>
                         <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
@@ -162,7 +162,7 @@ function AccountingPage() {
                         ) : transactions.length === 0 ? (
                             <div className="text-center text-muted py-4">本月尚無紀錄</div>
                         ) : (
-                            <Table striped bordered hover responsive size="sm" className="text-dark">
+                            <Table bordered hover responsive size="sm" style={{ color: '#fff', borderColor: 'rgba(255,255,255,0.15)' }}>
                                 <thead>
                                     <tr>
                                         <th>日期</th>

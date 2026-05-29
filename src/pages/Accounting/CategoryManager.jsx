@@ -57,7 +57,7 @@ function CategoryManager({ categories, onRefresh }) {
             <div className="row g-4 mb-4">
                 {/* 新增大分類 */}
                 <div className="col-md-6">
-                    <div className="card h-100 text-dark">
+                    <div className="card h-100" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff' }}>
                         <div className="card-header fw-semibold">新增大分類</div>
                         <div className="card-body">
                             <Form onSubmit={handleAddMain} className="d-flex flex-column gap-2">
@@ -82,7 +82,7 @@ function CategoryManager({ categories, onRefresh }) {
 
                 {/* 新增小分類 */}
                 <div className="col-md-6">
-                    <div className="card h-100 text-dark">
+                    <div className="card h-100" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff' }}>
                         <div className="card-header fw-semibold">新增小分類</div>
                         <div className="card-body">
                             <Form onSubmit={handleAddSub} className="d-flex flex-column gap-2">
@@ -124,15 +124,15 @@ function CategoryManager({ categories, onRefresh }) {
                         </div>
                         {topLevel.map(parent => (
                             <div key={parent.id} className="mb-1">
-                                <div className="d-flex justify-content-between align-items-center flex-wrap gap-1 px-3 py-2 border rounded" style={{ backgroundColor: '#495057', color: '#fff' }}>
+                                <div className="d-flex justify-content-between align-items-center flex-wrap gap-1 px-3 py-2 rounded" style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>
                                     <span className="fw-semibold text-truncate" style={{ maxWidth: '70%' }}>{parent.name}</span>
                                     {parent.user && (
                                         <Button variant="outline-light" size="sm" onClick={() => handleDelete(parent.id)}>刪除</Button>
                                     )}
                                 </div>
                                 {childrenOf(parent.id).map(child => (
-                                    <div key={child.id} className="d-flex justify-content-between align-items-center flex-wrap gap-1 px-3 py-2 ms-3 ms-sm-4 border rounded mt-1" style={{ backgroundColor: '#6c757d', color: '#fff' }}>
-                                        <span className="text-truncate" style={{ maxWidth: '70%', color: '#e9ecef' }}>└ {child.name}</span>
+                                    <div key={child.id} className="d-flex justify-content-between align-items-center flex-wrap gap-1 px-3 py-2 ms-3 ms-sm-4 rounded mt-1" style={{ background: 'rgba(102,126,234,0.2)', color: '#fff', border: '1px solid rgba(102,126,234,0.3)' }}>
+                                        <span className="text-truncate" style={{ maxWidth: '70%', color: 'rgba(255,255,255,0.8)' }}>└ {child.name}</span>
                                         {child.user && (
                                             <Button variant="outline-light" size="sm" onClick={() => handleDelete(child.id)}>刪除</Button>
                                         )}
