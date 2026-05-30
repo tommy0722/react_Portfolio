@@ -138,13 +138,13 @@ function AccountingPage() {
                             <div className="d-flex align-items-center gap-2 flex-wrap">
                                 <label className="fw-bold mb-0">月份：</label>
                                 <input
-                                    type="month" className="form-control" style={{ width: 150 }}
+                                    type="month" className="form-control" style={{ width: 150, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }}
                                     value={month} onChange={e => setMonth(e.target.value)}
                                 />
                                 <Form.Select
                                     value={filterAccount}
                                     onChange={e => setFilterAccount(e.target.value)}
-                                    style={{ minWidth: 120, maxWidth: 180 }}
+                                    style={{ minWidth: 120, maxWidth: 180, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }}
                                 >
                                     <option value="">全部帳戶</option>
                                     {accounts.map(a => (
@@ -162,39 +162,41 @@ function AccountingPage() {
                         ) : transactions.length === 0 ? (
                             <div className="text-center text-muted py-4">本月尚無紀錄</div>
                         ) : (
-                            <Table bordered hover responsive size="sm" style={{ color: '#fff', borderColor: 'rgba(255,255,255,0.15)' }}>
-                                <thead>
-                                    <tr>
-                                        <th>日期</th>
-                                        <th>類型</th>
-                                        <th>帳戶</th>
-                                        <th>分類</th>
-                                        <th className="text-end">金額</th>
-                                        <th>備註</th>
-                                        <th>操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {transactions.map(tx => (
-                                        <tr key={tx.id}>
-                                            <td>{tx.date}</td>
-                                            <td>
-                                                <Badge bg={tx.type === 'income' ? 'success' : 'danger'}>
-                                                    {tx.type === 'income' ? '收入' : '支出'}
-                                                </Badge>
-                                            </td>
-                                            <td>{tx.account?.name ?? '—'}</td>
-                                            <td>{tx.category?.name ?? '—'}</td>
-                                            <td className="text-end">$ {Number(tx.amount).toLocaleString()}</td>
-                                            <td>{tx.description || '—'}</td>
-                                            <td>
-                                                <Button size="sm" variant="outline-secondary" className="me-1" onClick={() => handleEdit(tx)}>編輯</Button>
-                                                <Button size="sm" variant="outline-danger" onClick={() => handleDelete(tx.id)}>刪除</Button>
-                                            </td>
+                            <div className="table-responsive">
+                                <table className="table table-sm accounting-table">
+                                    <thead>
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>類型</th>
+                                            <th>帳戶</th>
+                                            <th>分類</th>
+                                            <th className="text-end">金額</th>
+                                            <th>備註</th>
+                                            <th>操作</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
+                                    </thead>
+                                    <tbody>
+                                        {transactions.map(tx => (
+                                            <tr key={tx.id}>
+                                                <td>{tx.date}</td>
+                                                <td>
+                                                    <Badge bg={tx.type === 'income' ? 'success' : 'danger'}>
+                                                        {tx.type === 'income' ? '收入' : '支出'}
+                                                    </Badge>
+                                                </td>
+                                                <td>{tx.account?.name ?? '—'}</td>
+                                                <td>{tx.category?.name ?? '—'}</td>
+                                                <td className="text-end">$ {Number(tx.amount).toLocaleString()}</td>
+                                                <td>{tx.description || '—'}</td>
+                                                <td>
+                                                    <Button size="sm" variant="outline-light" className="me-1" onClick={() => handleEdit(tx)}>編輯</Button>
+                                                    <Button size="sm" variant="outline-danger" onClick={() => handleDelete(tx.id)}>刪除</Button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         )}
                     </>
                 )}

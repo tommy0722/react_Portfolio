@@ -290,3 +290,28 @@ body::before {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }
+
+/* 記帳系統表格 */
+.accounting-table {
+  color: #fff;
+  --bs-table-bg: transparent;
+  --bs-table-striped-bg: transparent;
+  --bs-table-hover-bg: rgba(102, 126, 234, 0.15);
+  --bs-table-border-color: rgba(255, 255, 255, 0.08);
+}
+
+.accounting-table > :not(caption) > * > * {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  vertical-align: middle;
+}
+
+.accounting-table thead > * > * {
+  background-color: rgba(102, 126, 234, 0.3) !important;
+  font-weight: 600;
+}
+
+.accounting-table tbody tr:hover > * {
+  background-color: rgba(102, 126, 234, 0.18) !important;
+}
