@@ -1,8 +1,15 @@
-/* Google Fonts 導入 */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
 
-/* 全局樣式 */
+:root {
+  --gb-bg: #000000;
+  --gb-surface: #030a03;
+  --gb-darkgreen: #0a2e0a;
+  --gb-midgreen: #1e5e1e;
+  --gb-light: #5cb85c;
+  --gb-bright: #a8ff3e;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,15 +17,19 @@
 }
 
 body {
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-  color: #ffffff !important;
-  font-family: 'Poppins', sans-serif;
+  background-color: var(--gb-bg) !important;
+  color: var(--gb-bright) !important;
+  font-family: 'Press Start 2P', monospace;
   min-height: 100vh;
-  position: relative;
   overflow-x: hidden;
 }
 
-/* 背景粒子效果 */
+#root {
+  background-color: var(--gb-bg);
+  min-height: 100vh;
+}
+
+/* 掃描線效果 */
 body::before {
   content: '';
   position: fixed;
@@ -26,106 +37,103 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
-    radial-gradient(circle at 25% 25%, #667eea 0%, transparent 50%),
-    radial-gradient(circle at 75% 25%, #764ba2 0%, transparent 50%),
-    radial-gradient(circle at 25% 75%, #f093fb 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, #f5576c 0%, transparent 50%);
-  opacity: 0.1;
-  z-index: -1;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
 }
 
-/* 主要內容區域 */
 .main-content {
   padding-top: 40px;
   min-height: calc(100vh - 80px);
+  background: var(--gb-bg);
 }
 
 /* 英雄區域 */
 .hero-section {
   text-align: center;
-  padding: 60px 0;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
+  padding: 48px 24px;
+  background: var(--gb-bg);
+  border: 3px solid var(--gb-midgreen);
+  border-left: 6px solid var(--gb-bright);
   margin-bottom: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 2rem;
+  color: var(--gb-bright);
   margin-bottom: 20px;
-  text-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+  text-shadow: 3px 3px 0 var(--gb-darkgreen);
+  letter-spacing: 2px;
 }
 
 .hero-subtitle {
-  font-size: 1.3rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 300;
-  letter-spacing: 1px;
+  font-size: 0.65rem;
+  color: var(--gb-light);
+  letter-spacing: 2px;
+  line-height: 2;
 }
 
-/* 自定義標籤頁 */
+/* 標籤頁 */
 .custom-tabs {
   margin-bottom: 0;
+  border-bottom: none;
 }
 
 .custom-tabs .nav-link {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px 15px 0 0;
-  margin-right: 10px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  padding: 15px 25px;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  background: var(--gb-surface);
+  color: var(--gb-light);
+  border: 3px solid var(--gb-midgreen) !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+  margin-right: 6px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  padding: 12px 16px;
+  transition: none;
 }
 
 .custom-tabs .nav-link:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  transform: translateY(-2px);
+  background: var(--gb-darkgreen);
+  color: var(--gb-bright);
+  transform: none;
 }
 
 .custom-tabs .nav-link.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+  background: var(--gb-bright);
+  color: var(--gb-bg);
+  border-color: var(--gb-bright) !important;
+  box-shadow: none;
 }
 
 /* 標籤內容包裝器 */
 .tab-content-wrapper {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 0 20px 20px 20px;
-  padding: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--gb-surface);
+  border: 3px solid var(--gb-bright);
+  box-shadow: 6px 6px 0 var(--gb-midgreen);
+  padding: 32px;
 }
 
-/* 現代化卡片樣式 */
+/* 作品集卡片 */
 .modern-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  transition: all 0.4s ease;
+  background: var(--gb-bg);
+  border: 3px solid var(--gb-midgreen) !important;
+  border-radius: 0 !important;
+  transition: none;
   overflow: hidden;
   height: 100%;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 4px 4px 0 var(--gb-darkgreen);
 }
 
 .modern-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
-  border-color: rgba(102, 126, 234, 0.5);
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0 var(--gb-midgreen);
+  border-color: var(--gb-bright) !important;
 }
 
 .card-image-wrapper {
@@ -135,13 +143,16 @@ body::before {
 
 .modern-card-img {
   width: 100%;
-  height: 250px;
+  height: 220px;
   object-fit: cover;
-  transition: all 0.4s ease;
+  transition: none;
+  filter: grayscale(20%) sepia(30%);
+  image-rendering: pixelated;
 }
 
 .modern-card:hover .modern-card-img {
-  transform: scale(1.1);
+  transform: none;
+  filter: grayscale(0%) sepia(0%);
 }
 
 .card-overlay {
@@ -150,12 +161,12 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(102, 126, 234, 0.8);
+  background: rgba(15, 56, 15, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: opacity 0.1s step-end;
 }
 
 .modern-card:hover .card-overlay {
@@ -164,107 +175,124 @@ body::before {
 
 .overlay-content {
   text-align: center;
-  color: white;
+  color: var(--gb-bright);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
 }
 
 .view-icon {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 10px;
   display: block;
 }
 
 .modern-card-body {
-  padding: 25px;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  background: var(--gb-surface);
 }
 
 .modern-card-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 15px;
+  font-size: 0.65rem;
+  color: var(--gb-bright);
+  margin-bottom: 12px;
   text-align: center;
+  font-family: 'Press Start 2P', monospace;
+  line-height: 1.8;
 }
 
 .modern-card-text {
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.6;
-  margin-bottom: 20px;
+  color: var(--gb-light);
+  line-height: 2;
+  margin-bottom: 16px;
   text-align: center;
-  font-size: 0.95rem;
+  font-size: 0.55rem;
+  font-family: monospace;
 }
 
-.modern-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.modern-btn,
+.modern-btn-primary {
+  background: var(--gb-bright);
   border: none;
-  border-radius: 25px;
-  padding: 12px 30px;
-  font-weight: 600;
-  color: white;
+  border-radius: 0 !important;
+  padding: 10px 20px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  font-weight: normal;
+  color: var(--gb-bg);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.3s ease;
+  transition: none;
   width: 100%;
-  font-size: 1rem;
+  box-shadow: 3px 3px 0 var(--gb-midgreen);
+  cursor: pointer;
 }
 
-.modern-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-  color: white;
+.modern-btn:hover,
+.modern-btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--gb-midgreen);
+  color: var(--gb-bg);
   text-decoration: none;
+  background: var(--gb-light);
+}
+
+.modern-btn:active,
+.modern-btn-primary:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--gb-midgreen);
 }
 
 .btn-icon {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 
-/* 次要按鈕樣式（技術文件下載） */
 .modern-btn-secondary {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  border: 2px solid rgba(245, 87, 108, 0.5);
-  border-radius: 25px;
-  padding: 12px 20px;
-  font-weight: 600;
-  color: white;
+  background: var(--gb-surface);
+  border: 2px solid var(--gb-midgreen);
+  border-radius: 0 !important;
+  padding: 10px 14px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  color: var(--gb-light);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
+  gap: 6px;
+  transition: none;
   white-space: nowrap;
+  box-shadow: 3px 3px 0 var(--gb-darkgreen);
+  cursor: pointer;
 }
 
 .modern-btn-secondary:hover {
-  background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(245, 87, 108, 0.5);
-  color: white;
+  background: var(--gb-darkgreen);
+  color: var(--gb-bright);
   text-decoration: none;
-  border-color: rgba(240, 147, 251, 0.8);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--gb-darkgreen);
+  border-color: var(--gb-light);
 }
 
-/* 響應式設計 */
+/* 響應式 */
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 1.2rem;
   }
-  
+
   .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 0.5rem;
   }
-  
+
   .tab-content-wrapper {
-    padding: 20px;
+    padding: 16px;
   }
-  
+
   .modern-card-img {
-    height: 200px;
+    height: 180px;
   }
 }
 
@@ -273,45 +301,113 @@ body::before {
   max-width: 1200px;
 }
 
-/* 滾動條美化 */
+.tab-content {
+  background: transparent !important;
+}
+
+.tab-pane {
+  background: transparent !important;
+}
+
+.card {
+  background-color: var(--gb-bg) !important;
+  border-color: var(--gb-midgreen) !important;
+}
+
+.card-body {
+  background-color: var(--gb-surface) !important;
+}
+
+.nav-tabs {
+  border-bottom: 3px solid var(--gb-bright) !important;
+  background: transparent !important;
+}
+
+/* 滾動條 */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--gb-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 10px;
+  background: var(--gb-midgreen);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  background: var(--gb-bright);
 }
 
 /* 記帳系統表格 */
 .accounting-table {
-  color: #fff;
+  color: var(--gb-bright);
+  font-family: monospace;
+  font-size: 0.8rem;
   --bs-table-bg: transparent;
   --bs-table-striped-bg: transparent;
-  --bs-table-hover-bg: rgba(102, 126, 234, 0.15);
-  --bs-table-border-color: rgba(255, 255, 255, 0.08);
+  --bs-table-hover-bg: rgba(155, 188, 15, 0.1);
+  --bs-table-border-color: var(--gb-midgreen);
 }
 
 .accounting-table > :not(caption) > * > * {
-  background-color: rgba(255, 255, 255, 0.04) !important;
-  border-color: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  background-color: var(--gb-surface) !important;
+  border-color: var(--gb-midgreen);
+  color: var(--gb-bright);
   vertical-align: middle;
 }
 
 .accounting-table thead > * > * {
-  background-color: rgba(102, 126, 234, 0.3) !important;
-  font-weight: 600;
+  background-color: var(--gb-darkgreen) !important;
+  font-weight: normal;
 }
 
 .accounting-table tbody tr:hover > * {
-  background-color: rgba(102, 126, 234, 0.18) !important;
+  background-color: rgba(155, 188, 15, 0.12) !important;
 }
+
+/* Bootstrap Modal 覆蓋 */
+.modal-content {
+  background: var(--gb-bg) !important;
+  border: 3px solid var(--gb-bright) !important;
+  border-radius: 0 !important;
+  box-shadow: 8px 8px 0 var(--gb-midgreen) !important;
+}
+
+.modal-header {
+  background: var(--gb-surface) !important;
+  border-bottom: 2px solid var(--gb-midgreen) !important;
+  border-radius: 0 !important;
+}
+
+.modal-title {
+  color: var(--gb-bright) !important;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+}
+
+.modal-body {
+  background: var(--gb-bg) !important;
+  padding: 0 !important;
+}
+
+.btn-close {
+  filter: invert(1) sepia(1) saturate(3) hue-rotate(60deg);
+}
+
+/* Bootstrap Alert 覆蓋 */
+.alert-info {
+  background: var(--gb-darkgreen) !important;
+  border: 2px solid var(--gb-midgreen) !important;
+  color: var(--gb-bright) !important;
+  border-radius: 0 !important;
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+/* Bootstrap Spinner 覆蓋 */
+.spinner-border {
+  border-color: var(--gb-bright) transparent var(--gb-bright) var(--gb-bright) !important;
+}
+

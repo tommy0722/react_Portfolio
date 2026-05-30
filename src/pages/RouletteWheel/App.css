@@ -1,208 +1,181 @@
-/* 輪盤應用容器樣式 */
 .roulette-wheel-app {
   min-height: calc(100vh - 80px);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 40px 20px;
-  margin-top: -20px;
+  background: var(--gb-bg);
+  padding: 32px 20px;
 }
 
-/* 主要內容區域 */
 .main-container {
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  background: var(--gb-surface);
+  border: 3px solid var(--gb-bright);
+  box-shadow: 6px 6px 0 var(--gb-midgreen);
   margin: 0 auto;
-  padding: 50px 40px;
+  padding: 40px 32px;
   max-width: 1100px;
-  animation: fadeInUp 0.6s ease-out;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 標題樣式 */
 .main-title {
-  background: linear-gradient(45deg, #ff6b6b, #ffa726);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 3rem;
-  font-weight: 800;
+  color: var(--gb-bright);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.4rem;
+  font-weight: normal;
   margin-bottom: 2rem;
   text-align: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 4px 4px 0 var(--gb-darkgreen);
+  letter-spacing: 2px;
 }
 
 .section-title {
-  color: #2c3e50;
-  font-size: 1.8rem;
-  font-weight: 600;
+  color: var(--gb-bright);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  font-weight: normal;
   margin: 2rem 0 1.5rem 0;
   position: relative;
   padding-left: 20px;
 }
 
 .section-title::before {
-  content: '';
+  content: '>';
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 30px;
-  background: linear-gradient(45deg, #ff6b6b, #ffa726);
-  border-radius: 2px;
+  top: 0;
+  color: var(--gb-light);
 }
 
-/* 按鈕樣式 */
 .btn-custom {
-  background: linear-gradient(45deg, #667eea, #764ba2);
-  border: none;
-  border-radius: 25px;
-  color: white;
-  padding: 12px 30px;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-  text-transform: none;
+  background: var(--gb-surface);
+  border: 2px solid var(--gb-bright);
+  border-radius: 0;
+  color: var(--gb-bright);
+  padding: 10px 24px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  font-weight: normal;
+  transition: none;
+  box-shadow: 3px 3px 0 var(--gb-midgreen);
+  cursor: pointer;
   margin: 5px;
 }
 
 .btn-custom:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-  background: linear-gradient(45deg, #5a67d8, #6b46c1);
-  color: white;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--gb-midgreen);
+  background: var(--gb-darkgreen);
+  color: var(--gb-bright);
 }
 
 .btn-custom:active {
-  transform: translateY(-1px);
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--gb-midgreen);
 }
 
 .btn-warning-custom {
-  background: linear-gradient(45deg, #ffa726, #ff7043);
-  border: none;
-  border-radius: 25px;
-  color: white;
-  padding: 15px 40px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 167, 38, 0.3);
+  background: var(--gb-bright);
+  border: 2px solid var(--gb-midgreen);
+  border-radius: 0;
+  color: var(--gb-bg);
+  padding: 14px 36px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  font-weight: normal;
+  transition: none;
+  box-shadow: 4px 4px 0 var(--gb-midgreen);
   margin-bottom: 2rem;
   cursor: pointer;
 }
 
 .btn-warning-custom:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 167, 38, 0.4);
-  background: linear-gradient(45deg, #ff9800, #ff5722);
-  color: white;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--gb-midgreen);
+  background: var(--gb-light);
+  color: var(--gb-bg);
 }
 
-/* 表格樣式 */
 .table-custom {
-  background: white;
-  border-radius: 15px;
+  background: var(--gb-surface);
+  border: 2px solid var(--gb-midgreen);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 0 var(--gb-darkgreen);
   margin-bottom: 2rem;
-  border: none;
   width: 100%;
+  border-collapse: collapse;
 }
 
 .table-custom thead {
-  background: linear-gradient(45deg, #667eea, #764ba2);
-  color: white;
+  background: var(--gb-darkgreen);
+  color: var(--gb-bright);
 }
 
 .table-custom th {
-  border: none;
-  padding: 20px 15px;
-  font-weight: 600;
-  font-size: 1.1rem;
+  border: 2px solid var(--gb-midgreen);
+  padding: 16px 12px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  font-weight: normal;
   text-align: center;
+  color: var(--gb-bright);
 }
 
 .table-custom td {
-  border: none;
-  padding: 20px 15px;
+  border: 1px solid var(--gb-midgreen);
+  padding: 14px 12px;
   vertical-align: middle;
   text-align: center;
-  font-size: 1rem;
-  color: #2c3e50;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--gb-light);
+  background: var(--gb-surface);
 }
 
-.table-custom tbody tr {
-  transition: all 0.3s ease;
-  border-bottom: 1px solid #ecf0f1;
+.table-custom tbody tr:hover td {
+  background: rgba(155, 188, 15, 0.1);
+  color: var(--gb-bright);
 }
 
-.table-custom tbody tr:hover {
-  background: linear-gradient(45deg, #f8f9ff, #f1f3ff);
-  transform: scale(1.01);
-}
-
-.table-custom tbody tr:last-child {
-  border-bottom: none;
-}
-
-/* 卡片樣式 */
 .card-custom {
-  background: white;
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  background: var(--gb-surface);
+  border: 3px solid var(--gb-midgreen);
+  padding: 28px;
+  box-shadow: 4px 4px 0 var(--gb-darkgreen);
   margin-bottom: 2rem;
-  transition: all 0.3s ease;
-  border: 1px solid #ecf0f1;
+  transition: none;
 }
 
 .card-custom:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--gb-midgreen);
+  border-color: var(--gb-bright);
 }
 
-/* UpdatePage 專屬樣式 */
 .update-page-header {
   text-align: center;
   margin-bottom: 3rem;
 }
 
 .group-name {
-  color: #667eea;
-  font-size: 2rem;
-  font-weight: 700;
+  color: var(--gb-bright);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.9rem;
   margin-top: 1rem;
-  padding: 15px 30px;
-  background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
-  border-radius: 15px;
+  padding: 12px 24px;
+  background: var(--gb-darkgreen);
+  border: 2px solid var(--gb-midgreen);
   display: inline-block;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+  box-shadow: 4px 4px 0 var(--gb-midgreen);
+  text-shadow: 2px 2px 0 var(--gb-bg);
 }
 
-/* ChartBar 專屬樣式 */
 .chart-page-header {
   text-align: center;
   margin-bottom: 3rem;
 }
 
 .chart-card {
-  background: white;
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  background: var(--gb-surface);
+  border: 3px solid var(--gb-midgreen);
+  padding: 32px;
+  box-shadow: 4px 4px 0 var(--gb-darkgreen);
   margin-bottom: 2rem;
-  border: 1px solid #ecf0f1;
 }
 
 .chart-wrapper {
@@ -226,10 +199,12 @@
 }
 
 .update-table .food-name {
-  font-weight: 600;
-  font-size: 1.1rem;
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: normal;
   text-align: left;
-  padding-left: 30px;
+  padding-left: 24px;
+  color: var(--gb-bright);
 }
 
 .update-footer {
@@ -241,99 +216,89 @@
 }
 
 .btn-save {
-  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-  border: none;
-  border-radius: 25px;
-  color: white;
-  padding: 15px 50px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+  background: var(--gb-bright);
+  border: 2px solid var(--gb-midgreen);
+  border-radius: 0;
+  color: var(--gb-bg);
+  padding: 14px 44px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  transition: none;
+  box-shadow: 4px 4px 0 var(--gb-midgreen);
   cursor: pointer;
 }
 
 .btn-save:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
-  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--gb-midgreen);
+  background: var(--gb-light);
 }
 
 .btn-back {
-  background: linear-gradient(135deg, #757575 0%, #616161 100%);
-  border: none;
-  border-radius: 25px;
-  color: white;
-  padding: 15px 50px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(117, 117, 117, 0.3);
+  background: var(--gb-surface);
+  border: 2px solid var(--gb-midgreen);
+  border-radius: 0;
+  color: var(--gb-light);
+  padding: 14px 44px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  transition: none;
+  box-shadow: 4px 4px 0 var(--gb-darkgreen);
   cursor: pointer;
 }
 
 .btn-back:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(117, 117, 117, 0.4);
-  background: linear-gradient(135deg, #616161 0%, #424242 100%);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--gb-darkgreen);
+  border-color: var(--gb-bright);
+  color: var(--gb-bright);
 }
 
-/* 響應式設計 */
 @media (max-width: 768px) {
   .roulette-wheel-app {
-    padding: 20px 10px;
+    padding: 16px 10px;
   }
 
   .main-container {
     margin: 10px;
-    padding: 30px 20px;
-    border-radius: 15px;
+    padding: 24px 16px;
   }
 
   .main-title {
-    font-size: 2.2rem;
+    font-size: 1rem;
   }
 
   .group-name {
-    font-size: 1.5rem;
-    padding: 12px 20px;
+    font-size: 0.65rem;
+    padding: 10px 16px;
   }
 
   .section-title {
-    font-size: 1.5rem;
+    font-size: 0.6rem;
   }
 
   .btn-custom {
-    padding: 10px 20px;
-    font-size: 0.9rem;
+    padding: 8px 16px;
+    font-size: 0.5rem;
     margin: 3px;
   }
 
   .btn-warning-custom,
   .btn-save,
   .btn-back {
-    padding: 12px 30px;
-    font-size: 1rem;
+    padding: 12px 24px;
+    font-size: 0.55rem;
     width: 100%;
   }
 
   .table-custom th,
   .table-custom td {
-    padding: 15px 10px;
-    font-size: 0.9rem;
-  }
-
-  .update-table .food-name {
-    font-size: 1rem;
-    padding-left: 15px;
+    padding: 10px 8px;
+    font-size: 0.75rem;
   }
 
   .update-footer {
     flex-direction: column;
-  }
-
-  .chart-card {
-    padding: 20px;
   }
 
   .chart-wrapper {
@@ -343,24 +308,12 @@
 
 @media (max-width: 480px) {
   .main-title {
-    font-size: 1.8rem;
-  }
-
-  .group-name {
-    font-size: 1.2rem;
+    font-size: 0.75rem;
   }
 
   .btn-custom {
     width: 100%;
-    margin: 5px 0;
-  }
-
-  .table-custom {
-    font-size: 0.8rem;
-  }
-
-  .update-table .food-name {
-    font-size: 0.9rem;
+    margin: 4px 0;
   }
 
   .chart-wrapper {

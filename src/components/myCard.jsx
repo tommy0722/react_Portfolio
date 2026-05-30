@@ -73,10 +73,10 @@ const MyCard = memo(({ data }) => {
 
             {/* 圖片放大 Modal */}
             <Modal show={showModal} onHide={handleCloseModal} centered size="lg">
-                <Modal.Header closeButton style={{ background: '#1a1a2e', border: 'none' }}>
-                    <Modal.Title style={{ color: 'white' }}>{data.title}</Modal.Title>
+                <Modal.Header closeButton>
+                    <Modal.Title>{data.title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body style={{ background: '#1a1a2e', padding: 0 }}>
+                <Modal.Body>
                     <img
                         src={data.image || "https://via.placeholder.com/150"}
                         alt={data.title}

@@ -1,24 +1,22 @@
-/* 輪盤頁面樣式 */
 .roulette-container {
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  background: var(--gb-surface);
+  border: 3px solid var(--gb-bright);
+  box-shadow: 6px 6px 0 var(--gb-midgreen);
   margin: 20px auto;
-  padding: 40px;
+  padding: 36px;
   max-width: 800px;
   min-height: calc(100vh - 40px);
   text-align: center;
 }
 
 .roulette-title {
-  background: linear-gradient(45deg, #ff6b6b, #ffa726);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 2.5rem;
-  font-weight: 800;
+  color: var(--gb-bright);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.4rem;
+  font-weight: normal;
   margin-bottom: 2rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 4px 4px 0 var(--gb-darkgreen);
+  letter-spacing: 2px;
 }
 
 .wheel-container {
@@ -28,67 +26,72 @@
   justify-content: center;
   margin: 2rem 0;
   padding: 2rem;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  border-radius: 20px;
-  box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: var(--gb-bg);
+  border: 3px solid var(--gb-midgreen);
+  box-shadow: inset 0 0 0 2px var(--gb-darkgreen);
 }
 
 .wheel-canvas {
-  border-radius: 50%;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 4px var(--gb-bright), 6px 6px 0 var(--gb-midgreen);
   margin-bottom: 2rem;
-  background: white;
-  padding: 10px;
+  background: var(--gb-bg);
+  padding: 8px;
+  border-radius: 50%;
 }
 
 .spin-button {
-  background: linear-gradient(45deg, #667eea, #764ba2);
-  border: none;
-  border-radius: 50px;
-  color: white;
-  padding: 20px 50px;
-  font-weight: 700;
-  font-size: 1.3rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  background: var(--gb-bright);
+  border: 3px solid var(--gb-midgreen);
+  border-radius: 0;
+  color: var(--gb-bg);
+  padding: 18px 44px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  font-weight: normal;
+  transition: none;
+  box-shadow: 5px 5px 0 var(--gb-midgreen);
+  letter-spacing: 2px;
   margin: 1rem;
+  cursor: pointer;
 }
 
 .spin-button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
-  background: linear-gradient(45deg, #5a67d8, #6b46c1);
-  color: white;
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 var(--gb-midgreen);
+  background: var(--gb-light);
+  color: var(--gb-bg);
 }
 
 .spin-button:active {
-  transform: translateY(-2px);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--gb-midgreen);
 }
 
 .spin-button:disabled {
-  background: #ccc;
+  background: var(--gb-darkgreen);
+  color: var(--gb-midgreen);
   cursor: not-allowed;
   transform: none;
-  box-shadow: none;
+  box-shadow: 2px 2px 0 var(--gb-darkgreen);
 }
 
 .food-list {
-  background: white;
-  border-radius: 15px;
-  padding: 2rem;
+  background: var(--gb-surface);
+  border: 3px solid var(--gb-midgreen);
+  padding: 24px;
   margin-top: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 0 var(--gb-darkgreen);
 }
 
 .food-list h3 {
-  color: #2c3e50;
-  font-size: 1.5rem;
-  font-weight: 600;
+  color: var(--gb-bright);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  font-weight: normal;
   margin-bottom: 1rem;
-  border-bottom: 3px solid #667eea;
-  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--gb-midgreen);
+  padding-bottom: 0.75rem;
+  letter-spacing: 1px;
 }
 
 .food-items {
@@ -99,61 +102,63 @@
 }
 
 .food-item {
-  background: linear-gradient(45deg, #ff6b6b, #ffa726);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  background: var(--gb-darkgreen);
+  color: var(--gb-bright);
+  padding: 6px 14px;
+  border: 2px solid var(--gb-midgreen);
+  font-family: monospace;
+  font-size: 0.8rem;
+  box-shadow: 2px 2px 0 var(--gb-midgreen);
 }
 
 .loading-spinner {
   display: inline-block;
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #667eea;
+  width: 36px;
+  height: 36px;
+  border: 4px solid var(--gb-darkgreen);
+  border-top: 4px solid var(--gb-bright);
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 1s step-start infinite;
   margin: 2rem auto;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(90deg); }
+  50%  { transform: rotate(180deg); }
+  75%  { transform: rotate(270deg); }
   100% { transform: rotate(360deg); }
 }
 
 .back-button {
-  background: linear-gradient(45deg, #95a5a6, #7f8c8d);
-  border: none;
-  border-radius: 25px;
-  color: white;
-  padding: 12px 30px;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+  background: var(--gb-surface);
+  border: 2px solid var(--gb-midgreen);
+  border-radius: 0;
+  color: var(--gb-light);
+  padding: 10px 28px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  transition: none;
+  box-shadow: 3px 3px 0 var(--gb-darkgreen);
   margin: 1rem;
+  cursor: pointer;
 }
 
 .back-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(149, 165, 166, 0.4);
-  background: linear-gradient(45deg, #7f8c8d, #95a5a6);
-  color: white;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--gb-darkgreen);
+  border-color: var(--gb-bright);
+  color: var(--gb-bright);
 }
 
-/* 響應式設計 */
 @media (max-width: 768px) {
   .roulette-container {
     margin: 10px;
     padding: 20px;
-    border-radius: 15px;
   }
 
   .roulette-title {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .wheel-container {
@@ -161,32 +166,32 @@
   }
 
   .spin-button {
-    padding: 15px 40px;
-    font-size: 1.1rem;
+    padding: 14px 32px;
+    font-size: 0.65rem;
   }
 
   .food-list {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
   .roulette-title {
-    font-size: 1.5rem;
+    font-size: 0.7rem;
   }
 
   .spin-button {
-    padding: 12px 30px;
-    font-size: 1rem;
-    width: 80%;
+    padding: 12px 24px;
+    font-size: 0.55rem;
+    width: 85%;
   }
 
   .food-items {
-    gap: 5px;
+    gap: 6px;
   }
 
   .food-item {
-    font-size: 0.8rem;
-    padding: 6px 12px;
+    font-size: 0.75rem;
+    padding: 5px 10px;
   }
 }
