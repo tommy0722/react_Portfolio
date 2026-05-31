@@ -367,6 +367,67 @@ body::before {
   background-color: rgba(155, 188, 15, 0.12) !important;
 }
 
+/* Bootstrap Form 覆蓋（Modal 內） */
+.modal-body .form-label {
+  color: var(--gb-bright) !important;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.modal-body .form-control,
+.modal-body .form-select {
+  background: var(--gb-surface) !important;
+  border: 2px solid var(--gb-midgreen) !important;
+  border-radius: 0 !important;
+  color: var(--gb-bright) !important;
+  font-family: monospace;
+}
+
+.modal-body .form-control:focus,
+.modal-body .form-select:focus {
+  border-color: var(--gb-bright) !important;
+  box-shadow: 0 0 0 2px var(--gb-darkgreen) !important;
+}
+
+.modal-body .form-select option {
+  background: var(--gb-bg);
+  color: var(--gb-bright);
+}
+
+.modal-body .alert-danger {
+  background: #1a0000 !important;
+  border: 2px solid #ff4444 !important;
+  color: #ff4444 !important;
+  border-radius: 0 !important;
+}
+
+.modal-footer .btn-secondary {
+  background: var(--gb-surface) !important;
+  border: 2px solid var(--gb-midgreen) !important;
+  border-radius: 0 !important;
+  color: var(--gb-light) !important;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  box-shadow: 3px 3px 0 var(--gb-darkgreen);
+}
+
+.modal-footer .btn-primary {
+  background: var(--gb-bright) !important;
+  border: 2px solid var(--gb-midgreen) !important;
+  border-radius: 0 !important;
+  color: var(--gb-bg) !important;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  box-shadow: 3px 3px 0 var(--gb-midgreen);
+}
+
+.modal-footer .btn-secondary:hover,
+.modal-footer .btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--gb-midgreen);
+}
+
 /* Bootstrap Modal 覆蓋 */
 .modal-content {
   background: var(--gb-bg) !important;

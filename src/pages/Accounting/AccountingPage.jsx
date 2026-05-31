@@ -2,10 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Button, Badge, Table, Form } from 'react-bootstrap';
 import SummaryCard from './SummaryCard';
 import TransactionForm from './TransactionForm';
+import TransferForm from './TransferForm';
 import CategoryManager from './CategoryManager';
 import AccountManager from './AccountManager';
 import StatsPage from './StatsPage';
-import { transactionAPI, categoryAPI, accountAPI } from '../../services/accountingService';
+import { transactionAPI, categoryAPI, accountAPI, transferAPI } from '../../services/accountingService';
 
 function AccountingPage() {
     const today = new Date();
@@ -20,6 +21,7 @@ function AccountingPage() {
     const [loadingSummary, setLoadingSummary] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [editTarget, setEditTarget] = useState(null);
+    const [showTransferForm, setShowTransferForm] = useState(false);
 
     const fetchAccounts = useCallback(async () => {
         try {
@@ -112,6 +114,19 @@ function AccountingPage() {
         setShowForm(true);
     };
 
+    const handleTransferSubmit = async (data) => {
+        try {
+            await transferAPI.create(data);
+            setShowTransferForm(false);
+            fetchSummary();
+        } catch (err) {
+            const msg = err?.response?.data
+                ? Object.values(err.response.data).flat().join(' ')
+                : '轉帳失敗，請重試';
+            alert(msg);
+        }
+    };
+
     return (
         <div style={{ width: '95%', maxWidth: 960, margin: '0 auto', padding: '12px 8px' }}>
             <h1 className="h4 fw-bold mb-4 text-center">記帳系統</h1>
@@ -152,7 +167,10 @@ function AccountingPage() {
                                     ))}
                                 </Form.Select>
                             </div>
-                            <Button variant="primary" onClick={handleAdd}>+ 新增紀錄</Button>
+                            <div className="d-flex gap-2">
+                                <Button variant="primary" onClick={handleAdd}>+ 新增紀錄</Button>
+                                <Button variant="outline-warning" onClick={() => setShowTransferForm(true)}>⇄ 轉帳</Button>
+                            </div>
                         </div>
 
                         <SummaryCard summary={summary} loading={loadingSummary} />
@@ -221,6 +239,13 @@ function AccountingPage() {
                 accounts={accounts}
                 categories={categories}
                 initial={editTarget}
+            />
+
+            <TransferForm
+                show={showTransferForm}
+                onHide={() => setShowTransferForm(false)}
+                onSubmit={handleTransferSubmit}
+                accounts={accounts}
             />
         </div>
     );

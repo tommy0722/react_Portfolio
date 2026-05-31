@@ -16,6 +16,12 @@ export const categoryAPI = {
     remove: (id) => axios.delete(`${BASE}/categories/${id}/`),
 };
 
+export const transferAPI = {
+    list: (params) => axios.get(`${BASE}/transfers/`, { params }),
+    create: (data) => axios.post(`${BASE}/transfers/`, data),
+    remove: (id) => axios.delete(`${BASE}/transfers/${id}/`),
+};
+
 export const transactionAPI = {
     list: (params) => axios.get(`${BASE}/transactions/`, { params }),
     create: (data) => axios.post(`${BASE}/transactions/`, data),
