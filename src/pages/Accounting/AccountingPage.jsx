@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Button, Badge, Table, Form } from 'react-bootstrap';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { Button, Badge, Form } from 'react-bootstrap';
 import SummaryCard from './SummaryCard';
 import TransactionForm from './TransactionForm';
 import TransferForm from './TransferForm';
@@ -9,8 +9,10 @@ import StatsPage from './StatsPage';
 import { transactionAPI, categoryAPI, accountAPI, transferAPI } from '../../services/accountingService';
 
 function AccountingPage() {
-    const today = new Date();
-    const [month, setMonth] = useState(`${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`);
+    const [month, setMonth] = useState(() => {
+        const d = new Date();
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    });
     const [activePage, setActivePage] = useState('transactions');
     const [filterAccount, setFilterAccount] = useState('');
     const [filterCategory, setFilterCategory] = useState('');
@@ -23,6 +25,8 @@ function AccountingPage() {
     const [showForm, setShowForm] = useState(false);
     const [editTarget, setEditTarget] = useState(null);
     const [showTransferForm, setShowTransferForm] = useState(false);
+    const [sortKey, setSortKey] = useState('date');
+    const [sortDir, setSortDir] = useState('desc');
 
     const fetchAccounts = useCallback(async () => {
         try {
@@ -68,6 +72,39 @@ function AccountingPage() {
             setLoadingSummary(false);
         }
     }, [month]);
+
+    const sortedTransactions = useMemo(() => {
+        const getValue = (tx) => {
+            if (sortKey === 'date') return tx.date;
+            if (sortKey === 'type') return tx.type;
+            if (sortKey === 'account') return tx.account?.name ?? '';
+            if (sortKey === 'category') return tx.category?.name ?? '';
+            if (sortKey === 'amount') return Number(tx.amount);
+            return tx.date;
+        };
+        return [...transactions].sort((a, b) => {
+            const va = getValue(a);
+            const vb = getValue(b);
+            if (va < vb) return sortDir === 'asc' ? -1 : 1;
+            if (va > vb) return sortDir === 'asc' ? 1 : -1;
+            return 0;
+        });
+    }, [transactions, sortKey, sortDir]);
+
+    const handleSort = (key) => {
+        if (sortKey === key) {
+            setSortDir(d => d === 'asc' ? 'desc' : 'asc');
+        } else {
+            setSortKey(key);
+            setSortDir('asc');
+        }
+    };
+
+    const handleMonthChange = useCallback((e) => {
+        setMonth(e.target.value);
+        setFilterAccount('');
+        setFilterCategory('');
+    }, []);
 
     useEffect(() => {
         fetchAccounts();
@@ -156,7 +193,7 @@ function AccountingPage() {
                                 <label className="fw-bold mb-0">月份：</label>
                                 <input
                                     type="month" className="form-control" style={{ width: 150, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }}
-                                    value={month} onChange={e => { setMonth(e.target.value); setFilterAccount(''); setFilterCategory(''); }}
+                                    value={month} onChange={handleMonthChange}
                                 />
                                 <Form.Select
                                     value={filterAccount}
@@ -200,20 +237,42 @@ function AccountingPage() {
                             <div className="text-center text-muted py-4">本月尚無紀錄</div>
                         ) : (
                             <div className="table-responsive">
-                                <table className="table table-sm accounting-table">
+                                <table className="table table-sm accounting-table" style={{ tableLayout: 'fixed', width: '100%' }}>
+                                    <colgroup>
+                                        <col style={{ width: 90 }} />
+                                        <col style={{ width: 70 }} />
+                                        <col style={{ width: 100 }} />
+                                        <col style={{ width: 100 }} />
+                                        <col style={{ width: 110 }} />
+                                        <col />
+                                        <col style={{ width: 110 }} />
+                                    </colgroup>
                                     <thead>
                                         <tr>
-                                            <th>日期</th>
-                                            <th>類型</th>
-                                            <th>帳戶</th>
-                                            <th>分類</th>
-                                            <th className="text-end">金額</th>
+                                            {[
+                                                { key: 'date', label: '日期' },
+                                                { key: 'type', label: '類型' },
+                                                { key: 'account', label: '帳戶' },
+                                                { key: 'category', label: '分類' },
+                                                { key: 'amount', label: '金額' },
+                                            ].map(col => (
+                                                <th
+                                                    key={col.key}
+                                                    onClick={() => handleSort(col.key)}
+                                                    style={{ cursor: 'pointer', userSelect: 'none', whiteSpace: 'nowrap' }}
+                                                >
+                                                    {col.label}{' '}
+                                                    <span style={{ opacity: sortKey === col.key ? 1 : 0.3, fontSize: '0.75em' }}>
+                                                        {sortKey === col.key ? (sortDir === 'asc' ? '▲' : '▼') : '⇅'}
+                                                    </span>
+                                                </th>
+                                            ))}
                                             <th>備註</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {transactions.map(tx => (
+                                        {sortedTransactions.map(tx => (
                                             <tr key={tx.id}>
                                                 <td>{tx.date}</td>
                                                 <td>
@@ -223,8 +282,8 @@ function AccountingPage() {
                                                 </td>
                                                 <td>{tx.account?.name ?? '—'}</td>
                                                 <td>{tx.category?.name ?? '—'}</td>
-                                                <td className="text-end">$ {Number(tx.amount).toLocaleString()}</td>
-                                                <td>{tx.description || '—'}</td>
+                                                <td>$ {Number(tx.amount).toLocaleString()}</td>
+                                                <td style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 0 }} title={tx.description || ''}>{tx.description || '—'}</td>
                                                 <td>
                                                     <Button size="sm" variant="outline-light" className="me-1" onClick={() => handleEdit(tx)}>編輯</Button>
                                                     <Button size="sm" variant="outline-danger" onClick={() => handleDelete(tx.id)}>刪除</Button>
