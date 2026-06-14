@@ -13,6 +13,7 @@ function AccountingPage() {
     const [month, setMonth] = useState(`${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`);
     const [activePage, setActivePage] = useState('transactions');
     const [filterAccount, setFilterAccount] = useState('');
+    const [filterCategory, setFilterCategory] = useState('');
     const [transactions, setTransactions] = useState([]);
     const [categories, setCategories] = useState([]);
     const [accounts, setAccounts] = useState([]);
@@ -46,6 +47,7 @@ function AccountingPage() {
         try {
             const params = { month };
             if (filterAccount) params.account = filterAccount;
+            if (filterCategory) params.category = filterCategory;
             const res = await transactionAPI.list(params);
             setTransactions(res.data);
         } catch {
@@ -53,7 +55,7 @@ function AccountingPage() {
         } finally {
             setLoadingTx(false);
         }
-    }, [month, filterAccount]);
+    }, [month, filterAccount, filterCategory]);
 
     const fetchSummary = useCallback(async () => {
         setLoadingSummary(true);
@@ -154,7 +156,7 @@ function AccountingPage() {
                                 <label className="fw-bold mb-0">月份：</label>
                                 <input
                                     type="month" className="form-control" style={{ width: 150, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }}
-                                    value={month} onChange={e => setMonth(e.target.value)}
+                                    value={month} onChange={e => { setMonth(e.target.value); setFilterAccount(''); setFilterCategory(''); }}
                                 />
                                 <Form.Select
                                     value={filterAccount}
@@ -165,6 +167,23 @@ function AccountingPage() {
                                     {accounts.map(a => (
                                         <option key={a.id} value={a.id}>{a.name}</option>
                                     ))}
+                                </Form.Select>
+                                <Form.Select
+                                    value={filterCategory}
+                                    onChange={e => setFilterCategory(e.target.value)}
+                                    style={{ minWidth: 120, maxWidth: 180, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }}
+                                >
+                                    <option value="">全部分類</option>
+                                    <optgroup label="── 支出 ──">
+                                        {categories.filter(c => c.type === 'expense').map(c => (
+                                            <option key={c.id} value={c.id}>{c.parent_name ? `${c.parent_name} / ${c.name}` : c.name}</option>
+                                        ))}
+                                    </optgroup>
+                                    <optgroup label="── 收入 ──">
+                                        {categories.filter(c => c.type === 'income').map(c => (
+                                            <option key={c.id} value={c.id}>{c.parent_name ? `${c.parent_name} / ${c.name}` : c.name}</option>
+                                        ))}
+                                    </optgroup>
                                 </Form.Select>
                             </div>
                             <div className="d-flex gap-2">

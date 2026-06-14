@@ -28,7 +28,7 @@ function Login() {
             login(email, name);
 
             // 導向主頁
-            navigate('/mapleboss');
+            navigate('/');
 
         } catch (error) {
             console.error('登入失敗', error);

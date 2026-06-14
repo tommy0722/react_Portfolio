@@ -121,6 +121,52 @@ function StatsPage({ summary, month }) {
                         本月無{showType === 'expense' ? '支出' : '收入'}分類資料
                     </div>
                 )}
+
+                {/* 分類消費明細表 */}
+                {(() => {
+                    if (!summary?.by_category) return null;
+                    const rows = summary.by_category.filter(r => r.type === showType);
+                    if (rows.length === 0) return null;
+                    const grandTotal = rows.reduce((s, r) => s + r.total, 0);
+                    return (
+                        <div className="mt-4">
+                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem' }}>
+                                <thead>
+                                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.2)' }}>
+                                        <th style={{ color: WHITE, textAlign: 'left', padding: '4px 8px' }}>分類</th>
+                                        <th style={{ color: WHITE, textAlign: 'right', padding: '4px 8px' }}>金額</th>
+                                        <th style={{ color: WHITE, textAlign: 'right', padding: '4px 8px' }}>佔比</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rows.map((r, i) => {
+                                        const pct = grandTotal > 0 ? (((r.total ?? 0) / grandTotal) * 100).toFixed(1) : '0.0';
+                                        return (
+                                            <tr key={r.category__id ?? `no-cat-${i}`} style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+                                                <td style={{ color: EXPENSE_COLORS[i % EXPENSE_COLORS.length], padding: '5px 8px' }}>
+                                                    {r.category__name ?? '未分類'}
+                                                </td>
+                                                <td style={{ color: WHITE, textAlign: 'right', padding: '5px 8px' }}>
+                                                    $ {Number(r.total).toLocaleString()}
+                                                </td>
+                                                <td style={{ color: WHITE_DIM, textAlign: 'right', padding: '5px 8px' }}>
+                                                    {pct}%
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                    <tr style={{ borderTop: '2px solid rgba(255,255,255,0.3)' }}>
+                                        <td style={{ color: WHITE, fontWeight: 'bold', padding: '5px 8px' }}>合計</td>
+                                        <td style={{ color: WHITE, fontWeight: 'bold', textAlign: 'right', padding: '5px 8px' }}>
+                                            $ {Number(grandTotal).toLocaleString()}
+                                        </td>
+                                        <td style={{ color: WHITE_DIM, textAlign: 'right', padding: '5px 8px' }}>100%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    );
+                })()}
             </div>
 
             {/* 長條圖 */}
