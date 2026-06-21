@@ -192,13 +192,14 @@ function AccountingPage() {
                             <div className="d-flex align-items-center gap-2 flex-wrap">
                                 <label className="fw-bold mb-0">月份：</label>
                                 <input
-                                    type="month" className="form-control" style={{ width: 150, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }}
+                                    type="month" className="form-control"
+                                    style={{ width: 150, background: 'var(--gb-darkgreen)', border: '1px solid var(--gb-bright)', color: 'var(--gb-bright)', colorScheme: 'dark' }}
                                     value={month} onChange={handleMonthChange}
                                 />
                                 <Form.Select
                                     value={filterAccount}
                                     onChange={e => setFilterAccount(e.target.value)}
-                                    style={{ minWidth: 120, maxWidth: 180, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }}
+                                    style={{ minWidth: 120, maxWidth: 180, background: 'var(--gb-darkgreen)', border: '1px solid var(--gb-bright)', color: 'var(--gb-bright)', colorScheme: 'dark' }}
                                 >
                                     <option value="">全部帳戶</option>
                                     {accounts.map(a => (
@@ -208,7 +209,7 @@ function AccountingPage() {
                                 <Form.Select
                                     value={filterCategory}
                                     onChange={e => setFilterCategory(e.target.value)}
-                                    style={{ minWidth: 120, maxWidth: 180, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }}
+                                    style={{ minWidth: 120, maxWidth: 180, background: 'var(--gb-darkgreen)', border: '1px solid var(--gb-bright)', color: 'var(--gb-bright)', colorScheme: 'dark' }}
                                 >
                                     <option value="">全部分類</option>
                                     <optgroup label="── 支出 ──">
