@@ -166,6 +166,11 @@ function AccountingPage() {
         }
     };
 
+    const handleCategoryClick = useCallback((categoryId) => {
+        setFilterCategory(String(categoryId));
+        setActivePage('transactions');
+    }, []);
+
     return (
         <div style={{ width: '95%', maxWidth: 960, margin: '0 auto', padding: '12px 8px' }}>
             <h1 className="h4 fw-bold mb-4 text-center">記帳系統</h1>
@@ -283,7 +288,7 @@ function AccountingPage() {
                                                 </td>
                                                 <td>{tx.account?.name ?? '—'}</td>
                                                 <td>{tx.category?.name ?? '—'}</td>
-                                                <td>$ {Number(tx.amount).toLocaleString()}</td>
+                                                <td>NT$ {Number(tx.amount).toLocaleString()}</td>
                                                 <td style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 0 }} title={tx.description || ''}>{tx.description || '—'}</td>
                                                 <td>
                                                     <Button size="sm" variant="outline-light" className="me-1" onClick={() => handleEdit(tx)}>編輯</Button>
@@ -307,7 +312,11 @@ function AccountingPage() {
                 )}
 
                 {activePage === 'stats' && (
-                    <StatsPage summary={summary} month={month} />
+                    <StatsPage
+                        summary={summary}
+                        month={month}
+                        onCategoryClick={handleCategoryClick}
+                    />
                 )}
             </div>
 

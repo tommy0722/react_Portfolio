@@ -59,7 +59,7 @@ const barOptions = {
     },
 };
 
-function StatsPage({ summary, month }) {
+function StatsPage({ summary, month, onCategoryClick }) {
     const [trend, setTrend] = useState([]);
     const [loadingTrend, setLoadingTrend] = useState(false);
     const [showType, setShowType] = useState('expense');
@@ -72,20 +72,23 @@ function StatsPage({ summary, month }) {
             .finally(() => setLoadingTrend(false));
     }, []);
 
-    const pieData = (() => {
-        if (!summary?.by_category) return null;
-        const rows = summary.by_category.filter(r => r.type === showType && r.category__name);
-        if (rows.length === 0) return null;
-        return {
-            labels: rows.map(r => r.category__name),
-            datasets: [{
-                data: rows.map(r => r.total),
-                backgroundColor: EXPENSE_COLORS.slice(0, rows.length),
-                borderWidth: 1,
-                borderColor: 'rgba(255,255,255,0.2)',
-            }],
-        };
-    })();
+    const pieRows = summary?.by_category?.filter(r => r.type === showType && r.category__name) ?? [];
+
+    const pieData = pieRows.length === 0 ? null : {
+        labels: pieRows.map(r => r.category__name),
+        datasets: [{
+            data: pieRows.map(r => r.total),
+            backgroundColor: EXPENSE_COLORS.slice(0, pieRows.length),
+            borderWidth: 1,
+            borderColor: 'rgba(255,255,255,0.2)',
+        }],
+    };
+
+    const handlePieClick = (_, elements) => {
+        if (!elements.length || !onCategoryClick) return;
+        const row = pieRows[elements[0].index];
+        if (row?.category__id != null) onCategoryClick(row.category__id);
+    };
 
     const barData = {
         labels: trend.map(t => t.label),
@@ -113,8 +116,8 @@ function StatsPage({ summary, month }) {
                     </div>
                 </div>
                 {pieData ? (
-                    <div style={{ maxWidth: 'min(360px, 100%)', margin: '0 auto' }}>
-                        <Pie data={pieData} options={pieOptions} />
+                    <div style={{ maxWidth: 'min(360px, 100%)', margin: '0 auto', cursor: onCategoryClick ? 'pointer' : 'default' }}>
+                        <Pie data={pieData} options={{ ...pieOptions, onClick: handlePieClick }} />
                     </div>
                 ) : (
                     <div className="text-center py-4" style={{ color: WHITE_DIM }}>
@@ -124,8 +127,7 @@ function StatsPage({ summary, month }) {
 
                 {/* 分類消費明細表 */}
                 {(() => {
-                    if (!summary?.by_category) return null;
-                    const rows = summary.by_category.filter(r => r.type === showType);
+                    const rows = pieRows;
                     if (rows.length === 0) return null;
                     const grandTotal = rows.reduce((s, r) => s + r.total, 0);
                     return (
@@ -141,13 +143,18 @@ function StatsPage({ summary, month }) {
                                 <tbody>
                                     {rows.map((r, i) => {
                                         const pct = grandTotal > 0 ? (((r.total ?? 0) / grandTotal) * 100).toFixed(1) : '0.0';
+                                        const clickable = onCategoryClick && r.category__id != null;
                                         return (
-                                            <tr key={r.category__id ?? `no-cat-${i}`} style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+                                            <tr
+                                                key={r.category__id ?? `no-cat-${i}`}
+                                                style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', cursor: clickable ? 'pointer' : 'default' }}
+                                                onClick={clickable ? () => onCategoryClick(r.category__id) : undefined}
+                                            >
                                                 <td style={{ color: EXPENSE_COLORS[i % EXPENSE_COLORS.length], padding: '5px 8px' }}>
                                                     {r.category__name ?? '未分類'}
                                                 </td>
                                                 <td style={{ color: WHITE, textAlign: 'right', padding: '5px 8px' }}>
-                                                    $ {Number(r.total).toLocaleString()}
+                                                    NT$ {Number(r.total).toLocaleString()}
                                                 </td>
                                                 <td style={{ color: WHITE_DIM, textAlign: 'right', padding: '5px 8px' }}>
                                                     {pct}%
@@ -158,7 +165,7 @@ function StatsPage({ summary, month }) {
                                     <tr style={{ borderTop: '2px solid rgba(255,255,255,0.3)' }}>
                                         <td style={{ color: WHITE, fontWeight: 'bold', padding: '5px 8px' }}>合計</td>
                                         <td style={{ color: WHITE, fontWeight: 'bold', textAlign: 'right', padding: '5px 8px' }}>
-                                            $ {Number(grandTotal).toLocaleString()}
+                                            NT$ {Number(grandTotal).toLocaleString()}
                                         </td>
                                         <td style={{ color: WHITE_DIM, textAlign: 'right', padding: '5px 8px' }}>100%</td>
                                     </tr>

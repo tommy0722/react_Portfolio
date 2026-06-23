@@ -15,7 +15,7 @@ function SummaryCard({ summary, loading }) {
                     <div className="card text-center" style={glassCard}>
                         <div className="card-body py-2">
                             <div className="fw-bold" style={{ color: '#4ade80' }}>本月收入</div>
-                            <div className="fs-5 fw-bold">$ {Number(income).toLocaleString()}</div>
+                            <div className="fs-5 fw-bold">NT$ {Number(income).toLocaleString()}</div>
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@ function SummaryCard({ summary, loading }) {
                     <div className="card text-center" style={glassCard}>
                         <div className="card-body py-2">
                             <div className="fw-bold" style={{ color: '#f87171' }}>本月支出</div>
-                            <div className="fs-5 fw-bold">$ {Number(expense).toLocaleString()}</div>
+                            <div className="fs-5 fw-bold">NT$ {Number(expense).toLocaleString()}</div>
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@ function SummaryCard({ summary, loading }) {
                     <div className="card text-center" style={glassCard}>
                         <div className="card-body py-2">
                             <div className="fw-bold" style={{ color: balance >= 0 ? '#818cf8' : '#fbbf24' }}>本月結餘</div>
-                            <div className="fs-5 fw-bold">$ {Number(balance).toLocaleString()}</div>
+                            <div className="fs-5 fw-bold">NT$ {Number(balance).toLocaleString()}</div>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@ function SummaryCard({ summary, loading }) {
                                 <div className="card-body py-1 px-3">
                                     <div className="small" style={{ color: 'rgba(255,255,255,0.6)' }}>{acc.name}</div>
                                     <div className="fw-bold" style={{ color: acc.balance >= 0 ? '#fff' : '#f87171' }}>
-                                        $ {Number(acc.balance).toLocaleString()}
+                                        NT$ {Number(acc.balance).toLocaleString()}
                                     </div>
                                 </div>
                             </div>
