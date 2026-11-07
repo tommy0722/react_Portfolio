@@ -45,9 +45,7 @@ class ErrorBoundary extends React.Component {
                         
                         <Alert variant="danger" className="mb-4">
                             <Alert.Heading>錯誤資訊</Alert.Heading>
-                            {this.state.error && this.state.error.toString()}
-                            <br />
-                            {this.state.errorInfo.componentStack}
+                            發生未預期的錯誤，請重新載入頁面或回到首頁。
                         </Alert>
 
                         <div className="d-flex gap-3 justify-content-center">
