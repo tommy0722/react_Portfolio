@@ -2,11 +2,48 @@ import React, { useState } from 'react';
 import { Button, Form, Badge } from 'react-bootstrap';
 import { categoryAPI } from '../../services/accountingService';
 
-const EMPTY = { name: '', type: 'expense' };
+const EMPTY = { name: '', type: 'expense', budget_limit: '' };
+
+function BudgetEditor({ category, onRefresh }) {
+    const [value, setValue] = useState(category.budget_limit ?? '');
+    const [saving, setSaving] = useState(false);
+
+    const handleBlur = async () => {
+        const next = value === '' ? null : Number(value);
+        if (next === (category.budget_limit ?? null)) return;
+        setSaving(true);
+        try {
+            await categoryAPI.update(category.id, {
+                name: category.name,
+                type: category.type,
+                parent: category.parent,
+                budget_limit: next,
+            });
+            onRefresh();
+        } catch {
+            alert('預算更新失敗');
+            setValue(category.budget_limit ?? '');
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    return (
+        <Form.Control
+            type="number" min="0" step="1"
+            placeholder="月度預算"
+            value={value}
+            disabled={saving}
+            onChange={e => setValue(e.target.value)}
+            onBlur={handleBlur}
+            style={{ width: 110, height: 30, fontSize: '0.8rem', background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.25)', color: '#fff' }}
+        />
+    );
+}
 
 function CategoryManager({ categories, onRefresh }) {
     const [mainForm, setMainForm] = useState(EMPTY);
-    const [subForm, setSubForm] = useState({ name: '', parentId: '' });
+    const [subForm, setSubForm] = useState({ name: '', parentId: '', budget_limit: '' });
     const [saving, setSaving] = useState(false);
 
     const roots = categories.filter(c => !c.parent);
@@ -19,7 +56,12 @@ function CategoryManager({ categories, onRefresh }) {
         if (!mainForm.name.trim()) return;
         setSaving(true);
         try {
-            await categoryAPI.create({ name: mainForm.name.trim(), type: mainForm.type, parent: null });
+            await categoryAPI.create({
+                name: mainForm.name.trim(),
+                type: mainForm.type,
+                parent: null,
+                budget_limit: mainForm.budget_limit === '' ? null : Number(mainForm.budget_limit),
+            });
             setMainForm(EMPTY);
             onRefresh();
         } catch { alert('新增失敗'); }
@@ -35,8 +77,9 @@ function CategoryManager({ categories, onRefresh }) {
                 name: subForm.name.trim(),
                 type: selectedParent.type,
                 parent: parseInt(subForm.parentId),
+                budget_limit: subForm.budget_limit === '' ? null : Number(subForm.budget_limit),
             });
-            setSubForm({ name: '', parentId: subForm.parentId });
+            setSubForm({ name: '', parentId: subForm.parentId, budget_limit: '' });
             onRefresh();
         } catch { alert('新增失敗'); }
         finally { setSaving(false); }
@@ -74,6 +117,14 @@ function CategoryManager({ categories, onRefresh }) {
                                     onChange={e => setMainForm(f => ({ ...f, name: e.target.value }))}
                                     maxLength={50}
                                 />
+                                {mainForm.type === 'expense' && (
+                                    <Form.Control
+                                        type="number" min="0" step="1"
+                                        placeholder="月度預算上限（選填）"
+                                        value={mainForm.budget_limit}
+                                        onChange={e => setMainForm(f => ({ ...f, budget_limit: e.target.value }))}
+                                    />
+                                )}
                                 <Button type="submit" variant="primary" disabled={saving}>新增大分類</Button>
                             </Form>
                         </div>
@@ -104,6 +155,14 @@ function CategoryManager({ categories, onRefresh }) {
                                     maxLength={50}
                                     disabled={!subForm.parentId}
                                 />
+                                {selectedParent?.type === 'expense' && (
+                                    <Form.Control
+                                        type="number" min="0" step="1"
+                                        placeholder="月度預算上限（選填）"
+                                        value={subForm.budget_limit}
+                                        onChange={e => setSubForm(f => ({ ...f, budget_limit: e.target.value }))}
+                                    />
+                                )}
                                 <Button type="submit" variant="success" disabled={saving || !subForm.parentId}>新增小分類</Button>
                             </Form>
                         </div>
@@ -124,18 +183,24 @@ function CategoryManager({ categories, onRefresh }) {
                         </div>
                         {topLevel.map(parent => (
                             <div key={parent.id} className="mb-1">
-                                <div className="d-flex justify-content-between align-items-center flex-wrap gap-1 px-3 py-2 rounded" style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>
-                                    <span className="fw-semibold text-truncate" style={{ maxWidth: '70%' }}>{parent.name}</span>
-                                    {parent.user && (
-                                        <Button variant="outline-light" size="sm" onClick={() => handleDelete(parent.id)}>刪除</Button>
-                                    )}
+                                <div className="d-flex justify-content-between align-items-center flex-wrap gap-2 px-3 py-2 rounded" style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)' }}>
+                                    <span className="fw-semibold text-truncate" style={{ maxWidth: '40%' }}>{parent.name}</span>
+                                    <div className="d-flex align-items-center gap-2">
+                                        {t === 'expense' && <BudgetEditor category={parent} onRefresh={onRefresh} />}
+                                        {parent.user && (
+                                            <Button variant="outline-light" size="sm" onClick={() => handleDelete(parent.id)}>刪除</Button>
+                                        )}
+                                    </div>
                                 </div>
                                 {childrenOf(parent.id).map(child => (
-                                    <div key={child.id} className="d-flex justify-content-between align-items-center flex-wrap gap-1 px-3 py-2 ms-3 ms-sm-4 rounded mt-1" style={{ background: 'rgba(102,126,234,0.2)', color: '#fff', border: '1px solid rgba(102,126,234,0.3)' }}>
-                                        <span className="text-truncate" style={{ maxWidth: '70%', color: 'rgba(255,255,255,0.8)' }}>└ {child.name}</span>
-                                        {child.user && (
-                                            <Button variant="outline-light" size="sm" onClick={() => handleDelete(child.id)}>刪除</Button>
-                                        )}
+                                    <div key={child.id} className="d-flex justify-content-between align-items-center flex-wrap gap-2 px-3 py-2 ms-3 ms-sm-4 rounded mt-1" style={{ background: 'rgba(102,126,234,0.2)', color: '#fff', border: '1px solid rgba(102,126,234,0.3)' }}>
+                                        <span className="text-truncate" style={{ maxWidth: '40%', color: 'rgba(255,255,255,0.8)' }}>└ {child.name}</span>
+                                        <div className="d-flex align-items-center gap-2">
+                                            {t === 'expense' && <BudgetEditor category={child} onRefresh={onRefresh} />}
+                                            {child.user && (
+                                                <Button variant="outline-light" size="sm" onClick={() => handleDelete(child.id)}>刪除</Button>
+                                            )}
+                                        </div>
                                     </div>
                                 ))}
                             </div>

@@ -20,6 +20,7 @@ const EXPENSE_COLORS = [
 
 const WHITE = '#ffffff';
 const WHITE_DIM = 'rgba(255,255,255,0.6)';
+const WARN = '#fbbf24';
 
 const chartTextStyle = {
     color: WHITE,
@@ -137,6 +138,7 @@ function StatsPage({ summary, month, onCategoryClick }) {
                                     <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.2)' }}>
                                         <th style={{ color: WHITE, textAlign: 'left', padding: '4px 8px' }}>分類</th>
                                         <th style={{ color: WHITE, textAlign: 'right', padding: '4px 8px' }}>金額</th>
+                                        <th style={{ color: WHITE, textAlign: 'right', padding: '4px 8px' }}>預算</th>
                                         <th style={{ color: WHITE, textAlign: 'right', padding: '4px 8px' }}>佔比</th>
                                     </tr>
                                 </thead>
@@ -144,6 +146,8 @@ function StatsPage({ summary, month, onCategoryClick }) {
                                     {rows.map((r, i) => {
                                         const pct = grandTotal > 0 ? (((r.total ?? 0) / grandTotal) * 100).toFixed(1) : '0.0';
                                         const clickable = onCategoryClick && r.category__id != null;
+                                        const budget = r.category__budget_limit;
+                                        const overBudget = showType === 'expense' && budget != null && r.total > budget;
                                         return (
                                             <tr
                                                 key={r.category__id ?? `no-cat-${i}`}
@@ -153,8 +157,12 @@ function StatsPage({ summary, month, onCategoryClick }) {
                                                 <td style={{ color: EXPENSE_COLORS[i % EXPENSE_COLORS.length], padding: '5px 8px' }}>
                                                     {r.category__name ?? '未分類'}
                                                 </td>
-                                                <td style={{ color: WHITE, textAlign: 'right', padding: '5px 8px' }}>
+                                                <td style={{ color: overBudget ? WARN : WHITE, textAlign: 'right', padding: '5px 8px', fontWeight: overBudget ? 700 : 400 }}>
                                                     NT$ {Number(r.total).toLocaleString()}
+                                                    {overBudget && ' ⚠'}
+                                                </td>
+                                                <td style={{ color: WHITE_DIM, textAlign: 'right', padding: '5px 8px' }}>
+                                                    {budget != null ? `NT$ ${Number(budget).toLocaleString()}` : '—'}
                                                 </td>
                                                 <td style={{ color: WHITE_DIM, textAlign: 'right', padding: '5px 8px' }}>
                                                     {pct}%
@@ -167,6 +175,7 @@ function StatsPage({ summary, month, onCategoryClick }) {
                                         <td style={{ color: WHITE, fontWeight: 'bold', textAlign: 'right', padding: '5px 8px' }}>
                                             NT$ {Number(grandTotal).toLocaleString()}
                                         </td>
+                                        <td style={{ padding: '5px 8px' }}></td>
                                         <td style={{ color: WHITE_DIM, textAlign: 'right', padding: '5px 8px' }}>100%</td>
                                     </tr>
                                 </tbody>

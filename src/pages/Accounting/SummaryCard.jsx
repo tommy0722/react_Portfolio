@@ -4,14 +4,16 @@ function SummaryCard({ summary, loading }) {
     if (loading) return <div className="text-center py-3">載入中...</div>;
     if (!summary) return null;
 
-    const { income = 0, expense = 0, balance = 0, accounts = [] } = summary;
+    const { income = 0, expense = 0, balance = 0, accounts = [], total_budget = 0, free_to_spend = income } = summary;
+    const hasBudget = total_budget > 0;
 
     const glassCard = { background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff' };
+    const colClass = hasBudget ? 'col-12 col-sm-6 col-lg-3' : 'col-12 col-sm-4';
 
     return (
         <>
             <div className="row g-3 mb-3">
-                <div className="col-12 col-sm-4">
+                <div className={colClass}>
                     <div className="card text-center" style={glassCard}>
                         <div className="card-body py-2">
                             <div className="fw-bold" style={{ color: '#4ade80' }}>本月收入</div>
@@ -19,7 +21,7 @@ function SummaryCard({ summary, loading }) {
                         </div>
                     </div>
                 </div>
-                <div className="col-12 col-sm-4">
+                <div className={colClass}>
                     <div className="card text-center" style={glassCard}>
                         <div className="card-body py-2">
                             <div className="fw-bold" style={{ color: '#f87171' }}>本月支出</div>
@@ -27,7 +29,7 @@ function SummaryCard({ summary, loading }) {
                         </div>
                     </div>
                 </div>
-                <div className="col-12 col-sm-4">
+                <div className={colClass}>
                     <div className="card text-center" style={glassCard}>
                         <div className="card-body py-2">
                             <div className="fw-bold" style={{ color: balance >= 0 ? '#818cf8' : '#fbbf24' }}>本月結餘</div>
@@ -35,6 +37,16 @@ function SummaryCard({ summary, loading }) {
                         </div>
                     </div>
                 </div>
+                {hasBudget && (
+                    <div className={colClass}>
+                        <div className="card text-center" style={glassCard} title="本月收入扣除各分類已設定的預算上限">
+                            <div className="card-body py-2">
+                                <div className="fw-bold" style={{ color: free_to_spend >= 0 ? '#38bdf8' : '#fbbf24' }}>可自由花用</div>
+                                <div className="fs-5 fw-bold">NT$ {Number(free_to_spend).toLocaleString()}</div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {accounts.length > 0 && (
