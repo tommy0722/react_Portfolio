@@ -1,39 +1,54 @@
-// src/pages/Login.js
-import React from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+// src/pages/login/login.jsx
+import { useEffect, useState } from 'react';
+import { Alert, Container, Row, Col, Spinner } from 'react-bootstrap';
 import { GoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
+import axiosInstance, { TokenManager } from '../../services/axiosInstance';
+import { useUser } from '../../hooks/useUser';
 
 function Login() {
+    const navigate = useNavigate();
+    const { login, isAuthenticated, loading: userLoading } = useUser();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+        if (!userLoading && isAuthenticated) {
+            navigate('/mapleboss', { replace: true });
+        }
+    }, [userLoading, isAuthenticated, navigate]);
+
     const handleSuccess = async (credentialResponse) => {
         const { credential } = credentialResponse;
+        setErrorMessage('');
+        setIsSubmitting(true);
 
         try {
-            const response = await axios.post('https://myweb-backend-571409330129.asia-east1.run.app/api/google-login/', {
+            const response = await axiosInstance.post('/auth/google/', {
                 token: credential,
             });
 
-            const { access, refresh,email,name } = response.data;
-            
-            // 儲存 JWT token
-            localStorage.setItem('access', access);
-            localStorage.setItem('refresh', refresh);
-            localStorage.setItem('user_email', email);
-            localStorage.setItem('user_name', name);
+            const { access, refresh, email, name } = response.data;
 
-            alert('登入成功！');
-            // 可選：導向主頁或 dashboard
-            window.location.href = '/mapleboss';
+            // 儲存 JWT token
+            TokenManager.setToken('access', access);
+            TokenManager.setToken('refresh', refresh);
+
+            // 更新全域 UserContext 狀態（同步更新 NavBar 等元件）
+            login(email, name);
+
+            // 導向主頁
+            navigate('/mapleboss', { replace: true });
 
         } catch (error) {
             console.error('登入失敗', error);
-            alert('登入失敗，請重試');
+            setErrorMessage(error.message || '登入失敗，請重試');
+            setIsSubmitting(false);
         }
     };
 
     const handleError = () => {
-        alert('Google 登入失敗');
+        setErrorMessage('Google 登入失敗，請重試');
     };
 
     return (
@@ -41,11 +56,22 @@ function Login() {
             <Row className="justify-content-md-center">
                 <Col md={6}>
                     <h2 className="text-center">登入</h2>
-                    <Form>
-                        <Form.Group>
+
+                    {errorMessage && (
+                        <Alert variant="danger" className="mt-3" dismissible onClose={() => setErrorMessage('')}>
+                            {errorMessage}
+                        </Alert>
+                    )}
+
+                    <div className="d-flex justify-content-center mt-3">
+                        {isSubmitting ? (
+                            <Spinner animation="border" role="status">
+                                <span className="visually-hidden">登入中...</span>
+                            </Spinner>
+                        ) : (
                             <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
-                        </Form.Group>
-                    </Form>
+                        )}
+                    </div>
                 </Col>
             </Row>
         </Container>
