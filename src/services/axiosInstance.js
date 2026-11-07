@@ -9,10 +9,9 @@ const API_CONFIG = {
 };
 
 // 根據環境選擇 baseURL
-const baseURL = process.env.NODE_ENV === 'production' 
-    ? API_CONFIG.PRODUCTION_URL 
+const baseURL = import.meta.env.PROD
+    ? API_CONFIG.PRODUCTION_URL
     : API_CONFIG.DEVELOPMENT_URL;
-console.log(baseURL);
 
 // 創建 axios 實例
 const instance = axios.create({ 
@@ -89,7 +88,7 @@ instance.interceptors.response.use(
         const duration = endTime - response.config.metadata.startTime;
         
         // 開發環境下記錄請求時間
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.DEV) {
             console.log(`API Request: ${response.config.method.toUpperCase()} ${response.config.url} - ${duration}ms`);
         }
         
