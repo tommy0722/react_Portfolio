@@ -6,7 +6,7 @@ function LocationComponent() {
   const [radius, setRadius] = useState(500);
   const [wheel, setWheel] = useState(null);
   const [winningRestaurant, setWinningRestaurant] = useState(null);
-  const apikey = 'AIzaSyAmYZHvMoDf0Oc-7DK4-QmUNGD88YHX6xA';
+  const apikey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const [location, setLocation] = useState({
     loaded: false,
     coordinates: { lat: "", lng: "" },

@@ -6,7 +6,7 @@ import fetchNearbyRestaurants from './googlemapapi'
 
 function LocationComponent() {
   const [radius, setRadius] = useState(500);
-  const apikey = 'AIzaSyAmYZHvMoDf0Oc-7DK4-QmUNGD88YHX6xA';
+  const apikey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const [showClosedRestaurants, setShowClosedRestaurants] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [animating, setAnimating] = useState(false);
