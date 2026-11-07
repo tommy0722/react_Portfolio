@@ -14,7 +14,7 @@ function Login() {
 
     useEffect(() => {
         if (!userLoading && isAuthenticated) {
-            navigate('/mapleboss', { replace: true });
+            navigate('/', { replace: true });
         }
     }, [userLoading, isAuthenticated, navigate]);
 
@@ -38,7 +38,7 @@ function Login() {
             login(email, name);
 
             // 導向主頁
-            navigate('/mapleboss', { replace: true });
+            navigate('/', { replace: true });
 
         } catch (error) {
             console.error('登入失敗', error);

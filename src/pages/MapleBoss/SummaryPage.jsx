@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Container, ButtonGroup, Button } from 'react-bootstrap';
 import './SummaryPage.css';
 import axios from '../../services/axiosInstance';
 
 function KillSummaryPage() {
     const [summary, setSummary] = useState([]);
-    const [filter, setFilter] = useState('all'); // 'all' 或 'today'
+    const [filter, setFilter] = useState('all');
 
     useEffect(() => {
         fetchKillSummary();
@@ -17,32 +16,25 @@ function KillSummaryPage() {
     }
 
     return (
-        <div className="Container">
-            <h1 className='text-center'>擊殺統計</h1>
+        <div className="summary-container">
+            <h1 className="summary-title">擊殺統計</h1>
 
-            <div className="text-center mb-3">
-                <ButtonGroup>
-                    <Button
-                        variant={filter === 'all' ? 'primary' : 'outline-primary'}
-                        onClick={() => setFilter('all')}
-                    >
-                        所有
-                    </Button>
-                    <Button
-                        variant={filter === 'today' ? 'success' : 'outline-success'}
-                        onClick={() => setFilter('today')}
-                    >
-                        今天
-                    </Button>
-                </ButtonGroup>
+            <div className="summary-filter">
+                <button
+                    className={`summary-filter-btn ${filter === 'all' ? 'active' : ''}`}
+                    onClick={() => setFilter('all')}
+                >
+                    所有
+                </button>
+                <button
+                    className={`summary-filter-btn ${filter === 'today' ? 'active' : ''}`}
+                    onClick={() => setFilter('today')}
+                >
+                    今天
+                </button>
             </div>
 
-            <table
-                className="table table-primary table-bordered table-sm text-center my-3"
-                style={{
-                    verticalAlign: 'middle', 
-                }}
-            >
+            <table className="summary-table">
                 <thead>
                     <tr>
                         <th>使用者</th>

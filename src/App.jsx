@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavigationBar from './components/NavigationBar';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -16,16 +16,16 @@ const ContentTabs = lazy(() => import('./tab'));
 const MapleBoss = lazy(() => import('./pages/MapleBoss/MapleBoss'));
 const RouletteWheel = lazy(() => import('./pages/RouletteWheel'));
 const Game24 = lazy(() => import('./pages/Game24/Game24'));
+const AccountingPage = lazy(() => import('./pages/Accounting/AccountingPage'));
 
 // 載入中組件
 const PageLoading = () => (
     <div className="d-flex justify-content-center align-items-center" style={{ height: '70vh' }}>
         <div className="text-center">
-            <div className="spinner-border text-primary mb-3" style={{ width: '3rem', height: '3rem' }} role="status">
+            <div className="spinner-border mb-3" style={{ width: '3rem', height: '3rem', color: 'var(--gb-bright)' }} role="status">
                 <span className="visually-hidden">載入中...</span>
             </div>
-            <h5 className="text-white">載入中...</h5>
-            <p className="text-muted">請稍候，正在準備頁面內容</p>
+            <p style={{ color: 'var(--gb-bright)', fontFamily: "'Press Start 2P', monospace", fontSize: '0.6rem', letterSpacing: '2px' }}>LOADING...</p>
         </div>
     </div>
 );
@@ -45,6 +45,7 @@ function App() {
                             <Route path="/mapleboss" element={<ProtectedRoute><MapleBoss /></ProtectedRoute>} />
                             <Route path="/roulette/*" element={<ProtectedRoute><RouletteWheel /></ProtectedRoute>} />
                             <Route path="/game24" element={<Game24 />} />
+                            <Route path="/accounting" element={<ProtectedRoute><AccountingPage /></ProtectedRoute>} />
                         </Routes>
                     </Suspense>
                 </Router>

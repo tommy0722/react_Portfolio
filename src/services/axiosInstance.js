@@ -14,7 +14,7 @@ const baseURL = import.meta.env.PROD
     : API_CONFIG.DEVELOPMENT_URL;
 
 // 創建 axios 實例
-const instance = axios.create({ 
+const instance = axios.create({
     baseURL,
     timeout: API_CONFIG.TIMEOUT,
     headers: {

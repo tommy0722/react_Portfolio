@@ -1,11 +1,87 @@
-.Container {
-    background-color: #0d9cd4;
-    font-family: 'Segoe UI', sans-serif;
-    padding: 2%;
-    border-radius: 10px;
+.summary-container {
+    font-family: monospace;
+    padding: 1rem;
+    color: var(--gb-bright);
 }
-tr{
+
+.summary-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.85rem;
+    color: var(--gb-bright);
+    text-align: center;
+    margin-bottom: 1.25rem;
+    text-shadow: 2px 2px 0 var(--gb-darkgreen);
+    letter-spacing: 2px;
+}
+
+.summary-filter {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+}
+
+.summary-filter-btn {
+    padding: 8px 20px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5rem;
+    background: var(--gb-surface);
+    color: var(--gb-light);
+    border: 2px solid var(--gb-midgreen);
+    border-radius: 0;
+    box-shadow: 3px 3px 0 var(--gb-darkgreen);
+    cursor: pointer;
+    transition: none;
+    width: auto;
+}
+
+.summary-filter-btn:hover {
+    background: var(--gb-darkgreen);
+    color: var(--gb-bright);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--gb-midgreen);
+}
+
+.summary-filter-btn.active {
+    background: var(--gb-bright);
+    color: var(--gb-bg);
+    border-color: var(--gb-bright);
+    box-shadow: 3px 3px 0 var(--gb-midgreen);
+    transform: none;
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: monospace;
+    font-size: 0.85rem;
+}
+
+.summary-table th {
+    background: var(--gb-darkgreen);
+    color: var(--gb-bright);
+    border: 2px solid var(--gb-midgreen);
+    padding: 10px 12px;
+    text-align: center;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5rem;
+}
+
+.summary-table td {
+    background: var(--gb-surface);
+    color: var(--gb-light);
+    border: 1px solid var(--gb-midgreen);
+    padding: 10px 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.summary-table tbody tr:hover td {
+    background: rgba(168, 255, 62, 0.08);
+    color: var(--gb-bright);
+}
+
+.summary-table tr {
     text-align: center;
     height: 50px;
-
 }

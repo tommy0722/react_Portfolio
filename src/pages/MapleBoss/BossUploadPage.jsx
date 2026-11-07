@@ -138,7 +138,7 @@ function MapleBoss() {
                     onChange={e => setServerId(e.target.value)}
                     placeholder="伺服器 ID"
                     required
-                    className="form-control form-control-sm"
+                    className="boss-input"
                     style={{ width: '120px' }}
                 />
 
@@ -146,7 +146,7 @@ function MapleBoss() {
                     value={selectedBoss}
                     onChange={e => setSelectedBoss(e.target.value)}
                     required
-                    className="form-select form-select-sm"
+                    className="boss-select"
                     style={{ width: '160px' }}
                 >
                     <option value="">選擇 BOSS</option>
@@ -188,7 +188,6 @@ function MapleBoss() {
 
                 <button
                     type="submit"
-                    className="btn btn-primary btn-sm"
                     disabled={isSubmitting}
                 >
                     {isSubmitting ? '送出中...' : '送出'}
@@ -197,11 +196,10 @@ function MapleBoss() {
             </form>
 
             <h2>擊殺紀錄</h2>
-            <div className="mb-3">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1rem' }}>
-                    <label style={{ whiteSpace: 'nowrap', marginBottom: 0 }}>篩選BOSS：</label>
+            <div className="boss-filter-row">
+                    <label className="boss-filter-label">篩選BOSS：</label>
                     <select
-                        className="form-select"
+                        className="boss-select"
                         value={selectedBossFilter}
                         onChange={e => setSelectedBossFilter(e.target.value)}
                         style={{ maxWidth: '300px' }}
@@ -211,7 +209,6 @@ function MapleBoss() {
                             <option key={boss.id} value={boss.name}>{boss.name}</option>
                         ))}
                     </select>
-                </div>
             </div>
             <div className="boss-card-container">
                 {

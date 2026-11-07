@@ -1,5 +1,6 @@
 // src/pages/MapleBoss.jsx
 import React, { useState } from 'react';
+import './MapleBoss.css';
 import BossUploadPage from './BossUploadPage';
 import SummaryPage from './SummaryPage';
 import BossTablePage from './BossTablePage'; 
@@ -10,41 +11,36 @@ function MapleBoss() {
 
     return (
         <div style={{ width: '80%', margin: '0 auto', padding: '20px' }}>
-            <h1 className="h4 fw-bold mb-4 text-center">楓之谷 Boss 工具</h1>
+            <h1 className="maple-page-title">楓之谷 Boss 工具</h1>
 
-            <div className="mb-4 d-flex justify-content-around">
+            <div className="maple-nav-group">
                 <button
-                    className={`btn ${activePage === 'boss' ? 'btn-primary' : 'btn-outline-primary'}`}
+                    className={`maple-nav-btn ${activePage === 'boss' ? 'active' : ''}`}
                     onClick={() => setActivePage('boss')}
-                    style={{ minWidth: '200px' }}
                 >
                     🗡️ 打王記錄(36H)
                 </button>
                 <button
-                    className={`btn ${activePage === 'summary' ? 'btn-success' : 'btn-outline-success'}`}
+                    className={`maple-nav-btn ${activePage === 'summary' ? 'active' : ''}`}
                     onClick={() => setActivePage('summary')}
-                    style={{ minWidth: '200px' }}
                 >
                     📊 掉寶統計
                 </button>
                 <button
-                    className={`btn ${activePage === 'table' ? 'btn-warning' : 'btn-outline-warning'}`}
+                    className={`maple-nav-btn ${activePage === 'table' ? 'active' : ''}`}
                     onClick={() => setActivePage('table')}
-                    style={{ minWidth: '200px' }}
                 >
                     📋 打王總表
                 </button>
                 <button
-                    className={`btn ${activePage === 'unitConversion' ? 'btn btn-info' : 'btn-outline-info'}`}
+                    className={`maple-nav-btn ${activePage === 'unitConversion' ? 'active' : ''}`}
                     onClick={() => setActivePage('unitConversion')}
-                    style={{ minWidth: '200px' }}
                 >
                     💱 單位換算
                 </button>
             </div>
 
-
-            <div className="border rounded p-4 shadow-sm bg-light">
+            <div className="maple-content-wrapper">
                 {activePage === 'boss' && <BossUploadPage />}
                 {activePage === 'summary' && <SummaryPage />}
                 {activePage === 'table' && <BossTablePage />}

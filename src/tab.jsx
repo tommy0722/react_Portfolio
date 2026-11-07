@@ -58,6 +58,13 @@ function ContentTabs() {
             link: "/mapleboss",
             buttonText: "連結",
         },
+        {
+            title: "記帳系統",
+            text: "個人收支記錄、分類管理與月度統計",
+            image: Invoice,
+            link: "/accounting",
+            buttonText: "連結",
+        },
     ];
 
     // Django 後端專案（含技術文件）

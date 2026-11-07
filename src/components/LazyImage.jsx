@@ -49,10 +49,10 @@ const LazyImage = ({
             style={style}
         >
             {hasError ? (
-                <div className="error-placeholder d-flex align-items-center justify-content-center bg-light text-muted" style={{ height: '100%', minHeight: '200px' }}>
+                <div className="error-placeholder d-flex align-items-center justify-content-center" style={{ height: '100%', minHeight: '200px', background: 'var(--gb-surface)', color: 'var(--gb-light)', border: '2px dashed var(--gb-midgreen)' }}>
                     <div className="text-center">
-                        <i className="fas fa-image text-muted mb-2" style={{ fontSize: '2rem' }}></i>
-                        <p>圖片載入失敗</p>
+                        <i className="fas fa-image mb-2" style={{ fontSize: '2rem', color: 'var(--gb-midgreen)' }}></i>
+                        <p style={{ fontFamily: 'monospace', fontSize: '0.8rem', color: 'var(--gb-light)' }}>圖片載入失敗</p>
                     </div>
                 </div>
             ) : (
