@@ -5,6 +5,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavigationBar from './components/NavigationBar';
 import ErrorBoundary from './components/ErrorBoundary';
+import ProtectedRoute from './components/ProtectedRoute';
 import { UserProvider } from './context/UserContext';
 
 // 懶載入組件
@@ -41,8 +42,8 @@ function App() {
                             <Route path="/pwColor" element={<PwColor />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/" element={<ContentTabs />} />
-                            <Route path="/mapleboss" element={<MapleBoss />} />
-                            <Route path="/roulette/*" element={<RouletteWheel />} />
+                            <Route path="/mapleboss" element={<ProtectedRoute><MapleBoss /></ProtectedRoute>} />
+                            <Route path="/roulette/*" element={<ProtectedRoute><RouletteWheel /></ProtectedRoute>} />
                             <Route path="/game24" element={<Game24 />} />
                         </Routes>
                     </Suspense>
