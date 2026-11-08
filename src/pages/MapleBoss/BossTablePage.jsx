@@ -3,7 +3,7 @@ import './MapleBoss.css';
 import axios from '../../services/axiosInstance';
 import Select from 'react-select/base';
 
-function MapleBoss() {
+function BossTablePage() {
     const [now, setNow] = useState(new Date());
     const [records, setRecords] = useState([]);
     const [bosses, setBosses] = useState([]);
@@ -113,4 +113,4 @@ function MapleBoss() {
     );
 }
 
-export default MapleBoss;
+export default BossTablePage;

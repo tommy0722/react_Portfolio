@@ -3,7 +3,7 @@ import './MapleBoss.css';
 import Select from 'react-select';
 import axios from '../../services/axiosInstance';
 
-function MapleBoss() {
+function BossUploadPage() {
     const [now, setNow] = useState(new Date());
     const [serverId, setServerId] = useState('');
     const [bosses, setBosses] = useState([]);
@@ -254,4 +254,4 @@ function MapleBoss() {
     );
 }
 
-export default MapleBoss;
+export default BossUploadPage;
