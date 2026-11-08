@@ -30,3 +30,13 @@ export const transactionAPI = {
     summary: (params) => axios.get(`${BASE}/transactions/summary/`, { params }),
     monthlyTrend: () => axios.get(`${BASE}/transactions/monthly-trend/`),
 };
+
+export const recurringAPI = {
+    list: () => axios.get(`${BASE}/recurring/`),
+    create: (data) => axios.post(`${BASE}/recurring/`, data),
+    update: (id, data) => axios.put(`${BASE}/recurring/${id}/`, data),
+    remove: (id) => axios.delete(`${BASE}/recurring/${id}/`),
+    due: () => axios.get(`${BASE}/recurring/due/`),
+    confirm: (id) => axios.post(`${BASE}/recurring/${id}/confirm/`),
+    skip: (id) => axios.post(`${BASE}/recurring/${id}/skip/`),
+};
