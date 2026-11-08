@@ -51,18 +51,24 @@ function SummaryCard({ summary, loading }) {
 
             {accounts.length > 0 && (
                 <div className="row g-2 mb-4">
-                    {accounts.map(acc => (
-                        <div className="col-auto" key={acc.id}>
-                            <div className="card" style={glassCard}>
-                                <div className="card-body py-1 px-3">
-                                    <div className="small" style={{ color: 'rgba(255,255,255,0.6)' }}>{acc.name}</div>
-                                    <div className="fw-bold" style={{ color: acc.balance >= 0 ? '#fff' : '#f87171' }}>
-                                        NT$ {Number(acc.balance).toLocaleString()}
+                    {accounts.map(acc => {
+                        const isCredit = acc.account_type === 'credit_card';
+                        const label = isCredit && acc.balance < 0 ? '欠款' : isCredit ? '溢繳' : acc.name;
+                        return (
+                            <div className="col-auto" key={acc.id}>
+                                <div className="card" style={glassCard}>
+                                    <div className="card-body py-1 px-3">
+                                        <div className="small" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                                            {acc.name}{isCredit && ` · ${label}`}
+                                        </div>
+                                        <div className="fw-bold" style={{ color: isCredit ? '#fbbf24' : (acc.balance >= 0 ? '#fff' : '#f87171') }}>
+                                            NT$ {Number(Math.abs(acc.balance)).toLocaleString()}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             )}
         </>

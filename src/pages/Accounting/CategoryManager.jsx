@@ -85,10 +85,16 @@ function CategoryManager({ categories, onRefresh }) {
         finally { setSaving(false); }
     };
 
-    const handleDelete = async (id) => {
-        if (!window.confirm('確定刪除？（子分類也會一併刪除）')) return;
+    const handleDelete = async (category) => {
+        const kids = childrenOf(category.id);
+        const affected = (category.transaction_count ?? 0) + kids.reduce((s, k) => s + (k.transaction_count ?? 0), 0);
+        const kidsNote = kids.length > 0 ? `，${kids.length} 個子分類也會一併刪除` : '';
+        const impact = affected > 0
+            ? `共 ${affected} 筆交易紀錄的分類欄位會被清空（紀錄本身不會被刪除）${kidsNote}。`
+            : `目前沒有任何交易紀錄使用這個分類${kidsNote}。`;
+        if (!window.confirm(`確定刪除「${category.name}」？\n${impact}`)) return;
         try {
-            await categoryAPI.remove(id);
+            await categoryAPI.remove(category.id);
             onRefresh();
         } catch { alert('刪除失敗'); }
     };
@@ -188,7 +194,7 @@ function CategoryManager({ categories, onRefresh }) {
                                     <div className="d-flex align-items-center gap-2">
                                         {t === 'expense' && <BudgetEditor category={parent} onRefresh={onRefresh} />}
                                         {parent.user && (
-                                            <Button variant="outline-light" size="sm" onClick={() => handleDelete(parent.id)}>刪除</Button>
+                                            <Button variant="outline-light" size="sm" onClick={() => handleDelete(parent)}>刪除</Button>
                                         )}
                                     </div>
                                 </div>
@@ -198,7 +204,7 @@ function CategoryManager({ categories, onRefresh }) {
                                         <div className="d-flex align-items-center gap-2">
                                             {t === 'expense' && <BudgetEditor category={child} onRefresh={onRefresh} />}
                                             {child.user && (
-                                                <Button variant="outline-light" size="sm" onClick={() => handleDelete(child.id)}>刪除</Button>
+                                                <Button variant="outline-light" size="sm" onClick={() => handleDelete(child)}>刪除</Button>
                                             )}
                                         </div>
                                     </div>
